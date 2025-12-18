@@ -39,7 +39,7 @@ struct SegmentTree {
         info[p].sum = val * len;
         lazy[p] = Lazy(0, val, true);
     }
-
+    //如果同时有重置信息和添加信息，那么一定是先重置，不然add将无效
     void down(int p, int sizL, int sizR){
         if(lazy[p].need){
             applySet(2 * p, sizL, lazy[p].setL);
