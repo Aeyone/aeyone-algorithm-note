@@ -12,6 +12,7 @@ using i64 = long long;
 struct Info{
     i64 mn = INFLL;     //最小值
     i64 mn2 = INFLL;    //次小值
+    i64 sum = 0;        //区间和
     int cnt = 0;
     int len = 0;
 };
@@ -24,6 +25,7 @@ struct Lazy{//由于需要在第二个剪枝的时候只对最小值进行加，
 Info operator+(const Info &l, const Info &r){
 	Info res;
 	res.len = l.len + r.len;
+    res.sum = l.sum + r.sum;
 	if(l.mn == r.mn){
 		res.mn = l.mn;
 		res.cnt = l.cnt + r.cnt;
@@ -57,6 +59,7 @@ struct SegmentTree{
     }
     //对i节点进行+v的懒操作
     void applyAdd(int p, i64 val1, i64 val2) {
+        info[p].sum += val1 * info[p].cnt + val2 * (info[p].len - info[p].cnt);
         info[p].mn += val1;
         info[p].mn2 += (info[p].mn2 == INFLL ? 0 : val2);
         lazy[p].add += val1;
@@ -106,7 +109,7 @@ struct SegmentTree{
             up(p);//回溯
         }
     }
-    i64 query(int p, int l, int r, int L, int R, int k){
+    i64 setmax(int p, int l, int r, int L, int R, int k){
         if(L > r || R < l || info[p].mn > k){   //第一个剪枝：最小值大于k不操作
             return 0;
         }
@@ -116,9 +119,9 @@ struct SegmentTree{
         	applyAdd(p, k - info[p].mn, 0);
         }else{                                  //暴力下发过程
             int mid = (l + r) / 2;
-            down(p);                            
-            res += query(2 * p, l, mid, L, R, k);
-            res += query(2 * p + 1, mid + 1, r, L, R, k);
+            down(p);
+            res += setmax(2 * p, l, mid, L, R, k);
+            res += setmax(2 * p + 1, mid + 1, r, L, R, k);
             up(p);
         }
         return res;//统计累计上升的总和
@@ -127,8 +130,8 @@ struct SegmentTree{
     void modify(int L, int R, int val){ 
         modify(1, 1, n, L , R , val);
     }
-    i64 query(int L, int R, int k){
-        return query(1, 1, n, L, R, k);
+    i64 setmax(int L, int R, int k){
+        return setmax(1, 1, n, L, R, k);
     }
 };
 
@@ -147,7 +150,7 @@ void solve() {//吉如一线段树
 		cin >> l >> r >> k;
 		i64 res = 1ll * (r - l + 1) * k;
 		st.modify(l, r, -k);
-		res -= st.query(l, r, 0);
+		res -= st.setmax(l, r, 0);
 		cout << res << '\n';
 	}
 }
