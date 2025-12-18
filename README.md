@@ -55,7 +55,7 @@
 - [04--计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04--计算几何.txt)
 - [05--多项式乘法(NTT).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05--多项式乘法(NTT).txt)
 - [06--米勒罗宾判断素数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/06--米勒罗宾判断素数.txt)
-- [07--米勒罗宾判断12素数 .txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/07--米勒罗宾判断12素数 .txt)
+- [07--米勒罗宾判断质数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/07--米勒罗宾判断质数.txt)
 
 </details>
 
