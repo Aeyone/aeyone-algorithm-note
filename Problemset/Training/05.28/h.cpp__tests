@@ -1,0 +1,17 @@
+[
+	{
+		"test": "a@aa@a\n"
+	},
+	{
+		"test": "a@a@a\n"
+	},
+	{
+		"test": "@aa@a\n"
+	},
+	{
+		"test": "a@a\n"
+	},
+	{
+		"test": "aa@aaaa@vsdaa@aaaa\n"
+	}
+]

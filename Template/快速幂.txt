@@ -1,0 +1,7 @@
+i64 qmi(i64 a, i64 b, int p = MOD){
+	i64 res = 1;
+	for( ;b ; b >>= 1, a = a * a % p) if(b & 1){
+		res = a * res % p;
+	}
+	return res;
+}

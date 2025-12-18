@@ -1,0 +1,26 @@
+template <typename T>
+struct Fenwick {
+    int n;
+    std::vector<T> a;
+    
+    Fenwick(int n_ = 0) {
+        init(n_);
+    }
+    
+    void init(int n_) {//可用于清空树状数组，并重新定义大小
+        n = n_;
+        a.assign(n + 1, T{});//下标为从1开始，需要初始化大小为n + 1
+    }
+
+    void add(int x, const T &v) {//单点修改(下标为从1开始)
+        while(x <= n)
+            a[x] += v, x += x & -x;
+    }
+    
+    T sum(int x) {//查询1~x的和(下标为从1开始)
+        T ans{};
+        while(x > 0)
+            ans += a[x], x -= x & -x;
+        return ans;
+    }
+};

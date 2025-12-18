@@ -1,0 +1,129 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+const int N = 1e6 + 10;
+i64 val[N << 2], add[N << 2], change[N << 2];
+bool lazy[N << 2];
+
+//对i节点进行+v的懒操作
+void addLazy(int i, i64 v){
+    val[i] += v;
+    add[i] += v;
+}
+//对i节点进行=v的懒操作
+void updateLazy(int i, i64 v){
+    val[i] = v;
+    add[i] = 0;//需要清空add懒标记
+    change[i] = v;
+    lazy[i] = true;
+}
+//回溯，更新i的值
+void up(int i){
+    val[i] = max(val[2 * i], val[2 * i + 1]);
+}
+//懒信息下发，对左右进行懒操作，然后清空本身的懒标记，
+//如果同时有重置信息和添加信息，那么一定是先重置，不然add将无效
+void down(int i){
+    if(lazy[i]){
+        updateLazy(2 * i, change[i]);
+        updateLazy(2 * i + 1, change[i]);
+        lazy[i] = false;
+    }
+    if(add[i] != 0){
+        addLazy(2 * i, add[i]);
+        addLazy(2 * i + 1, add[i]);
+        add[i] = 0;
+    }
+}
+//区间修改与重置(下标为0) 最坏2*O(logN)
+void modify(int sign, int ql, int qr, i64 v, int l, int r, int i){
+    if(ql <= l && r <= qr){//l~r被ql~qr完全包含时，进行懒操作，不用往下递归了
+        if(sign == 1)//增加
+            addLazy(i, v);
+        if(sign == 2)//重置
+            updateLazy(i, v);
+    }else{
+        int mid = (l + r) / 2;
+        down(i);//l~r不完全被ql~qr包含，懒信息下发
+        if(ql <= mid)
+            modify(sign, ql, qr, v, l, mid, 2 * i);
+        if(qr > mid)
+            modify(sign, ql, qr, v, mid + 1, r, 2 * i + 1);
+        up(i);//回溯
+    }
+}
+//区间查询(下标为0) 最坏2*O(logN) 不需要回溯
+i64 query(int ql, int qr, int l, int r, int i){
+    i64 res = -1e17;
+    if(ql <= l && r <= qr){//l~r被ql~qr完全包含时，直接返回整段值，不用往下递归了
+        res = max(res, val[i]);
+    }else{
+        int mid = (l + r) / 2;
+        down(i);//l~r不完全被ql~qr包含，懒信息下发
+        if(ql <= mid)
+            res = max(res, query(ql, qr, l, mid, 2 * i));
+        if(qr > mid)
+            res = max(res, query(ql, qr, mid + 1, r, 2 * i + 1));
+    }
+    return res;
+}
+//构建线段树(传入下标为0的数组) O(N)
+void build(int l, int r, int i, vector<i64> &a){
+    if(l == r){
+        val[i] = a[l];
+    }else{
+        int mid = (l + r) / 2;
+        build(l, mid, 2 * i, a);
+        build(mid + 1, r, 2 * i + 1, a);
+        up(i);//回溯更新val[i]
+    }
+    add[i] = 0;
+    change[i] = 0;
+    lazy[i] = false;
+}
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    vector<i64> a(n);
+    for(auto &e : a)
+        cin >> e;
+    build(0, n - 1, 1, a);
+    while(m --){
+        int sign;
+        cin >> sign;
+        if(sign == 1){//重置
+            int l, r;
+            i64 v;
+            cin >> l >> r >> v;
+            l --, r --;
+            modify(2, l, r, v, 0, n - 1, 1);
+        }
+        if(sign == 2){//修改
+            int l, r;
+            i64 v;
+            cin >> l >> r >> v;
+            l --, r --;
+            modify(1, l, r, v, 0, n - 1, 1);
+        }
+        if(sign == 3){//查询
+            // cout << "arr : ";
+            // for(int i = 0; i < n; i ++)
+            //     cout << query(i, i, 0, n - 1, 1) << ' ';
+            // cout << '\n';
+            int l, r;
+            cin >> l >> r;
+            l --, r --;
+            cout << query(l, r, 0, n - 1, 1) << '\n';
+        }
+    }
+}
+signed main() {
+//    freopen("../data/data.in", "r", stdin), freopen("../data/data.out", "w", stdout);
+    ios::sync_with_stdio(false), cin.tie(nullptr);
+    int _ = 1;
+    // cin >> _;
+    while (_ --)
+        solve();
+}

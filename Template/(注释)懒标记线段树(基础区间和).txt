@@ -1,0 +1,104 @@
+using i64 = long long;
+
+struct Info{//主要信息
+    i64 sum;
+    Info(i64 s = 0) : sum(s) {}
+};
+
+struct Lazy{//懒信息
+    i64 add;
+    Lazy(i64 x1 = 0) : add(x1) {}
+};
+
+Info operator+(const Info &a, const Info &b){//合并两个子区间的规则
+   return Info(a.sum + b.sum);
+}
+ 
+struct SegmentTree{
+    int n;
+    vector<Info> info;
+    vector<Lazy> lazy;//懒信息
+ 
+    SegmentTree() {}
+    SegmentTree(int _n) {
+        init(_n);
+    }
+
+    void init(int _n){
+        n = _n;
+        info.assign(n << 2, Info());
+        lazy.assign(n << 2, Lazy());
+        build(1, 1, n);
+    }
+    //回溯，更新i的值
+    void up(int p){
+        info[p] = info[2 * p] + info[2 * p + 1];
+    }
+    //对i节点进行+v的懒操作
+    void apply(int p, i64 val, int siz){
+        info[p].sum += val * siz;
+        lazy[p].add += val;
+    }
+    //懒信息下发，对左右进行懒操作，然后清空本身的懒标记
+    void down(int p, int sizL, int sizR){
+        if (lazy[p].add != 0){
+            apply(2 * p, lazy[p].add, sizL);
+            apply(2 * p + 1, lazy[p].add, sizR);
+            lazy[p].add = 0;//清空
+        }
+    }
+    //构建线段树 O(N)
+    void build(int p, int l, int r){
+        if (l == r){
+            info[p] = Info(0);
+        }else{
+            int mid = (l + r) / 2;
+            build(2 * p, l, mid);
+            build(2 * p + 1, mid + 1, r);
+            up(p);//回溯更新info[i]
+        }
+    }
+    //区间修改 最坏2*O(logN)
+    void modify(int p, int l, int r, int L, int R, i64 val){
+        if (L > r || R < l)
+            return;
+
+        if (L <= l && r <= R){//l~r被ql~qr完全包含时，进行懒操作，不用往下递归了
+            apply(p, val, r - l + 1);
+        }else{
+            int mid = (l + r) / 2;
+            down(p, mid - l + 1, r - mid);//l~r不完全被ql~qr包含，懒信息下发, 注意右边应该为r - (mid + 1) + 1
+            modify(2 * p, l, mid, L, R, val);
+            modify(2 * p + 1, mid + 1, r, L, R, val);
+            up(p);//回溯更新info[i]
+        }
+    }
+    //区间查询 最坏2*O(logN) 注意: 不需要回溯
+    i64 query(int p, int l, int r, int L, int R){
+        if(L > r || R < l)
+            return 0;
+
+        i64 res = 0;
+        if(L <= l && r <= R){//l~r被ql~qr完全包含时，直接返回整段值，不用往下递归了
+            res = info[p].sum;
+        }else{
+            int mid = (l + r) / 2;
+            down(p, mid - l + 1, r - mid);//l~r不完全被ql~qr包含，懒信息下发
+            res += query(2 * p, l, mid, L, R);
+            res += query(2 * p + 1, mid + 1, r, L, R);
+        }
+        return res;
+    }
+
+    //0-based
+    void modify(int L, int R, i64 val){
+        if (L <= R)
+            modify(1, 1, n, L + 1, R + 1, val);
+    }
+    i64 query(int L, int R){
+        if(L <= R)
+            return query(1, 1, n, L + 1, R + 1);
+        else
+            return -1ll;
+    }
+};

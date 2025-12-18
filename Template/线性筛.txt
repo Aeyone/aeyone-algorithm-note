@@ -1,0 +1,16 @@
+const int N = 1e5;
+int p[N + 1], vis[N + 1], psiz;
+
+void build(){
+	for(int i = 2; i <= N; i ++){
+		if(!vis[i]){
+			p[psiz ++] = i;
+		}
+		for(int j = 0; j < psiz && p[j] <= N / i; j ++){
+			vis[p[j] * i] = true;
+			if(i % p[j] == 0){
+				break;
+			}
+		}
+	}
+}

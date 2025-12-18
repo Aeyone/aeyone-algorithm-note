@@ -1,0 +1,47 @@
+vector<i64> fac, inv;
+
+i64 qmi(i64 a, i64 b, int p){
+    i64 res = 1;
+    for( ;b ; b >>= 1, a = a * a % p){
+        if(b & 1)
+            res = a * res % p;
+    }
+    return res;
+}
+
+void init(int n) {
+    //求阶乘
+    fac.assign(n + 1, 1);
+    for (int i = 1; i <= n; i++) {
+        fac[i] = fac[i - 1] * i % MOD;
+    }
+    //求某个阶乘的逆元
+    inv.assign(n + 1, 1);
+    inv[n] = qmi(fac[n], MOD - 2, MOD);
+    for (int i = n - 1; i >= 0; i--) {
+        inv[i] = inv[i + 1] * (i + 1) % MOD;
+    }
+}
+
+int C(int N, int M) {//求n取m的组合数
+    if (M > N || M < 0)
+        return 0;
+    return fac[N] * inv[M] % MOD * inv[N - M] % MOD;
+}
+
+int A(int N, int M) {//求n取m的排列数
+    if (M > N || M < 0)
+        return 0;
+    return fac[N] * inv[N - M] % MOD;
+}
+
+// c[a][b] 表示从a个苹果中选b个的方案数
+for (int i = 0; i < N; i ++) {
+    for (int j = 0; j <= i; j ++) {
+        if (!j){
+            c[i][j] = 1;
+        }else{
+            c[i][j] = (c[i - 1][j] + c[i - 1][j - 1]) % MOD;
+        }
+    }
+}

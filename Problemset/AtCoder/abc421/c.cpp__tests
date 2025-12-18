@@ -1,0 +1,11 @@
+[
+	{
+		"test": "3\nAABBBA\n"
+	},
+	{
+		"test": "3\nAAABBB\n"
+	},
+	{
+		"test": "17\nAAABABABBBABABBABABABABBAAABABABBA\n"
+	}
+]

@@ -1,0 +1,75 @@
+/**EditTime: 2025-04-26 23:20**/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+template<class T> using vt = vector<T>;
+template<class T> using pq = priority_queue<T>;
+template<class T> using pqg = priority_queue<T, vector<T>, greater<T>>;
+
+#define fread freopen("data.in", "r", stdin), freopen("data.out", "w", stdout)
+#define mst(x, y) memset(x, y, sizeof x)
+#define endl '\n'
+#define ft first
+#define sd second
+#define pb push_back
+#define bitset(x) ((x) & (-x))
+#define int long long
+
+typedef pair<int, int> pii;
+
+const int dx[8] = {-1, 0, 1, 0, -1, -1, 1, 1}, dy[8] = {0, 1, 0, -1, -1, 1, -1, 1};
+const int INF = 0x3f3f3f3f;
+const int mod = 1e9 + 7;
+
+const int N = 20010;
+
+int v[N], w[N], s[N];
+int f[N], g[N], q[N];
+
+void solve() {
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= n; i ++)
+        cin >> v[i] >> w[i] >> s[i];
+
+
+    for (int i = 1; i <= n; i ++) {
+        memcpy(g, f, sizeof f);
+        for (int j = 0; j < v[i]; j ++) {
+            int hh = 0, tt = -1;//对于v的每个r都用一个单调队列维护最大值
+            for (int k = j; k <= m; k += v[i]) {
+                //滑动窗口左边界：k - s * v， 右边界：k - v，k为当前下标 当前未入队
+
+                //队头出了左边界时需要弹出
+                if (hh <= tt && q[hh] < k - s[i] * v[i])
+                    hh ++;
+
+                //g[q.front()]一定为滑动窗口最大值
+                //更新f[k], (k - q.front()) / v[i] 为还能存下的个数 乘上w为价值
+                if (hh <= tt)
+                    f[k] = max(g[k], g[q[hh]] + (k - q[hh]) / v[i] * w[i]);
+
+                //设要用g[k]更新之后的f[x] (x, k同余) 则队尾元素应该要比当前g[k]更有价值
+                //"因为k最后才加进来 则有k在的一天 比他小的队尾元素将永无出头之日"
+                //即 g[q.back()] + (x - q.back()) / v * w > g[k] + (x - k) / v * w
+                //否则弹出队尾元素以保证单调性(一定是以放入物品的价值为判断依据的单调下降)
+                while (hh <= tt && g[k] >= g[q[tt]] + (k - q[tt]) / v[i] * w[i])
+                    tt --;
+
+                q[++ tt] = k;
+            }
+        }
+    }
+    cout << f[m] << endl;
+
+}
+
+signed main() {
+//  fread;
+//  ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
+//  int t;
+//  cin >> t;
+//  while (t --)
+    solve();
+}

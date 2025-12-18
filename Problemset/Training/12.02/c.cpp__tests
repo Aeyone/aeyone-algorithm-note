@@ -1,0 +1,14 @@
+[
+	{
+		"test": "3\naab\n"
+	},
+	{
+		"test": "7\natcoder\n"
+	},
+	{
+		"test": "4\naaba\n"
+	},
+	{
+		"test": "22\natcoderbeginnercontest\n"
+	}
+]
