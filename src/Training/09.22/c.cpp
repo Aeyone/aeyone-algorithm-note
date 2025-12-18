@@ -4,7 +4,7 @@ using namespace std;
 using i64 = long long;
 const int inf = 0x3f3f3f3f;
 
-void solve() {//二分好题
+void solve() {//二分+一点dp思想
 	int n;
 	cin >> n;
 	vector<int> a(n);

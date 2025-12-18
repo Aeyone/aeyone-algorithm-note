@@ -49,7 +49,6 @@
 <summary><strong>数学</strong></summary>
 
 - [01--快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01--快速幂.txt)
-- [02--组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/02--组合计数.txt)
 - [03--线性筛.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03--线性筛.txt)
 - [04--计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04--计算几何.txt)
 - [05--多项式乘法(NTT).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05--多项式乘法(NTT).txt)

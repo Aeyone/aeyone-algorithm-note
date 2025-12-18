@@ -1,0 +1,41 @@
+name: Auto Update README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "Template/**"
+      - "scripts/**"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Make scripts executable
+        run: |
+          chmod +x scripts/gen_template_readme.sh
+          chmod +x scripts/update_readme.sh
+
+      - name: Update README
+        run: |
+          ./scripts/update_readme.sh
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet README.md; then
+            echo "README unchanged"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore: auto update README"
+            git push
+          fi
+
