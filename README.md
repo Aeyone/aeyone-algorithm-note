@@ -29,7 +29,7 @@
 ## Template
 
 <details>
-<summary><strong>📁 数据结构</strong></summary>
+<summary><strong>数据结构</strong></summary>
 
 - [01--DSU.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数据结构/01--DSU.txt)
 - [02--普通莫队.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数据结构/02--普通莫队.txt)
@@ -44,8 +44,8 @@
 
 </details>
 
-
-#### 数学
+<details>
+<summary><strong>数学</strong></summary>
 
 - [01--快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数学/01--快速幂.txt)
 - [02--组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数学/02--组合计数.txt)
@@ -54,13 +54,21 @@
 - [05--多项式乘法(NTT).txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数学/05--多项式乘法(NTT).txt)
 - [06--米勒罗宾判断素数.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/数学/06--米勒罗宾判断素数.txt)
 
-### 一些杂碎
+</details>
+
+<details>
+<summary><strong>一些杂碎</strong></summary>
 
 - [01--main.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/一些杂碎/01--main.txt)
 - [02--一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/一些杂碎/02--一些小trick.txt)
 - [03--进制转换.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/一些杂碎/03--进制转换.txt)
 - [04--重载输出运算符(int128).txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/一些杂碎/04--重载输出运算符(int128).txt)
 
-### 字符串
+</details>
+
+<details>
+<summary><strong>字符串</strong></summary>
 
 - [01--kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/tree/main/Template/字符串/01--kmp.txt)
+
+</details>
