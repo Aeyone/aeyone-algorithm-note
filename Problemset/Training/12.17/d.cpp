@@ -16,7 +16,7 @@ const int MOD = 998244353;
 void solve() {//有趣贪心
 	int n;
 	cin >> n;
-	vector<array<int, 2>> a(n);
+	vector<array<int, 2>> a(n)
 	multiset<int> st;
 	for(int i = 0; i < n; i ++) {
 		cin >> a[i][0] >> a[i][1];
