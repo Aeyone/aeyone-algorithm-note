@@ -83,7 +83,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
-||[]()||[Accept Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.12/a.cpp)|
+|cf*1700|[CF1625C](https://codeforces.com/problemset/problem/1625/C)|很好的一道线性dp，考虑删除与不删除，详解看code|[Accept Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.12/a.cpp)|
 ||[]()||[Accept Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数据结构
