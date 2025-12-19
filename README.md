@@ -8,45 +8,45 @@
 <details open>
 <summary><strong>一些杂碎</strong></summary>
 
-- [01--main.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/01--main.txt)
-- [02--一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02--一些小trick.txt)
-- [03--进制转换.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/03--进制转换.txt)
-- [04--重载输出运算符(int128).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/04--重载输出运算符(int128).txt)
+- [01 - main.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/01%20-%20main.txt)
+- [02 - 一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02%20-%20一些小trick.txt)
+- [03 - 进制转换.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/03%20-%20进制转换.txt)
+- [04 - int128 输出流自定义.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/04%20-%20int128%20输出流自定义.txt)
 
 </details>
 
 <details open>
 <summary><strong>字符串</strong></summary>
 
-- [01--kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01--kmp.txt)
+- [01 - kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01%20-%20kmp.txt)
 
 </details>
 
 <details open>
 <summary><strong>数学</strong></summary>
 
-- [01--快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01--快速幂.txt)
-- [02--组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/02--组合计数.txt)
-- [03--线性筛.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03--线性筛.txt)
-- [04--计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04--计算几何.txt)
-- [05--多项式乘法(NTT).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05--多项式乘法(NTT).txt)
-- [06--米勒罗宾判断素数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/06--米勒罗宾判断素数.txt)
+- [01 - 快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01%20-%20快速幂.txt)
+- [02 - 组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/02%20-%20组合计数.txt)
+- [03 - 线性筛.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03%20-%20线性筛.txt)
+- [04 - 计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04%20-%20计算几何.txt)
+- [05 - 多项式乘法（NTT）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05%20-%20多项式乘法（NTT）.txt)
+- [06 - 米勒-罗宾素数检验（Miller–Rabin）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/06%20-%20米勒-罗宾素数检验（Miller–Rabin）.txt)
 
 </details>
 
 <details open>
 <summary><strong>数据结构</strong></summary>
 
-- [01--DSU.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/01--DSU.txt)
-- [02--普通莫队.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/02--普通莫队.txt)
-- [03--FenwickTree.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/03--FenwickTree.txt)
-- [04--SparseTable.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/04--SparseTable.txt)
-- [05A--懒标记线段树(基础区间修改).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05A--懒标记线段树(基础区间修改).txt)
-- [05B--懒标记线段树(区间赋值+区间修改).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05B--懒标记线段树(区间赋值+区间修改).txt)
-- [05C--懒标记线段树(动态开点+区间修改).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05C--懒标记线段树(动态开点+区间修改).txt)
-- [05D--线段树(区间合并，无modify).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05D--线段树(区间合并，无modify).txt)
-- [05E1--吉如一线段树(区间求和).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05E1--吉如一线段树(区间求和).txt)
-- [05E2--吉如一线段树(区间求和+区间历史最值).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05E2--吉如一线段树(区间求和+区间历史最值).txt)
+- [01 - 并查集（DSU）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/01%20-%20并查集（DSU）.txt)
+- [02 - 普通莫队.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/02%20-%20普通莫队.txt)
+- [03 - 树状数组（FenwickTree）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/03%20-%20树状数组（FenwickTree）.txt)
+- [04 - ST表（SparseTable）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/04%20-%20ST表（SparseTable）.txt)
+- [05 - 线段树（区间合并，不带修）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/05%20-%20线段树（区间合并，不带修）.txt)
+- [06A - 懒标记线段树（基础区间操作）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/06A%20-%20懒标记线段树（基础区间操作）.txt)
+- [06B - 懒标记线段树（双重区间操作）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/06B%20-%20懒标记线段树（双重区间操作）.txt)
+- [06C - 懒标记线段树（动态开点+区间操作）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/06C%20-%20懒标记线段树（动态开点+区间操作）.txt)
+- [07A - 吉如一线段树（区间求和）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/07A%20-%20吉如一线段树（区间求和）.txt)
+- [07B - 吉如一线段树（区间求和+区间历史最值）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/07B%20-%20吉如一线段树（区间求和+区间历史最值）.txt)
 
 </details>
 
