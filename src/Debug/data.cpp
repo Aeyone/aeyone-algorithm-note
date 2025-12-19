@@ -14,7 +14,7 @@ static mt19937_64 rng (
 #define randll(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
 
 void solve() {
-    i64 n = randll(8, 15), m = 4;    
+    i64 n = randll(1, 1e9), m = 6;    
     cout << n << ' ' << m << '\n';
 }
 

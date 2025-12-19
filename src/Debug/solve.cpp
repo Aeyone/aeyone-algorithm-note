@@ -49,9 +49,6 @@ void solve() {
         XOR ^= e;
         sum += e;
     }
-    if(XOR != n) {
-        cout << "EROR" << '\n';
-    }
     cout << sum << '\n';
     // for(auto e : a) {
     //  cout << lltos(e, 2) << '\n';
