@@ -1,12 +1,12 @@
 # 算法竞赛学习记录
 
-用于日常学习记录，主要维护模板和做题笔记
+用于个人日常学习记录，主要维护模板和做题笔记
 
 ## 目录
 
 	├── Problemset
-	│   ├── 动态规划
 	│   ├── 基础算法
+	│   ├── 动态规划
 	│   ├── 数据结构
 	│   ├── 数学
 	│   ├── 图论
@@ -75,3 +75,41 @@
 </details>
 
 <!-- TEMPLATE_END -->
+
+## Problemset
+
+#### 基础算法
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[CF1623C](https://codeforces.com/contest/1623/problem/C)|[code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Problemset/基础算法/二分/CF1623C.cpp)||
+
+#### 动态规划
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[]()|[]()||
+
+#### 数据结构
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[]()|[]()||
+
+#### 数学
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[]()|[]()||
+
+#### 图论
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[]()|[]()||
+
+#### 字符串
+
+| Problems | AC Code | Note |
+| -------- | ------- | ---- |
+|[]()|[]()||
