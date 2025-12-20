@@ -47,6 +47,7 @@
 - [06C - 懒标记线段树（动态开点+区间操作）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/06C%20-%20懒标记线段树（动态开点+区间操作）.txt)
 - [07A - 吉如一线段树（区间求和）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/07A%20-%20吉如一线段树（区间求和）.txt)
 - [07B - 吉如一线段树（区间求和+区间历史最值）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/07B%20-%20吉如一线段树（区间求和+区间历史最值）.txt)
+- [07C - 吉如一线段树（区间求和+区间历史最值） (副本).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数据结构/07C%20-%20吉如一线段树（区间求和+区间历史最值）%20(副本).txt)
 
 </details>
 
