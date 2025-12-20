@@ -19,6 +19,7 @@
 <summary><strong>字符串</strong></summary>
 
 - [01 - kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01%20-%20kmp.txt)
+- [02 - k123131副本).txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/02%20-%20k123131副本).txt)
 
 </details>
 
