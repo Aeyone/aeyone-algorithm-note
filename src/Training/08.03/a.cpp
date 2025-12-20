@@ -16,9 +16,9 @@ void solve() {
 	vector<int> I, S;
 	dp[0][0] = 0;
 	for(int i = 0, idx = -1; i <= n; i ++){
-		if(idx == -1 && a[i] != 0)
+		if(idx == -1 && a[i] != 0){
 			continue;
-
+		}
 		if(a[i] != 0){
 			if(a[i] > 0)
 				I.push_back(a[i]);
@@ -26,7 +26,6 @@ void solve() {
 				S.push_back(-a[i]);
 			continue;
 		}
-
 		idx ++;
 		if(idx == 0)
 			continue;
@@ -51,15 +50,6 @@ void solve() {
 	for(int i = 0; i <= m; i ++)
 		ans = max(ans, dp[m][i]);
 	cout << ans << '\n';
-	// for(int i = 0; i <= m; i ++){
-	// 	for(int j = 0; j <= m; j ++){
-	// 		if(dp[i][j] != -inf)
-	// 			cout << dp[i][j] << ' ';
-	// 		else
-	// 			cout << -1 << ' ';
-	// 	}
-	// 	cout << '\n';
-	// }
 }
 
 signed main() {
