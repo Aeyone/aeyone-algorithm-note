@@ -76,7 +76,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |cf*1600|[Minimal Height Tree](https://codeforces.com/contest/1437/problem/D)|贪心，用双指针解决很轻松，BFS序？|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.03/b.cpp)|
 |cf*1600|[Ehab and Prefix MEXs](https://codeforces.com/contest/1364/problem/C)|MEX构造，不难|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.03/c.cpp)|
 |atc*1001|[Least Unbalanced](https://atcoder.jp/contests/abc422/tasks/abc422_d)|构造题，类似于线段树的建树过程|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.04/d.cpp)|
-||[Matrix and Shifts](https://codeforces.com/contest/1660/problem/E)|循环位移经典trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.09/c.cpp)|
+|cf*1600|[Matrix and Shifts](https://codeforces.com/contest/1660/problem/E)|循环位移经典trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.09/c.cpp)|
 |atc*1212|[Takahashi's Expectation](https://atcoder.jp/contests/abc417/tasks/abc417_d)|倍增，按值域分治（还有一种DP解法）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/a.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
@@ -127,6 +127,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1347|[Popcount Sum 3](https://atcoder.jp/contests/abc406/tasks/abc406_e)|计数题，拆位+组合数学，难点在于保证计数不重不漏|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.12/c.cpp)|
 |cf*1800|[Shohag Loves XOR (Hard Version) ](https://codeforces.com/contest/2039/problem/C2)|计数题，XOR+数学知识（整除一定至少为2倍）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.19/c.cpp)|
 |atc*1692|[Sums of Sliding Window Maximum](https://atcoder.jp/contests/abc407/tasks/abc407_f)|计数题，非常重量级，ST表+二分or单调栈+二重差分，难点在于存在相同的数字，如何不重不漏地统计所有情况，是一个经典Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/e.cpp)|
+||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数据结构
 
@@ -135,15 +136,18 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*810|[Reachability Query](https://atcoder.jp/contests/abc420/tasks/abc420_e)|并查集板子|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.08/b.cpp)|
 |atc*100|[Nearest Taller](https://atcoder.jp/contests/abc433/tasks/abc433_b)|最基本的单调栈用法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/abc433/b.cpp)|
 |cf*1800|[Rating System](https://codeforces.com/contest/1845/problem/D)|单调栈好题 有点挑战性|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.15/c.cpp)|
-|atc*1496|[Adding Chords](https://atcoder.jp/contests/abc424/tasks/abc424_f)|线段树应用题，难点在于怎么用线段树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.02/f.cpp)|
+|atc*1424|[Forbidden Prefix](https://atcoder.jp/contests/abc403/tasks/abc403_e)|trie树好题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.12/d.cpp)|
+|cf*2400|[One Occurrence](https://codeforces.com/contest/1000/problem/F)|基础莫队模板题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.29/1000F.cpp)
+|cf*2300|[Physical Education Lessons](https://codeforces.com/contest/915/problem/E)|动态开点线段树板子题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/Problems/915E.cpp)
+|atc*1385|[Random Gathering](https://atcoder.jp/contests/abc417/tasks/abc417_f)|线段树，区间重置操作，线段树上带取模操作|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/f.cpp)|
+|atc*1496|[Adding Chords](https://atcoder.jp/contests/abc424/tasks/abc424_f)|看似几何题，实际线段树，难点在于怎么用线段树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.02/f.cpp)|
+|atc*1448|[Compare Tree Weights](https://atcoder.jp/contests/abc406/tasks/abc406_f)|dfn序上线段树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.12/e.cpp)|
+|unknown|[Maximum Rating](https://codeforces.com/gym/104869/problem/K)|值域线段树（2023ICPC沈阳）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/icpc%20shenyang%202023/k.cpp)
 |atc*1497|[Most Valuable Parentheses](https://atcoder.jp/contests/abc407/tasks/abc407_e)|线段树上维护括号的合法性|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/d.cpp)|
 |atc*1708|[Clearance](https://atcoder.jp/contests/abc426/tasks/abc426_f)|吉如一线段树（其实没必要）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.30/f.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数学
-
-/home/aeyone/code/aeyone-algorithm-note/
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
@@ -154,8 +158,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |cf*1600|[Orac and LCM](https://codeforces.com/contest/1349/problem/A)|gcd&lcm+唯一分解定理的经典Trick，gcd取min，lcm取max|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.27/d.cpp)|
 |atc*1536|[Closest Moment](https://atcoder.jp/contests/abc426/tasks/abc426_e)|计算几何+三分|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.30/e.cpp)|
 |atc*1559|[Colinear](https://atcoder.jp/contests/abc422/tasks/abc422_e)|平面几何，随机化|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.04/e.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
-
+|atc*unknown|[LCM Sequence](https://atcoder.jp/contests/abc412/tasks/abc412_e)|大质数判断板子题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.16/c.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
@@ -171,8 +174,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1680|[Wind Cleaning](https://atcoder.jp/contests/abc427/tasks/abc427_e)|最短路问题，状态定义需要开六维，非常新颖|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.30/b.cpp)|
 |atc*729|[Toggle Maze](https://atcoder.jp/contests/abc420/tasks/abc420_d)|分层最短路问题，考虑两种不同的状态|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.08/a.cpp)|
 |atc*932|[Domino Covering XOR](https://atcoder.jp/contests/abc407/tasks/abc407_d)|暴搜+状压|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/b.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
+|atc*1421|[Development](https://atcoder.jp/contests/abc416/tasks/abc416_e)|Floyd优化|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.16/d.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 字符串
@@ -183,3 +185,4 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |----------| -------- | ---- | ---- |
 |atc*1124|[Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)|KMP板子+循环位移Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.28/e.cpp)|
 |unknown|[幻想乡的裁判长](https://qoj.ac/contest/2575/problem/14823)|（Todo）Manacher变形（2025CCPC哈尔滨）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
+||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
