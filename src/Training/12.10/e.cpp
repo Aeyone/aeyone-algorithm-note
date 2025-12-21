@@ -35,7 +35,7 @@ void solve() {
 		int l = 0, r = i - 1;
 		while(l <= r){
 			int mid = (l + r) / 2;
-			if(query(mid, i - 1) < a[i]){
+			if(query(mid, i - 1) < a[i]){//规定l到i区间上不可以存在和a[i]相同的数字
 				ans1 = mid, r = mid - 1;
 			}else{
 				l = mid + 1;
@@ -44,7 +44,7 @@ void solve() {
 		l = i, r = n - 1;
 		while(l <= r){
 			int mid = (l + r) / 2;
-			if(query(i, mid) <= a[i]){
+			if(query(i, mid) <= a[i]){//规定i到r区间上可以存在和a[i]相同的数字
 				ans2 = mid, l = mid + 1;
 			}else{
 				r = mid - 1;

@@ -30,49 +30,36 @@ string lltos(i64 num, int base, int siz){
 	reverse(res.begin(), res.end());
 	return res;
 }
-
 void solve() {
     int n, k;
     std::cin >> n >> k;
-    // n = randll(1, 63);
-    // k = 4;
-    // cout << "n = " << n << '\n';
-    std::vector<int> ans(k);
-    int s = 0;
-    for (int d = 29; d >= 0; d--) {
-        int nd = n >> d & 1;
-        int c = nd ? k : s;
-        if (c % 2 != nd) {
-            c--;
-        }
-        if (nd) {
-            s = std::min(k, s + k - c);
-        }
+    
+    if (k % 2 == 1) {
         for (int i = 0; i < k; i++) {
-            if (c > 0 && (ans[i] >> (d + 1)) < (n >> (d + 1)) && ans[i] + (1 << d) <= n) {
-                c--;
-                ans[i] += (1 << d);
-            }
+            std::cout << n << " \n"[i == k - 1];
         }
+    } else if (!(n & (n - 1))) {
+        std::cout << 0 << " ";
+        for (int i = 1; i < k; i++) {
+            std::cout << n << " \n"[i == k - 1];
+        }
+    } else {
+        int t = std::__lg(n);
+        int x = (2 << std::__lg(n - (1 << t))) - 1;
+        int y = n ^ x;
         for (int i = 0; i < k; i++) {
-            if (c > 0 && !(ans[i] >> d & 1) && ans[i] + (1 << d) <= n) {
-                c--;
-                ans[i] += (1 << d);
+            if (i == 0) {
+                std::cout << x;
+            } else if (i == 1) {
+                std::cout << y;
+            } else {
+                std::cout << n;
             }
+            std::cout << " \n"[i == k - 1];
         }
-        assert(c == 0);
     }
-    int sum = 0;
-    for (int i = 0; i < k; i++) {
-    	sum += ans[i];
-        // std::cout << ans[i] << " \n"[i == k - 1];
-    }
-    cout << sum << '\n';
-    for(auto e : ans) {
-    	cout << lltos(e, 2, __lg(n) + 1) << '\n';
-    }
-    cout << '\n';
 }
+ 
 
 int main() {
     std::ios::sync_with_stdio(false);
