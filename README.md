@@ -86,6 +86,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |----------| --------| ---- | ---- |
 |cf*1800|[Money Buys Happiness](https://codeforces.com/contest/1974/problem/E)|很朴素的背包DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.11/a.cpp)|
 |atc*719|[Robot Customize](https://atcoder.jp/contests/abc431/tasks/abc431_d)|简单背包DP，带一点条件的转移|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.28/a.cpp)|
+|cf*1800|[World is Mine](https://codeforces.com/contest/1987/problem/D)|比较难想的背包DP，有趣|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.23/A--1987D.cpp)|
 |cf*1700|[Sleeping Schedule](https://codeforces.com/contest/1324/problem/E)|DP练手题，背包计数|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.22-10.24/1324E.cpp)|
 |cf*1700|[Road Optimization](https://codeforces.com/problemset/problem/1625/C)|很典，详解看Code|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.12/a.cpp)|
 |cf*1600|[Good Triples](https://codeforces.com/contest/1907/problem/E)|数学+背包DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.03/a.cpp)|
@@ -114,7 +115,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1229|[2x2 Erasing 2](https://atcoder.jp/contests/abc424/tasks/abc424_d)|简单状压DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.02/d.cpp)|
 |unknown|[Light Up the Grid](https://codeforces.com/gym/105578/problem/E)|Floyd+状压DP（2024ICPC沈阳区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Asia%20Shenyang%20Regional%20Contest/e.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
-
+/home/aeyone/code/aeyone-algorithm-note/
 
 #### 数据结构
 
@@ -178,6 +179,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1421|[Development](https://atcoder.jp/contests/abc416/tasks/abc416_e)|Floyd优化|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.16/d.cpp)|
 |unknown|[Knapsack Problem](https://qoj.ac/contest/2513/problem/14309)|最短路问题（Asia EC Online 2025 I）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/2025%20icpc%20online%20/I.cpp)|
 |atc*1960|[Replace](https://atcoder.jp/contests/abc399/tasks/abc399_e)|基环树，思维题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.22/abc399_e.cpp)|
+|atc*1014|[Takahashi the Wall Breaker](https://atcoder.jp/contests/abc400/tasks/abc400_d)|01-BFS/dijkstra|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.22/abc400_d.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 字符串
@@ -186,4 +188,5 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |----------| -------- | ---- | ---- |
 |atc*1124|[Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)|KMP板子+循环位移Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.28/e.cpp)|
 |unknown|[幻想乡的裁判长](https://qoj.ac/contest/2575/problem/14823)|（Todo）Manacher变形（2025CCPC哈尔滨）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
+||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|

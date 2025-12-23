@@ -12,7 +12,8 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
-const int N = 2e6;
+vector<i64> a;
+const int N = 1e3;
 int p[N + 1], vis[N + 1], psiz;
 
 void build(){
@@ -27,22 +28,41 @@ void build(){
 			}
 		}
 	}
+	auto check = [&](i64 x)->bool{
+		int tot = 0;
+		for(int i = 0; i < psiz; i ++) {
+			int cnt = 0;
+			while(x % p[i] == 0) {
+				x /= p[i];
+				cnt ++;
+			}
+			tot += (cnt > 0);
+			if(tot == 2) {
+				return (x == 1);
+			}
+		}
+		return (tot == 1 && x > 1);
+	};
+	for(int i = 0; i <= 1e6; i ++) {
+		if(check(i + 2)){
+			a.push_back(1ll * (i + 2) * (i + 2));
+		}
+	}
 }
 
 void solve() {
-	i64 a;
-	cin >> a;
-	for(int i = 0; p[i] <= a / p[i]	 && i < psiz; i ++) {
-
-	}
+	i64 n;
+	cin >> n;
+	i64 x = *(-- upper_bound(a.begin(), a.end(), n));
+	cout << x << '\n';
 }
 
 signed main() {
 	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 	cout << fixed << setprecision(10);
 	int _ = 1;
-	build();
 	cin >> _;
+	build();
 	while (_ --){
 		solve();
 	}
