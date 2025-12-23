@@ -179,6 +179,7 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |unknown|[Knapsack Problem](https://qoj.ac/contest/2513/problem/14309)|最短路问题（Asia EC Online 2025 I）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/2025%20icpc%20online%20/I.cpp)|
 |atc*1960|[Replace](https://atcoder.jp/contests/abc399/tasks/abc399_e)|基环树，思维题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.22/abc399_e.cpp)|
 |atc*1014|[Takahashi the Wall Breaker](https://atcoder.jp/contests/abc400/tasks/abc400_d)|01-BFS/dijkstra|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.22/abc400_d.cpp)|
+|cf*1800|[A Wide, Wide Graph](https://codeforces.com/contest/1805/problem/D)|求树上每个节点的最远距离，做的时候不知道的一个结论：树上任意一点，离他最远的点一定是直径两端的点之一。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.23/C--1805D.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 字符串
