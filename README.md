@@ -147,6 +147,8 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1536|[Closest Moment](https://atcoder.jp/contests/abc426/tasks/abc426_e)|计算几何+三分|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.30/e.cpp)|
 |atc*1559|[Colinear](https://atcoder.jp/contests/abc422/tasks/abc422_e)|平面几何，随机化|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.04/e.cpp)|
 |atc*unknown|[LCM Sequence](https://atcoder.jp/contests/abc412/tasks/abc412_e)|大质数判断板子题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.16/c.cpp)|
+|unknown|[Coin](https://codeforces.com/gym/105588/problem/C)|间隔取数，求第k大的经典Trick，倒推|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Asia%20Kunming%20Regional%20Contest/c1.cpp)|
+|cf*2100|[Removal of a Sequence (Hard Version)](https://codeforces.com/contest/2169/problem/D2)|同上，上面这个题目的升级版，一样是倒推的做法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2169(edu)/D.cpp)|
 ||
 |atc*849|[XNOR Operation](https://atcoder.jp/contests/abc418/tasks/abc418_d)|计数题，双指针+贡献法，非常基础|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.08/d.cpp)|
 |cf*1800|[Colored Balls](https://codeforces.com/contest/1954/problem/D)|计数题，转换为维护方案数的dp+贪心|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.17/b.cpp)|
@@ -161,7 +163,6 @@ https://github.com/Aeyone/aeyone-algorithm-note/blob/main/
 |atc*1347|[Popcount Sum 3](https://atcoder.jp/contests/abc406/tasks/abc406_e)|计数题，拆位+组合数学，难点在于保证计数不重不漏|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.12/c.cpp)|
 |cf*1800|[Shohag Loves XOR (Hard Version) ](https://codeforces.com/contest/2039/problem/C2)|计数题，XOR+数学知识（整除一定至少为2倍）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.19/c.cpp)|
 |atc*1692|[Sums of Sliding Window Maximum](https://atcoder.jp/contests/abc407/tasks/abc407_f)|计数题，非常重量级，ST表+二分or单调栈+二重差分，难点在于存在相同的数字，如何不重不漏地统计所有情况，是一个经典Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/e.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
 #### 图论
