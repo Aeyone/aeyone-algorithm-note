@@ -13,6 +13,25 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(1 << n);
+	for(int i = 0; i < 1 << n; i ++) {
+		cin >> a[i];
+	}
+	for(int len = 1; len < 1 << n; len <<= 1) {
+		for(int i = 0; i < 1 << n; i += (len << 1)) {
+			if(i + (len << 1) <= (1 << n) && a[i] > a[i + len]) {
+				for(int j = i; j < i + len; j ++) {
+					swap(a[j], a[j + len]);
+				}
+			}
+		}
+	}
+	for(auto e : a) {
+		cout << e << ' ';
+	}
+	cout << '\n';
 }
 
 signed main() {
