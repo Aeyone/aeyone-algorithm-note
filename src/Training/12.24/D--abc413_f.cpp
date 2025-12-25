@@ -18,8 +18,7 @@ void solve() {
 	int n, m, k;
 	cin >> n >> m >> k;
 	vector<vector<int>> g(n, vector<int>(m)), dis(n, vector<int>(m, INF)), vis(n, vector<int>(m));
-	using T = array<int, 3>;
-	priority_queue<T, vector<T>, greater<T>> heap;
+	queue<array<int, 3>> q;
 
 	for(int i = 0; i < k; i ++) {
 		int x, y;
@@ -27,12 +26,12 @@ void solve() {
 		x --, y --;
 		g[x][y] = -1;
 		dis[x][y] = 0;
-		heap.push({0, x, y});
+		q.push({0, x, y});
 	}
 
-	while(heap.size()) {
-		auto [d, x, y] = heap.top();
-		heap.pop();
+	while(q.size()) {
+		auto [d, x, y] = q.front();
+		q.pop();
 
 		if(vis[x][y]) {
 			continue;
@@ -50,7 +49,7 @@ void solve() {
 			}
 			if(dis[a][b] > d + 1) {
 				dis[a][b] = d + 1;
-				heap.push({d + 1, a, b});
+				q.push({d + 1, a, b});
 			}
 		}
 	}
