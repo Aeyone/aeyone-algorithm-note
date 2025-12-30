@@ -1,16 +1,21 @@
-const int N = 1e5;
-int p[N + 1], vis[N + 1], psiz;
-
-void build(){
-	for(int i = 2; i <= N; i ++){
-		if(!vis[i]){
-			p[psiz ++] = i;
-		}
-		for(int j = 0; j < psiz && p[j] <= N / i; j ++){
-			vis[p[j] * i] = true;
-			if(i % p[j] == 0){
-				break;
-			}
-		}
-	}
+vector<int> minp, p;
+ 
+void sieve(int n) {
+    minp.assign(n + 1, 0);
+    p.clear();
+    for (int i = 2; i <= n; i++) {
+        if (minp[i] == 0) {
+            minp[i] = i;
+            p.push_back(i);
+        }
+        for (auto e : p) {
+            if (i * e > n) {
+                break;
+            }
+            minp[i * e] = e;
+            if (e == minp[i]) {
+                break;
+            }
+        }
+    }
 }
