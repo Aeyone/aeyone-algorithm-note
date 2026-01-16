@@ -74,6 +74,7 @@
 |atc*1212|[Takahashi's Expectation](https://atcoder.jp/contests/abc417/tasks/abc417_d)|倍增，按值域分治（还有一种DP解法）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/a.cpp)|
 |atc*1216|[Reverse 2^i](https://atcoder.jp/contests/abc413/tasks/abc413_e)|一道很像线段树的题目，很巧妙的分治|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.24/B--abc413_e.cpp)|
 |cf*1800|[Prefix Purchase](https://codeforces.com/contest/1870/problem/D)|全局贪心最优，局部不优|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.26/A--1870D.cpp)|
+|cf*1900|[Blackslex and Another RGB Walking](https://codeforces.com/contest/2179/problem/F)|通信题，很新鲜但是题目不难|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2179(div3)/f.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 动态规划
