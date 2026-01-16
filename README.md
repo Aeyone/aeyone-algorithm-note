@@ -162,6 +162,7 @@
 |cf*1700|[Close Tuples (hard version)](https://codeforces.com/contest/1462/problem/E2)|计数题，排列组合+双指针|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.27/e.cpp)|
 |atc*1347|[Popcount Sum 3](https://atcoder.jp/contests/abc406/tasks/abc406_e)|计数题，拆位+组合数学，难点在于保证计数不重不漏|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.12/c.cpp)|
 |cf*1800|[Shohag Loves XOR (Hard Version) ](https://codeforces.com/contest/2039/problem/C2)|计数题，XOR+数学知识（整除一定至少为2倍）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.19/c.cpp)|
+|cf*1763|[Exquisite Array](https://codeforces.com/contest/2184/problem/E)|计数题，典题，题目要求最小值为1~n-1的k的子数组的数量，从小到大去删掉等于i的间隔点，计算答案即可|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/e.cpp)|
 |atc*1692|[Sums of Sliding Window Maximum](https://atcoder.jp/contests/abc407/tasks/abc407_f)|计数题，非常重量级，ST表+二分or单调栈+二重差分，难点在于存在相同的数字，如何不重不漏地统计所有情况，是一个经典Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/e.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
