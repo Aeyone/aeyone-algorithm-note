@@ -1,14 +1,24 @@
 #include <stdio.h>
+
 int main() {
-    int n;
+    int n = 0;
+    double sum = 0;
     scanf("%d", &n);
-    for (int i = 1; i <= n; i++) {
-        for (int j = 0; j < n - i; j++) 
-            printf(" ");
-        char c = 'A' + (i - 1) % 26;
-        for (int j = 0; j < 2 * i - 1; j++) 
-            printf("%c", c);
-        printf("\n");
-    }    
+    int i = 0;
+    int a = 1;
+    int b = 1;
+    int temp = 0;
+
+    for (i = 1; i < n; i++) {
+        temp = a;
+        a = b;
+        b = temp + b;
+        if (i % 2 != 0) {
+            sum += (1.0000000 * a / b);
+        } else
+            sum -=  (1.0000000 * a / b);
+    }
+
+    printf("%.6f", sum);
     return 0;
 }

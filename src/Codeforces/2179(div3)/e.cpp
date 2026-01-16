@@ -17,36 +17,30 @@ void solve() {
 	cin >> n >> x >> y;
 	string s;
 	cin >> s;
-	i64 sum = 0;
+	i64 s1 = 0, s2 = 0, sum = 0;
+	vector<int> p(n);
 	for (int i = 0; i < n; i ++) {
-		int x;
-		cin >> x;
-		sum += x;
+		cin >> p[i];
+		sum += p[i];
+		if (s[i] == '0') {
+			s1 += p[i] / 2 + 1;
+		} else {
+			s2 += p[i] / 2 + 1;
+		}
 	}
-	int c0 = count(s.begin(), s.end(), '0');
-	int c1 = count(s.begin(), s.end(), '1');
-	if (sum > x + y) {
+	bool ok = true;
+	ok &= (sum <= x + y);
+	ok &= (x >= s1 && y >= s2);
+	if (count(s.begin(), s.end(), '1') == n) {
+		ok &= (y >= x + n);
+	}
+	if (count(s.begin(), s.end(), '0') == n) {
+		ok &= (x >= y + n);
+	}
+	if (ok) {
+		cout << "YES" << '\n';
+	} else {
 		cout << "NO" << '\n';
-		return;
-	}
-	if (c0 && c1) {
-		if (x - c0 >= 0 && y - c1 >= 0) {
-			cout << "YES" << '\n';
-		} else {
-			cout << "NO" << '\n';
-		}
-	} else if (c0) {
-		if (x > y) {
-			cout << "YES" << '\n';
-		} else {
-			cout << "NO" << '\n';
-		}
-	} else if (c1) {
-		if (y > x) {
-			cout << "YES" << '\n';
-		} else {
-			cout << "NO" << '\n';
-		}
 	}
 }
 
