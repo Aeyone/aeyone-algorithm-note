@@ -9,7 +9,7 @@ struct Fenwick {
     
     void init(int n_) {
         n = n_;
-        a.assign(n + 1, T{});//初始化大小为n + 1
+        a.assign(n, T{});//初始化大小为n
     }
 
     void add(int x, const T &v) {//单点修改
