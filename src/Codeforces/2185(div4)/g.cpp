@@ -16,42 +16,39 @@ void solve() {
 	int n;
 	cin >> n;
 	vector<vector<int>> a(n);
-	vector<i64> to(n + 2);
-	map<int, int> mp;
+	vector<map<int, int>> cnt(n);
+	vector<int> mex(n);
+	map<int, i64> to;
 	i64 sum = 0;
 	for (int i = 0; i < n; i ++) {
 		int l;
 		cin >> l;
 		a[i].assign(l, 0);
-		set<int> st;
 		for (int j = 0; j < l; j ++) {
 			cin >> a[i][j];
-			st.insert(a[i][j]);
+			cnt[i][a[i][j]] ++;
 		}
-		int mex = 0;
-		while (st.find(mex) != st.end()) {
-			mex ++;
+		while (cnt[i].find(mex[i]) != cnt[i].end()) {
+			mex[i] ++;
 		}
-		sum += mex;
-		mp[mex] ++;
+		sum += mex[i];
 
-		int tomex = mex + 1;
-		while (st.find(tomex) != st.end()) {
+		int tomex = mex[i] + 1;
+		while (cnt[i].find(tomex) != cnt[i].end()) {
 			tomex ++;
 		}
-		to[mex] += tomex;
+		to[mex[i]] += tomex - mex[i];
 	}
 	i64 ans = 0;
 	for (int i = 0; i < n; i ++) {
-		ans += sum * a[i].size();
-	}
-	for (int i = 0; i < n; i ++) {
 		for (auto e : a[i]) {
-			if (mp.find(e) == mp.end()) {
-				continue;
+			ans += 1ll * (n - 1) * sum;
+			if (cnt[i][e] == 1 && e < mex[i]) {
+				ans -= 1ll * (n - 1) * (mex[i] - e);
 			}
-			ans -= 1ll * mp[e] * e;
-			ans += to[e];
+			if (to.find(e) != to.end()) {
+				ans += to[e];
+			}
 		}
 	}
 	cout << ans << '\n';

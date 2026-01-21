@@ -107,6 +107,7 @@
 |cf*1700|[Fake Plastic Trees](https://codeforces.com/contest/1693/problem/B)|树形DP，比较有趣的一个树上问题，把树分叉的性质与求和结合在一起，贪心|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/10.14/b.cpp)|
 |cf*2200|[Balanced Tree](https://codeforces.com/contest/2062/problem/D)|树形DP+贪心，需要有活跃的思维|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2062(d1+d2)/d.cpp)|
 |atc*1444|[Path Decomposition of a Tree](https://atcoder.jp/contests/abc397/tasks/abc397_e)|树形DP，条件转移维护可行性，简单|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.24/C--abc397_e.cpp)|
+|cf*1962|[Cherry Tree](https://codeforces.com/contest/2184/problem/F)|树形DP，关键条件为选出三的倍数个节点|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/f.cpp)|
 ||
 |unknown|[Not a subset sum](https://qoj.ac/contest/2645/problem/15317)|状压DP，想到转移就很好做了（2025ICPC上海区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20Asia%20Shanghai%20Regional%20Contest/d.cpp)|
 |atc*1752|[Inserting Process](https://atcoder.jp/contests/abc425/tasks/abc425_f)|状压DP，和上题类似，难点在于处理相邻位置相同时的条件转移|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.02/c.cpp)|
@@ -132,6 +133,7 @@
 |unknown|[Maximum Rating](https://codeforces.com/gym/104869/problem/K)|值域线段树（2023ICPC沈阳区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/icpc%20shenyang%202023/k.cpp)
 |atc*1497|[Most Valuable Parentheses](https://atcoder.jp/contests/abc407/tasks/abc407_e)|线段树上维护括号的合法性|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/12.10/d.cpp)|
 |atc*1708|[Clearance](https://atcoder.jp/contests/abc426/tasks/abc426_f)|吉如一线段树（其实没必要）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/11.30/f.cpp)|
+|cf*2083|[Nastiness of Segments](https://codeforces.com/contest/2184/problem/G)|二分+线段树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/g.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数学
