@@ -13,23 +13,26 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
-	int n;
-	cin >> n;
-	vector<int> a(n);
+	int n, m;
+	cin >> n >> m;
+	vector<int> w(n), v(n);
 	for (int i = 0; i < n; i ++) {
-		cin >> a[i];
+		cin >> w[i] >> v[i];
 	}
-	vector<int> dp(n, INF);
-	dp[0] = 0;
+	array<vector<i64>, 2> dp;
+	dp[1].assign(m + 1, -INFLL);
+	dp[1][0] = 0;
 	for (int i = 0; i < n; i ++) {
-		if (i + 1 < n) {
-			dp[i + 1] = min(dp[i + 1], dp[i] + abs(a[i] - a[i + 1]));
-		} 
-		if (i + 2 < n) {
-			dp[i + 2] = min(dp[i + 2], dp[i] + abs(a[i] - a[i + 2]));
+		dp[i & 1] = dp[~i & 1];
+		for (int j = m; j >= w[i]; j --) {
+			dp[i & 1][j] = max(dp[i & 1][j], dp[~i & 1][j - w[i]] + v[i]);
 		}
 	}
-	cout << dp[n - 1] << '\n';
+	i64 ans = 0;
+	for (int i = 0; i <= m; i ++) {
+		ans = max(ans, dp[(n - 1) & 1][i]);
+	}
+	cout << ans << '\n';
 }
 
 signed main() {

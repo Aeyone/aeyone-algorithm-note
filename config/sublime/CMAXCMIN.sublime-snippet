@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+template<typename T> bool cmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
+template<typename T> bool cmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>CC</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
