@@ -11,11 +11,23 @@ const int MOD = 998244353;
 static mt19937_64 rng (
     chrono::steady_clock::now().time_since_epoch().count()
 );
-#define randll(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
+#define rand(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
 
 void solve() {
-    i64 n = randll(1, 1e9), m = randll(1, 1e9);    
+    i64 n = rand(1, 20), m = rand(1, 20);
     cout << n << ' ' << m << '\n';
+    for (int i = 0; i < n; i ++) {
+        for (int j = 0; j < m; j ++) {
+            int x = rand(1, 5);
+            string s = "knare";
+            if (x == 1) {
+                cout << 'x';
+            } else {
+                cout << s[rand(0, 4)];
+            }
+        }
+        cout << '\n';
+    }
 }
 
 signed main() {

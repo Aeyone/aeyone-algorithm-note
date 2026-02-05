@@ -1,3 +1,7 @@
 正在比较文件 answer.out 和 SOLVE.OUT
-FC: 找不到差异
+***** answer.out
+5
+***** SOLVE.OUT
+0
+*****
 

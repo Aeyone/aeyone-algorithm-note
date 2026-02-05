@@ -11,18 +11,16 @@ using u128 = unsigned __int128;
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
 const int MOD = 998244353;
+
 void solve() {
-    int n;
-    cin >> n;
-    cout << pow(10ll, n) << '\n';
 }
 
 signed main() {
-    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    cout << fixed << setprecision(10);
-    int _ = 1;
-    // cin >> _;
-    while (_ --){
-        solve();
-    }
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int _ = 1;
+	cin >> _;
+	while (_ --) {
+		solve();
+	}
 }

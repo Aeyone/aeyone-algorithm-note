@@ -7,61 +7,58 @@ using u64 = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
 
-#define int long long
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
 const int MOD = 998244353;
 
 void solve() {
-    int x, y;
-    cin >> x >> y;
-    int X = x, Y = y;
-    int z = x & y;
-    int pre = 0;
-    int p = x ^ z, q = y, cur = z;
-    for (int i = 32; i >= 0; i --) {
-        if ((x >> i & 1) == (y >> i & 1)) {
-            if (x >> i & 1) {
-                pre += (1ll << i);
-                x -= (1ll << i);
-            } else {
-                int cx = (1ll << i) - (x % (1ll << i));
-                int cy = (1ll << i) - (y % (1ll << i));
-                int cost = pre + min(cx, cy);
-                if (cost < cur) {
-                    if (cx <= cy) {
-                        p = (x >> i) + 1 << i;
-                        q = y;
-                    } else {
-                        p = x;
-                        q = (y >> i) + 1 << i;
-                    }
-                    cur = cost;
-                }
-                if (i < __lg(z)) {
-                    x += (1ll << i);
-                    pre -= (1ll << i);
+    int n, m;
+    cin >> n >> m;
+    vector<string> s(n + 1);
+    for (int i = 1; i <= n; i ++) {
+        cin >> s[i];
+    }
+    set<char> st {'k', 'n', 'a', 'r', 'e'};
+    string let = "knare";
+    vector<vector<pair<int, int>>> val(n + 1, vector<pair<int, int>>(5));
+    for (int i = 1; i <= n; i ++) {
+        for (int j = 0; j < 5; j ++) {
+            int cur = j, tot = 0, cnt = 0;
+            for (int k = 0; k < m; k ++) {
+                if (s[i][k] == let[(cur + 1) % 5]) {
+                    cur = (cur + 1) % 5;
+                    cnt += cur == 0;
+                } else if (st.find(s[i][k]) != st.end()) {
+                    tot ++;
                 }
             }
+            if (cnt > 0) {
+                tot -= j;
+            }
+            val[i][j] = {5 * cnt - (tot + cur), cur};
         }
     }
-    int ans = 0, check = 0;
-    if (pre <= cur) {
-        ans += abs(X - x) + abs(Y - y);
-        check = x & y;
-    } else {
-        ans += abs(X - p) + abs(Y - q);
-        check = x & y;
+
+    vector<vector<int>> dp(n + 1, vector<int> (5, -INF));
+    dp[0][0] = 0;
+    for (int i = 1; i <= n; i ++) {
+        for (int j = 0; j < 5; j ++) {
+            dp[i][j] = max(dp[i][j], dp[i - 1][j]);
+            dp[i][val[i][j].second] = max(dp[i][val[i][j].second], dp[i - 1][j] + val[i][j].first);
+        }
     }
-    cout << ans << ' ' << check << '\n';
+    int mx = 0;
+    for (int i = 0; i < 5; i ++) {
+        mx = max(mx, dp[n][i]);
+    }
+    cout << mx << '\n';
 }
 
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     cout << fixed << setprecision(10);
     int _ = 1;
-    // cin >> _;
     while (_ --) {
         solve();
     }
