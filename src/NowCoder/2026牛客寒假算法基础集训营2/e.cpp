@@ -15,26 +15,19 @@ const int MOD = 998244353;
 void solve() {
 	int n;
 	cin >> n;
-	vector<double> p(n + 1);
-	for (int i = 1; i <= n; i ++) {
-		cin >> p[i];
-	}
-	int m = n / 2;
-	vector dp(n + 1, vector<double>(m + 1));
-	dp[0][0] = 1;
-	for (int i = 1; i <= n; i ++) {
-		for (int j = 0; j <= min(i, m); j ++) {
-			dp[i][j] += dp[i - 1][j] * p[i];
-			if (j > 0) {
-				dp[i][j] += dp[i - 1][j - 1] * (1 - p[i]);
-			}
+	vector g(n, vector<int>(n));
+	for (int i = 0; i < n; i ++) {
+		for (int j = i; j < n; j ++) {
+			g[i][j] = (i & 1);
+			g[j][i] = (i & 1);
 		}
 	}
-	double ans = 0;
-	for (int i = 0; i <= m; i ++) {
-		ans += dp[n][i];
+	for (int i = 0; i < n; i ++) {
+		for (int j = 0; j < n; j ++) {
+			cout << g[i][j] << ' ';
+		}
+		cout << '\n';
 	}
-	cout << ans << '\n';
 }
 
 signed main() {
