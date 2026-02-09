@@ -116,6 +116,7 @@
 |cf*1800|[Missing Subsequence Sum](https://codeforces.com/contest/1965/problem/B)|构造题，利用背包DP维护状态，很巧妙，贪心解不是很懂|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.26/B--1965B.cpp)|
 |atc*unknown|[LCS](https://atcoder.jp/contests/dp/tasks/dp_f)|纯板子，LCS问题+记录转移|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/f.cpp)|
 |atc*unknown|[Sushi](https://atcoder.jp/contests/dp/tasks/dp_j)|好玩的期望DP，关键在于状态转移E[x]=∑(p[i]*x[i])，以及一个很巧妙的移项|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/j.cpp)|
+|atc*unknown|[Deque](https://atcoder.jp/contests/dp/tasks/dp_l)|区间dp+博弈论，关键在于要把两个人遇到的局面转化为相同的东西|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/l.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数据结构
