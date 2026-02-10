@@ -1,7 +1,7 @@
 template <typename T>
 struct Fenwick {
     int n;
-    std::vector<T> a;
+    vector<T> a;
     
     Fenwick(int n_ = 0) {
         init(n_);
@@ -9,22 +9,28 @@ struct Fenwick {
     
     void init(int n_) {
         n = n_;
-        a.assign(n, T{});//初始化大小为n
+        a.assign(n, T{});
     }
 
-    void add(int x, const T &v) {//单点修改
-        while(x <= n)
+    void add(int x, const T &v) { // 单点修改
+        while(x <= n){
             a[x] += v, x += x & -x;
+        }
     }
     
-    T sum(int x) {//查询1~x的和
+    T query(int x) {// 查询1~x的和 or 单点查询(差分优化)
         T ans{};
-        while(x > 0)
+        while(x > 0){
             ans += a[x], x -= x & -x;
+        }
         return ans;
     }
-    //1-based
+    // 1-based
     T query(int l, int r) {
-        return sum(r) - sum(l - 1);
+        return query(r) - query(l - 1);
+    }
+
+    void rangeAdd(int l, int r, const T &v) { // 区间修改(差分优化)
+        add(l, v), add(r + 1, -v);
     }
 };

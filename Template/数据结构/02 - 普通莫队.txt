@@ -1,20 +1,10 @@
-// CF1000F
-#include <bits/stdc++.h>
-using namespace std;
-
-using i64 = long long;
-
-#define MOD 998244353
-#define INF 0x7f7f7f7f
-#define INFLL 0x7f7f7f7f7f7f7f7fLL
-
-int unit; //块大小
+int unit = 990; // 块大小
 int getBlock(int x){
 	return x / unit;
 }
 struct Query {
   	int l, r, id;
-  	bool operator<(const Query &x) const {//奇偶排序
+  	bool operator<(const Query &x) const { // 奇偶排序
 	  	int a = getBlock(l), b = getBlock(x.l);
 	    if (a != b){
 	    	return l < x.l;
@@ -35,15 +25,14 @@ void solve() {
 		cin >> que[i].l >> que[i].r;
 		que[i].id = i;
 	}
-	unit = 990;
 	sort(que.begin(), que.end());
-	auto add = [&](int u)->void{
+	int l = 1, r = 0, res = 0; // 左闭右闭
 
+	auto add = [&](int u)->void{
 	};
 	auto del = [&](int u)->void{
-
 	};
-	int l = 1, r = 0, res = 0;
+	
 	for(register int i = 0; i < q; i ++){
 		auto &[L, R, id] = que[i];
 		while(l > L) add(-- l);
@@ -51,14 +40,5 @@ void solve() {
 		while(l < L) del(l ++);
 		while(r > R) del(r --);
 		ans[id] = res;
-	}
-}
-
-signed main() {
-	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-	int _ = 1;
-	// cin >> _;
-	while (_ --){
-		solve();
 	}
 }
