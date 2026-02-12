@@ -12,6 +12,7 @@
 - [02 - 一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02%20-%20一些小trick.txt)
 - [03 - 进制转换.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/03%20-%20进制转换.txt)
 - [04 - int128 输出流自定义.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/04%20-%20int128%20输出流自定义.txt)
+- [05 - 取模类（MLong & MInt）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/05%20-%20取模类（MLong%20&%20MInt）.txt)
 
 </details>
 
