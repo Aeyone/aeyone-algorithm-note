@@ -75,6 +75,7 @@
 |atc*1216|[Reverse 2^i](https://atcoder.jp/contests/abc413/tasks/abc413_e)|一道很像线段树的题目，很巧妙的分治|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.24/B--abc413_e.cpp)|
 |cf*1800|[Prefix Purchase](https://codeforces.com/contest/1870/problem/D)|全局贪心最优，局部不优|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.26/A--1870D.cpp)|
 |cf*1900|[Blackslex and Another RGB Walking](https://codeforces.com/contest/2179/problem/F)|通信题，很新鲜但是题目不难|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2179(div3)/f.cpp)|
+|cf*1800|[Clique Problem](https://codeforces.com/problemset/problem/527/D)|数学推导转换为经典线段覆盖问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.11/A--527D.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 动态规划
@@ -119,6 +120,7 @@
 |atc*1426|[Deque](https://atcoder.jp/contests/dp/tasks/dp_l)|区间DP+博弈论，关键在于要把两个人遇到的局面转化为相同的东西|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/l.cpp)|
 |cf*1900|[Zuma](https://codeforces.com/problemset/problem/607/B)|区间dp + 回文，关键在于状态转移的套路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/C--607B.cpp)|
 |atc*1550|[Candies](https://atcoder.jp/contests/dp/tasks/dp_m)|背包DP + 树状数组优化，想到区间操作可以优化，就很好做了；还有一种做法是前缀和优化，光想区间操作了(XD|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/m.cpp)|
+|cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数据结构
@@ -140,6 +142,7 @@
 |atc*1708|[Clearance](https://atcoder.jp/contests/abc426/tasks/abc426_f)|吉如一线段树（其实没必要）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.11.30/f.cpp)|
 |cf*2083|[Nastiness of Segments](https://codeforces.com/contest/2184/problem/G)|二分+线段树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/g.cpp)|
 |cf*2000|[XOR on Segment](https://codeforces.com/problemset/problem/242/E)|线段树板子题，区间异或操作 + 区间求和|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/D--242E.cpp)|
+|cf*1994|[Little Elephant and Array](https://codeforces.com/problemset/problem/220/B)|离线后按左端点排序后算贡献，利用树状数组维护。还有个非常简单的莫队做法)|[Code1](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/AA--220B.cpp)[code2](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/A--220B.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数学
