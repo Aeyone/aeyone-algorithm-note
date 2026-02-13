@@ -20,12 +20,12 @@ using i64 = long long;
 void solve() {
     int n;
     cin >> n;
-    vector<int> a(n), w(n), b(n);
-    int W = 0, B = 0;
+    vector<int> a(n);
+    int t[2] {};
     for(int i = 0; i < n; i ++){
         cin >> a[i];
-        W += (a[i] == 1);
-        B += (a[i] == 0);
+        t[0] += (a[i] == 0);
+        t[1] += (a[i] == 1);
     }
     vector<vector<int>> g(n);
     for(int i = 1; i < n; i ++){
@@ -36,28 +36,25 @@ void solve() {
         g[v].push_back(u);
     }
     vector<int> res(n);
-    auto dfs = [&](auto &&self, int u, int fa)->void{
+    auto dfs1 = [&](auto &&self, int u, int fa)->void{
         res[u] = (a[u] == 1 ? 1 : -1);
-        w[u] = (a[u] == 1);
-        b[u] = (a[u] == 0);
-        priority_queue<int> heap;
         for(auto v : g[u]) if(v != fa){
             self(self, v, u);
-            heap.push(w[v] - b[v]);
-            w[u] += w[v];
-            b[u] += b[v];
-        }
-        heap.push((W - w[u]) - (B - b[u]));
-        while(heap.size() && heap.top() > 0){
-            res[u] += heap.top();
-            heap.pop();
+            res[u] += max(0, res[v]);
         }
     };
-    dfs(dfs, 0, -1);
+    auto dfs2 = [&](auto &&self, int u, int fa)->void{
+        for(auto v : g[u]) if(v != fa){
+            res[v] = max(res[v], (res[v] < 0 ? res[v] : 0) + res[u]);
+            self(self, v, u);
+        }
+    };
+    dfs1(dfs1, 0, -1);
+    dfs2(dfs2, 0, -1);
     for(auto e : res){
         cout << e << ' ';
     }
-    cout << '\n';    
+    cout << '\n';   
 }
 
 signed main() {
