@@ -123,7 +123,8 @@
 |cf*1900|[Zuma](https://codeforces.com/problemset/problem/607/B)|区间dp + 回文，关键在于状态转移的套路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/C--607B.cpp)|
 |atc*1550|[Candies](https://atcoder.jp/contests/dp/tasks/dp_m)|背包DP + 树状数组优化，想到区间操作可以优化，就很好做了；还有一种做法是前缀和优化，光想区间操作了(XD|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/m.cpp)|
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
-||[]()|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
+|cf*1800|[Queries for Number of Palindromes](https://codeforces.com/problemset/problem/245/H)|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
+|cf*1800|[Kefa and Dishes](https://codeforces.com/problemset/problem/580/D)|很基础的状压DP，注意状态枚举按照1的数量从小到大排序|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.15/A--580D.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 数据结构
