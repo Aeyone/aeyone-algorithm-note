@@ -201,6 +201,7 @@
 |cf*1800|[Rendez-vous de Marian et Robin](https://codeforces.com/contest/2014/problem/E)|分层图Dijkstra好题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.23/D--2014E.cpp)|
 |atc*1680|[Wind Cleaning](https://atcoder.jp/contests/abc427/tasks/abc427_e)|最短路问题，状态定义需要开六维，非常新颖|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.11.30/b.cpp)|
 |cf*1800|[A Wide, Wide Graph](https://codeforces.com/contest/1805/problem/D)|求树上每个节点的最远距离，做的时候不知道的一个结论：树上任意一点，离他最远的点一定是直径两端的点之一。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.23/C--1805D.cpp)|
+|cf*1800|[Edge Deletion](https://codeforces.com/problemset/problem/1076/D)|很有意思的一道题，Dijkstra跑出最短路径树，然后对树一个一个删边|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.14/B--1076D.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 #### 字符串
@@ -208,6 +209,6 @@
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
 |atc*1124|[Shift String](https://atcoder.jp/contests/abc430/tasks/abc430_e)|KMP板子+循环位移Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.11.28/e.cpp)|
+|cf*1800|[MUH and Cube Walls](https://codeforces.com/problemset/problem/471/D)|差分后kmp，统计子串数量，注意w=1的时候特判|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.14/A--471D.cpp)|
 |unknown|[幻想乡的裁判长](https://qoj.ac/contest/2575/problem/14823)|（Todo）Manacher变形（2025CCPC哈尔滨）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
