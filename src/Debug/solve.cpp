@@ -1,138 +1,122 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using i64 = long long;
-using u64 = unsigned long long;
+using ll = long long;
 
-using i128 = __int128;
-using u128 = unsigned __int128;
+#define MOD 998244353
+#define INF 0x7f7f7f7f
+#define INFLL 0x7f7f7f7f7f7f7f7fLL
 
-#define INF 0x3f3f3f3f
-#define INFLL 0x3f3f3f3f3f3f3f3fLL
-
-const int MOD = 998244353;
-
-struct Info{
-    array<int, 10> cnt = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-};
-
-struct Lazy{
-    int add = 0;
-};
-
-Info operator+(const Info &l, const Info &r){
-    Info res;
-    for (int i = 0; i < 10; i ++) {
-        res.cnt[i] = l.cnt[i] + r.cnt[i];
+vector<int> minp, p;
+ 
+void sieve(int n) {
+    minp.assign(n + 1, 0);
+    p.clear();
+    for (int i = 2; i <= n; i++) {
+        if (minp[i] == 0) {
+            minp[i] = i;
+            p.push_back(i);
+        }
+        for (auto e : p) {
+            if (1ll * i * e > n) {
+                break;
+            }
+            minp[i * e] = e;
+            if (e == minp[i]) {
+                break;
+            }
+        }
     }
-    return res;
 }
- 
-struct SegmentTree{
-    int n, m;
-    vector<Info> info;
-    vector<Lazy> lazy;
- 
-    SegmentTree() {}
-    SegmentTree(int _n, int _m, vector<int> &a) {
-        init(_n, _m, a);
-    }
-
-    void init(int _n, int _m, vector<int> &a){
-        n = _n;
-        m = _m;
-
-        info.assign(n << 2, Info({0, 0, 0, 0, 0, 0, 0, 0, 0, 0}));
-        lazy.assign(n << 2, Lazy());
-        build(1, 1, n, a);
-    }
-
-    void apply(int p, int val, int siz){
-        array<int, 10> res = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        for (int i = 0; i < m; i ++) {
-            res[(i + (val % m)) % m] += info[p].cnt[i];
-        }
-        info[p].cnt = res;
-        lazy[p].add = (lazy[p].add + val) % m;
-    }
-
-    void down(int p, int sizL, int sizR){
-        if (lazy[p].add != 0){
-            apply(2 * p, lazy[p].add, sizL);
-            apply(2 * p + 1, lazy[p].add, sizR);
-            lazy[p].add = 0;
-        }
-    }
-
-    void up(int p){
-        info[p] = info[2 * p] + info[2 * p + 1];
-    }
-    
-    void build(int p, int l, int r, vector<int> &a){
-        if (l == r){
-            info[p].cnt[a[l - 1] % m] = 1;
-        }else{
-            int mid = (l + r) / 2;
-            build(2 * p, l, mid, a);
-            build(2 * p + 1, mid + 1, r, a);
-            up(p);
-        }
-    }
-
-    void modify(int p, int l, int r, int L, int R, int val){
-        if (L > r || R < l){
-            return;
-        }
-        if (L <= l && r <= R){
-            apply(p, val, r - l + 1);
-        }else{
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            modify(2 * p, l, mid, L, R, val);
-            modify(2 * p + 1, mid + 1, r, L, R, val);
-            up(p);
-        }
-    }
-
-    Info query(int p, int l, int r, int L, int R){
-        if(L > r || R < l){
-            return Info();
-        }
-        Info res;
-        if(L <= l && r <= R){
-            res = info[p];
-        }else{
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            res = query(2 * p, l, mid, L, R) + query(2 * p + 1, mid + 1, r, L, R);
-        }
-        return res;
-    }
-    //1-based
-    void modify(int L, int R, int val){
-        modify(1, 1, n, L, R, val);
-    }
-    Info query(int L, int R){
-        return query(1, 1, n, L, R);
-    }
-};
 
 void solve() {
     int n;
     cin >> n;
-    vector<int> a(n), b(n), siz(n);
-    for (int i = 0; i < n; i ++) {
+    vector<int> a(n + 1), b(n + 1);
+    vector<vector<int>> ps(n + 1);
+    int m = 5e5 + 10;
+    for (int i = 1; i <= n; i++){
         cin >> a[i];
+        int x = a[i];
+        for (auto e : p) {
+            if (x % e == 0) {
+                ps[i].push_back(e);
+            }
+            while (x % e == 0) {
+                x /= e;
+            }
+        }
+        if (x > 1) {
+            ps[i].push_back(x);
+        }
+    }
+    for (int i = 1; i <= n; i++){
+        cin >> b[i];
     }
 
-    cout << 1 << '\n';
+    vector<set<array<int, 2>>> dp(m);
 
+    auto check = [&](int &mx, int idx, int c)->void{
+        if (dp[idx].size() == 0) {
+            return;
+        }
+        auto [len1, c1] = *(--dp[idx].end());
+        if (dp[idx].size() == 2) {
+            auto [len2, c2] = *dp[idx].begin();
+            mx = max(mx, c1 == c ? len2 : len1);
+        } else {
+            mx = max(mx, c1 == c ? 0 : len1);
+        }
+    };
+
+    auto update = [&](int mx, int idx, int c)->void{
+        if (dp[idx].size() == 2) {
+            auto [len1, c1] = *(--dp[idx].end());
+            auto [len2, c2] = *dp[idx].begin();
+            if (c != c1 && c != c2) {
+                dp[idx].insert({mx, c});
+                dp[idx].erase(dp[idx].begin());
+            } else if (c == c1) {
+                if (mx > len1) {
+                    dp[idx].erase(*(--dp[idx].end()));
+                    dp[idx].insert({mx, c});
+                }
+            } else if (c == c2) {
+                if (mx > len2) {
+                    dp[idx].erase(dp[idx].begin());
+                    dp[idx].insert({mx, c});
+                }
+            }
+        } else {
+            dp[idx].insert({mx, c});
+        }
+    };
+
+    for (int i = 1; i <= n; i++) {
+        int mx = 0;
+        for (auto p : ps[i]) {
+            check(mx, p, b[i]);
+        }
+        mx ++;
+        for (auto p : ps[i]) {
+            update(mx, p, b[i]);
+        }
+    }
+    int ans = 0;
+    for (int i = 0; i < m; i ++) {
+        if (dp[i].size() > 0) {
+            auto [len1, c1] = *(--dp[i].end());
+            ans = max(ans, len1);
+        }
+    }
+    cout << ans << endl;
 }
 
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    cout << fixed << setprecision(10);
     int _ = 1;
+    sieve(1e3);
+//    cin >> _;
     while (_ --) {
         solve();
     }
