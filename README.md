@@ -17,6 +17,13 @@
 </details>
 
 <details open>
+<summary><strong>图论</strong></summary>
+
+- [01 - 强连通分量缩点（SCC）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/图论/01%20-%20强连通分量缩点（SCC）.txt)
+
+</details>
+
+<details open>
 <summary><strong>字符串</strong></summary>
 
 - [01 - kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01%20-%20kmp.txt)
