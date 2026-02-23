@@ -12,6 +12,103 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
+struct Info{
+    i64 mx = 0;
+};
+
+struct Lazy{
+    i64 add = 0;
+};
+
+Info operator+(const Info &l, const Info &r){
+    Info res;
+    res.mx = max(l.mx, r.mx);
+    return res;
+}
+ 
+struct SegmentTree{
+    int n;
+    vector<Info> info;
+    vector<Lazy> lazy;
+ 
+    SegmentTree() {}
+    SegmentTree(int _n) {
+        init(_n);
+    }
+
+    void init(int _n){
+        n = _n;
+        info.assign(n << 2, Info());
+        lazy.assign(n << 2, Lazy());
+        build(1, 1, n);
+    }
+
+    void apply(int p, i64 val, int siz){
+        info[p].mx += val;
+        lazy[p].add += val;
+    }
+
+    void down(int p, int sizL, int sizR){
+        if (lazy[p].add != 0){
+            apply(2 * p, lazy[p].add, sizL);
+            apply(2 * p + 1, lazy[p].add, sizR);
+            lazy[p].add = 0;
+        }
+    }
+
+    void up(int p){
+        info[p] = info[2 * p] + info[2 * p + 1];
+    }
+    
+    void build(int p, int l, int r){
+        if (l == r){
+            info[p] = Info(0);
+        }else{
+            int mid = (l + r) / 2;
+            build(2 * p, l, mid);
+            build(2 * p + 1, mid + 1, r);
+            up(p);
+        }
+    }
+
+    void modify(int p, int l, int r, int L, int R, i64 val){
+        if (L > r || R < l){
+            return;
+        }
+        if (L <= l && r <= R){
+            apply(p, val, r - l + 1);
+        }else{
+            int mid = (l + r) / 2;
+            down(p, mid - l + 1, r - mid);
+            modify(2 * p, l, mid, L, R, val);
+            modify(2 * p + 1, mid + 1, r, L, R, val);
+            up(p);
+        }
+    }
+
+    Info query(int p, int l, int r, int L, int R){
+        if(L > r || R < l){
+            return Info();
+        }
+        Info res;
+        if(L <= l && r <= R){
+            res = info[p];
+        }else{
+            int mid = (l + r) / 2;
+            down(p, mid - l + 1, r - mid);
+            res = query(2 * p, l, mid, L, R) + query(2 * p + 1, mid + 1, r, L, R);
+        }
+        return res;
+    }
+    //1-based
+    void modify(int L, int R, i64 val){
+        modify(1, 1, n, L, R, val);
+    }
+    Info query(int L, int R){
+        return query(1, 1, n, L, R);
+    }
+};
+
 void solve() {
 	int n;
 	cin >> n;
@@ -22,61 +119,12 @@ void solve() {
 	for (int i = 0; i < n; i ++) {
 		cin >> a[i];
 	}
-/*
-*	d[len]存的整个长度为len的子序列的末尾高度的贡献的集合，高度从大到小
-*	d[len].back()表示长度为len最大贡献，用单调栈维护
-*	dp[len]表示当前长度为len的子序列结尾的高度的最小值
-*/
-	vector<vector<i64>> val;
-	vector<vector<int>> d;
-	vector<int> dp;
-
-	val.push_back({0});
-	d.push_back({0});
-	dp.push_back(0);
-
+	SegmentTree st(n);
 	for (int i = 0; i < n; i ++) {
-		// cerr << "siz = " << val.size() << '\n';
-		// cerr << "siz = " << d.size() << '\n';
-		// cerr << "siz = " << dp.size() << '\n';
-		if (h[i] > dp.back()) {
-			int idx2 = upper_bound(d.back().begin(), d.back().end(), h[i], greater<int>{}) - d.back().begin();
-			val.push_back({val[val.size() - 1][idx2] + a[i]});
-			d.push_back({h[i]});
-			dp.push_back(h[i]);
-		} else {
-			int idx = upper_bound(dp.begin(), dp.end(), h[i]) - dp.begin();
-			int idx2 = upper_bound(d[idx - 1].begin(), d[idx - 1].end(), h[i], greater<int>{}) - d[idx - 1].begin();
-			// cerr << "h[i] = " << h[i] << '\n';
-			// cerr << "idx = " << idx << '\n';
-			// cerr << "idx2 = " << idx2 << '\n';
-			// cerr << "val = " << val[idx - 1][idx2] << '\n';
-			// cerr << '\n';
-
-			while (val[idx].size() && val[idx].back() <= val[idx - 1][idx2] + a[i]) {
-				val[idx].pop_back();
-				d[idx].pop_back();
-			}
-			val[idx].push_back(val[idx - 1][idx2] + a[i]);
-			d[idx].push_back(h[i]);
-			dp[idx] = h[i];
-		}
+		i64 mx = st.query(1, h[i] - 1).mx;
+		st.modify(h[i], h[i], mx + a[i]);
 	}
-	i64 ans = 0;
-	for (auto v : val) {
-		for (auto e : v) {
-			// cout << e << ' ';
-			ans = max(ans, e);
-		}
-		// cout << '\n';
-	}
-	// for (auto v : d) {
-	// 	for (auto e : v) {
-	// 		cout << e << ' ';
-	// 	}
-	// 	cout << '\n';
-	// }
-	cout << ans << '\n';
+	cout << st.query(1, n).mx << '\n';
 }
 
 signed main() {

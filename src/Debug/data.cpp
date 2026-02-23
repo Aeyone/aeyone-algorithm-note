@@ -14,20 +14,12 @@ static mt19937_64 rng (
 #define rand(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
 
 void solve() {
-    i64 n = rand(1, 20), m = rand(1, 20);
-    cout << n << ' ' << m << '\n';
+    i64 n = rand(1e4, 2e4);
+    cout << n << '\n';
     for (int i = 0; i < n; i ++) {
-        for (int j = 0; j < m; j ++) {
-            int x = rand(1, 5);
-            string s = "knare";
-            if (x == 1) {
-                cout << 'x';
-            } else {
-                cout << s[rand(0, 4)];
-            }
-        }
-        cout << '\n';
+        cout << rand(1e8, 1e9) << ' ';
     }
+    cout << '\n';
 }
 
 signed main() {
