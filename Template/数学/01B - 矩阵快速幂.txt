@@ -1,0 +1,51 @@
+struct Mat {
+    int n, m;
+    i64 a[60][60] = {};
+
+    Mat() {}
+
+    Mat(int n, int m) {
+        init(n, m);
+    }
+
+    void init(int n, int m) {
+        this->n = n;
+        this->m = m;
+    }
+
+    void I() {
+        memset(a, 0, sizeof(a));
+        for (int i = 0; i < n; i++) {
+            a[i][i] = 1;
+        }
+    }
+
+    Mat operator*(const Mat& T) const {
+        Mat res(n, T.m);
+        int r;
+        for (int i = 0; i < n; i ++) {
+            for (int k = 0; k < T.m; k ++) {
+                r = a[i][k];
+                for (int j = 0; j < m; j ++) {
+                	res.a[i][j] += T.a[k][j] * r;
+                	res.a[i][j] %= MOD;
+                }
+            }
+        }
+        return res;
+    }
+
+    Mat operator^(i64 b) const {
+        Mat res(n, m);
+        res.I();
+        Mat base = *this;
+        while (b) {
+            if (b & 1) {
+                res = res * base;
+            }
+            base = base * base;
+            b >>= 1;
+        }
+        return res;
+    }
+};
