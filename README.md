@@ -33,7 +33,8 @@
 <details open>
 <summary><strong>数学</strong></summary>
 
-- [01 - 快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01%20-%20快速幂.txt)
+- [01A - 快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01A%20-%20快速幂.txt)
+- [01B - 矩阵快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01B%20-%20矩阵快速幂.txt)
 - [02 - 组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/02%20-%20组合计数.txt)
 - [03 - 线性筛.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03%20-%20线性筛.txt)
 - [04 - 计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04%20-%20计算几何.txt)
