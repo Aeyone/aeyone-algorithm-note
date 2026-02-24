@@ -133,7 +133,10 @@
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 |cf*1800|[Queries for Number of Palindromes](https://codeforces.com/problemset/problem/245/H)|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
 |cf*1800|[Kefa and Dishes](https://codeforces.com/problemset/problem/580/D)|很基础的状压DP，注意状态枚举按照1的数量从小到大排序|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.15/A--580D.cpp)|
+|unknown|[Path Summing Problem](https://qoj.ac/contest/2025/problem/10742)|网格DP + 容斥DP + 根号分治，非常漂亮的一道题目，详细看Code注释|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20China%20Hubei(Wuhan)%20National%20Invitational%20Programming%20Contest/g.cpp)|
+|cf*2200|[Gerald and Giant Chess](https://codeforces.com/contest/559/problem/C)|网格DP + 容斥原理，以上问题的子问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.24/cf559C.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
+
 
 #### 数据结构
 
