@@ -13,6 +13,7 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
+	
 }
 
 signed main() {
