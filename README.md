@@ -133,8 +133,14 @@
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 |cf*1800|[Queries for Number of Palindromes](https://codeforces.com/problemset/problem/245/H)|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
 |cf*1800|[Kefa and Dishes](https://codeforces.com/problemset/problem/580/D)|很基础的状压DP，注意状态枚举按照1的数量从小到大排序|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.15/A--580D.cpp)|
+|atc*1687|[Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)|LIS变形，“最大价值子序列”，注意到题目数据范围，考虑区间最值的转移，线段树优化DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/q.cpp)|
 |unknown|[Path Summing Problem](https://qoj.ac/contest/2025/problem/10742)|网格DP + 容斥DP + 根号分治，非常漂亮的一道题目，详细看Code注释|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20China%20Hubei(Wuhan)%20National%20Invitational%20Programming%20Contest/g.cpp)|
 |cf*2200|[Gerald and Giant Chess](https://codeforces.com/contest/559/problem/C)|网格DP + 容斥原理，以上问题的子问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.24/cf559C.cpp)|
+|atc*1774|[Walk](https://atcoder.jp/contests/dp/tasks/dp_r)|矩阵快速幂优化DP，每走一步相当于进行一次矩阵乘法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/r.cpp)|
+|atc*1610|[Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)|数位DP基础题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/s.cpp)|
+|atc*2172|[Permutation](https://atcoder.jp/contests/dp/tasks/dp_t)|排列DP + 前缀和优化，状态定义很关键，排列的子集也是排列，详细看Code|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/t.cpp)|
+|atc*1910|[Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)|SOS-DP，枚举子集Trick，将4^n优化至3^n，submask=(submask-1)&mask是关键|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/u.cpp)|
+|atc*2200|[Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)|基础换根DP，做法为先树形DP算出以1为根的状态，然后从1开始去递推所有节点为根的状态，难点在于如何剔除某个节点的子节点的信息，递推到下一个即将要作为根的子节点上面去|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/v.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
