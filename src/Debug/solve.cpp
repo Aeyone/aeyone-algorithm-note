@@ -1,122 +1,71 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;
+using i64 = long long;
+using u64 = unsigned long long;
 
-#define MOD 998244353
-#define INF 0x7f7f7f7f
-#define INFLL 0x7f7f7f7f7f7f7f7fLL
+using i128 = __int128;
+using u128 = unsigned __int128;
 
-vector<int> minp, p;
- 
-void sieve(int n) {
-    minp.assign(n + 1, 0);
-    p.clear();
-    for (int i = 2; i <= n; i++) {
-        if (minp[i] == 0) {
-            minp[i] = i;
-            p.push_back(i);
-        }
-        for (auto e : p) {
-            if (1ll * i * e > n) {
-                break;
-            }
-            minp[i * e] = e;
-            if (e == minp[i]) {
-                break;
-            }
-        }
+#define int long long
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 998244353;
+
+ostream& operator<<(ostream &os, __int128 n) {
+    string s;
+    while(n) {
+        s += '0' + n % 10;
+        n /= 10;
     }
+    reverse(s.begin(), s.end());
+    return os << s;
 }
 
+
 void solve() {
-    int n;
-    cin >> n;
-    vector<int> a(n + 1), b(n + 1);
-    vector<vector<int>> ps(n + 1);
-    int m = 5e5 + 10;
-    for (int i = 1; i <= n; i++){
-        cin >> a[i];
-        int x = a[i];
-        for (auto e : p) {
-            if (x % e == 0) {
-                ps[i].push_back(e);
-            }
-            while (x % e == 0) {
-                x /= e;
-            }
-        }
-        if (x > 1) {
-            ps[i].push_back(x);
-        }
-    }
-    for (int i = 1; i <= n; i++){
-        cin >> b[i];
+    i64 n, k;
+    cin >> n >> k;
+    i128 _k = k;
+    vector<array<i128, 3>> a(n);
+    for (int i = 0; i < n; i ++) {
+        i64 x, y, z;
+        cin >> x >> y >> z;
+        a[i] = {x, y, z};
     }
 
-    vector<set<array<int, 2>>> dp(m);
-
-    auto check = [&](int &mx, int idx, int c)->void{
-        if (dp[idx].size() == 0) {
-            return;
+    auto check = [&](i128 m)->bool {
+        i128 sum = 0;
+        for (auto [t, l, w] : a) {
+            i128 T = t * l + w;
+            i128 cnt = m / T, r = m % T;
+            sum += cnt * l + min(l, r / t);
+            if (sum >= _k) {
+                return 1;
+            }
         }
-        auto [len1, c1] = *(--dp[idx].end());
-        if (dp[idx].size() == 2) {
-            auto [len2, c2] = *dp[idx].begin();
-            mx = max(mx, c1 == c ? len2 : len1);
-        } else {
-            mx = max(mx, c1 == c ? 0 : len1);
-        }
+        return (sum >= _k);
     };
 
-    auto update = [&](int mx, int idx, int c)->void{
-        if (dp[idx].size() == 2) {
-            auto [len1, c1] = *(--dp[idx].end());
-            auto [len2, c2] = *dp[idx].begin();
-            if (c != c1 && c != c2) {
-                dp[idx].insert({mx, c});
-                dp[idx].erase(dp[idx].begin());
-            } else if (c == c1) {
-                if (mx > len1) {
-                    dp[idx].erase(*(--dp[idx].end()));
-                    dp[idx].insert({mx, c});
-                }
-            } else if (c == c2) {
-                if (mx > len2) {
-                    dp[idx].erase(dp[idx].begin());
-                    dp[idx].insert({mx, c});
-                }
-            }
+    i128 l = 0, r = (i128)INFLL * INFLL, ans = -1;
+    while (l <= r) {
+        cerr << l << ' ' << r << '\n';
+        i128 mid = l + r >> 1;
+        if (check(mid)) {
+            ans = mid, r = mid - 1;
         } else {
-            dp[idx].insert({mx, c});
-        }
-    };
-
-    for (int i = 1; i <= n; i++) {
-        int mx = 0;
-        for (auto p : ps[i]) {
-            check(mx, p, b[i]);
-        }
-        mx ++;
-        for (auto p : ps[i]) {
-            update(mx, p, b[i]);
+            l = mid + 1;
         }
     }
-    int ans = 0;
-    for (int i = 0; i < m; i ++) {
-        if (dp[i].size() > 0) {
-            auto [len1, c1] = *(--dp[i].end());
-            ans = max(ans, len1);
-        }
-    }
-    cout << ans << endl;
+    cout << ans << '\n';
 }
 
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    cout << fixed << setprecision(10);
     int _ = 1;
-    sieve(1e3);
-//    cin >> _;
+    cin >> _;
     while (_ --) {
         solve();
     }
