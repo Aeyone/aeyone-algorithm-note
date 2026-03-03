@@ -1,16 +1,11 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-using i64 = long long;
-
-void solve() {
+void solve() { // 普通st表
     int n;
     cin >> n;
     vector<int> a(n);
     for(int i = 0; i < n; i ++){
         cin >> a[i];
     }
-    vector<vector<int>> st(n, vector<int>(20));
+    vector<vector<int>> st(n, vector<int>(21));
     for(int i = 0; i < n; i ++){    //p = 0时
         st[i][0] = a[i];
     }
@@ -30,11 +25,41 @@ void solve() {
     }
 }
 
-signed main() {
-//    freopen("../data/data.in", "r", stdin), freopen("../data/data.out", "w", stdout);
-    ios::sync_with_stdio(false), cin.tie(nullptr);
-    int _ = 1;
-    // cin >> _;
-    while (_ --)
-        solve();
+void solve() { // 树上倍增求lca
+    vector up(n, vector<int>(21));
+    vector<int> dep(n);
+
+    auto init = [&](this auto &&self, int u, int fa)->void {
+        up[u][0] = fa;
+        for (int p = 1; dep[u] >> p > 0; p ++) {
+            int la = up[u][p - 1];
+            up[u][p] = up[la][p - 1];
+        }
+        for (auto [v, _] : g[u]) if (v != fa) {
+            dep[v] = dep[u] + 1;
+            self(v, u);
+        }
+    };
+    init(0, -1);
+
+    auto lca = [&](int x, int y)->int {
+        if (dep[x] < dep[y]) {
+            swap(x, y);
+        }
+        for (int p = 20; p >= 0; p --) { // 使x, y跳到同一树高
+            if (dep[x] - (1 << p) >= dep[y]) {
+                x = up[x][p];
+            }
+        }
+        if (x == y) { // 已经相等说明y就是x的祖先
+            return x;
+        }
+        for (int p = 20; p >= 0; p --) { // 一起上跳至差一格到lca
+            if (up[x][p] != up[y][p]) {
+                x = up[x][p];
+                y = up[y][p];
+            }
+        }
+        return up[x][0]; // 最后不要忘记再跳一次
+    };
 }
