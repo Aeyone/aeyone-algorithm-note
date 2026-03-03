@@ -63,7 +63,7 @@
 
 ## Problemset
 
-#### 基础算法
+### 基础算法
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
@@ -88,7 +88,7 @@
 |cf*1800|[Maximum Subsequence](https://codeforces.com/problemset/problem/888/E)|很巧妙的分治，将n=35一分为二，然后分别二进制枚举，再考虑两个1e5级别的序列操作|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/A--888E.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
-#### 动态规划
+### 动态规划
 
 1. 背包DP
 
@@ -118,19 +118,17 @@
 |atc*1444|[Path Decomposition of a Tree](https://atcoder.jp/contests/abc397/tasks/abc397_e)|树形DP，条件转移维护可行性，简单|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.24/C--abc397_e.cpp)|
 |cf*1962|[Cherry Tree](https://codeforces.com/contest/2184/problem/F)|树形DP，关键条件为选出三的倍数个节点|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/f.cpp)|
 |atc*2200|[Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)|基础换根DP，做法为先树形DP算出以1为根的状态，然后从1开始去递推所有节点为根的状态，难点在于如何剔除某个节点的子节点的信息，递推到下一个即将要作为根的子节点上面去|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/v.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 3. 状压DP
 
 |Difficulty| Problem | Note | Code |
 |----------| --------| ---- | ---- |
 |atc*1229|[2x2 Erasing 2](https://atcoder.jp/contests/abc424/tasks/abc424_d)|简单状压DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.02/d.cpp)|
-|unknown|[Not a subset sum](https://qoj.ac/contest/2645/problem/15317)|状压DP，想到转移就很好做了（2025ICPC上海区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20Asia%20Shanghai%20Regional%20Contest/d.cpp)|
 |atc*1752|[Inserting Process](https://atcoder.jp/contests/abc425/tasks/abc425_f)|状压DP，和上题类似，难点在于处理相邻位置相同时的条件转移|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.02/c.cpp)|
 |unknown|[Light Up the Grid](https://codeforces.com/gym/105578/problem/E)|Floyd+状压DP（2024ICPC沈阳区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Asia%20Shenyang%20Regional%20Contest/e.cpp)|
 |cf*1800|[Kefa and Dishes](https://codeforces.com/problemset/problem/580/D)|很基础的状压DP，注意状态枚举按照1的数量从小到大排序|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.15/A--580D.cpp)|
+|unknown|[Not a subset sum](https://qoj.ac/contest/2645/problem/15317)|状压DP，想到转移就很好做了（2025ICPC上海区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20Asia%20Shanghai%20Regional%20Contest/d.cpp)|
 |atc*1910|[Grouping](https://atcoder.jp/contests/dp/tasks/dp_u)|SOS-DP，枚举子集Trick，将4^n优化至3^n，submask=(submask-1)&mask是关键|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/u.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 4. 序列DP
 
@@ -141,7 +139,6 @@
 |cf*1700|[Consecutive Subsequence](https://codeforces.com/contest/977/problem/F)|构造+经典LIS问题变形|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.10.27/977F.cpp)|
 |atc*1104|[LCS](https://atcoder.jp/contests/dp/tasks/dp_f)|纯板子，LCS问题+记录转移|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/f.cpp)|
 |atc*1687|[Flowers](https://atcoder.jp/contests/dp/tasks/dp_q)|LIS变形，“最大价值子序列”，注意到题目数据范围，考虑区间最值的转移，线段树优化DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/q.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 5. 区间DP
 
@@ -151,7 +148,6 @@
 |atc*1426|[Deque](https://atcoder.jp/contests/dp/tasks/dp_l)|区间DP+博弈论，关键在于要把两个人遇到的局面转化为相同的东西|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/l.cpp)|
 |cf*1900|[Zuma](https://codeforces.com/problemset/problem/607/B)|区间dp + 回文，关键在于状态转移的套路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/C--607B.cpp)|
 |cf*1800|[Queries for Number of Palindromes](https://codeforces.com/problemset/problem/245/H)|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 6. 网格DP
 
@@ -159,21 +155,18 @@
 |----------| --------| ---- | ---- |
 |unknown|[Path Summing Problem](https://qoj.ac/contest/2025/problem/10742)|网格DP + 容斥DP + 根号分治，非常漂亮的一道题目，详细看Code注释|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202025%20ICPC%20China%20Hubei(Wuhan)%20National%20Invitational%20Programming%20Contest/g.cpp)|
 |cf*2200|[Gerald and Giant Chess](https://codeforces.com/contest/559/problem/C)|网格DP + 容斥原理，以上问题的子问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.24/cf559C.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 7. 数位DP
 
 |Difficulty| Problem | Note | Code |
 |----------| --------| ---- | ---- |
 |atc*1610|[Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)|数位DP基础题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/s.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 8. 期望DP
 
 |Difficulty| Problem | Note | Code |
 |----------| --------| ---- | ---- |
 |atc*1833|[Sushi](https://atcoder.jp/contests/dp/tasks/dp_j)|好玩的期望DP，关键在于状态转移E[x]=∑(p[i]*x[i])，以及一个很巧妙的移项|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/j.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 9. DP优化
 
@@ -188,10 +181,9 @@
 |cf*1600|[Good Key, Bad Key](https://codeforces.com/contest/1703/problem/G)|考虑势能分析，最多除2除30下，在此基础上进行DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.09.22/e.cpp)|
 |atc*1774|[Walk](https://atcoder.jp/contests/dp/tasks/dp_r)|矩阵快速幂优化DP，每走一步相当于进行一次矩阵乘法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/r.cpp)|
 |atc*2499|[Intervals](https://atcoder.jp/contests/dp/tasks/dp_w)|线段树优化DP，正难则反，按照右端点排序，考虑一个区间内能包含多少个给定区间，并维护每个区间权值|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/w.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
-#### 数据结构
+### 数据结构
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
@@ -214,7 +206,9 @@
 |cf*1800|[Petya and Array](https://codeforces.com/problemset/problem/1042/D)|经典的计算区间数量问题，离散化+树状数组套路，树状数组求逆序对思想(动态维护大于某个数的数量)|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/C--1042D.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
-#### 数学
+### 数学
+
+1. 基础数论
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
@@ -229,7 +223,11 @@
 |atc*unknown|[LCM Sequence](https://atcoder.jp/contests/abc412/tasks/abc412_e)|大质数判断板子题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.16/c.cpp)|
 |unknown|[Coin](https://codeforces.com/gym/105588/problem/C)|间隔取数，求第k大的经典Trick，倒推（2024ICPC昆明区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Asia%20Kunming%20Regional%20Contest/c1.cpp)|
 |cf*2100|[Removal of a Sequence (Hard Version)](https://codeforces.com/contest/2169/problem/D2)|同上，上面这个题目的升级版，一样是倒推的做法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2169(edu)/D.cpp)|
-||
+
+2. 计数问题
+
+|Difficulty| Problem | Note | Code |
+|----------| -------- | ---- | ---- |
 |atc*849|[XNOR Operation](https://atcoder.jp/contests/abc418/tasks/abc418_d)|计数题，双指针+贡献法，非常基础|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.08/d.cpp)|
 |cf*1800|[Colored Balls](https://codeforces.com/contest/1954/problem/D)|计数题，转换为维护方案数的dp+贪心|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.17/b.cpp)|
 |cf*1800|[Fibonacci Paths](https://codeforces.com/contest/2176/problem/D)|计数题，经典斐波那契+贪心，详解看Code|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2176(div2)/d.cpp)|
@@ -247,7 +245,7 @@
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
-#### 图论
+### 图论
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
@@ -271,7 +269,7 @@
 |unknown|[The Quest for El Dorado](https://qoj.ac/contest/1802/problem/9431)|Dijkstra最短路 + RMQ问题，难点在于想到状态如何定义以及怎么跑最短路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Kunming%20Invitational%20Contest/j.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
-#### 字符串
+### 字符串
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
