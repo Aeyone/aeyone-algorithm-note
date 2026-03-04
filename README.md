@@ -104,6 +104,7 @@
 |atc*1550|[Candies](https://atcoder.jp/contests/dp/tasks/dp_m)|背包DP + 树状数组优化，想到区间操作可以优化，就很好做了；还有一种做法是前缀和优化，光想区间操作了(XD|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/m.cpp)|
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 |cf*1800|[Missing Subsequence Sum](https://codeforces.com/contest/1965/problem/B)|构造题，利用背包DP维护状态，很巧妙，贪心解不是很懂|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.26/B--1965B.cpp)|
+|atc*unknown|[辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)|变相计数DP，字符串子序列中不重复计算的Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/g.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 2. 树形DP
@@ -148,6 +149,7 @@
 |atc*1426|[Deque](https://atcoder.jp/contests/dp/tasks/dp_l)|区间DP+博弈论，关键在于要把两个人遇到的局面转化为相同的东西|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/l.cpp)|
 |cf*1900|[Zuma](https://codeforces.com/problemset/problem/607/B)|区间dp + 回文，关键在于状态转移的套路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/C--607B.cpp)|
 |cf*1800|[Queries for Number of Palindromes](https://codeforces.com/problemset/problem/245/H)|区间DP + 二维前缀和的计数问题，用于解决某区间内所有子区间问题。|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/D--245H.cpp)|
+|cf*1900|[Coloring Brackets](https://codeforces.com/problemset/problem/149/D)|区间DP，重点在于状态表示，转移过程像在写模拟题，用dfs实现倒推|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.03/B--149D.cpp)|
 
 6. 网格DP
 
