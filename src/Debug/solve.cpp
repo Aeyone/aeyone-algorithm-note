@@ -7,65 +7,49 @@ using u64 = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
 
-#define int long long
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
 const int MOD = 998244353;
 
-ostream& operator<<(ostream &os, __int128 n) {
-    string s;
-    while(n) {
-        s += '0' + n % 10;
-        n /= 10;
-    }
-    reverse(s.begin(), s.end());
-    return os << s;
-}
-
+template<typename T> bool cmax(T &a, const T &b) { return b > a ? a = b, 1 : 0; }
+template<typename T> bool cmin(T &a, const T &b) { return b < a ? a = b, 1 : 0; }
 
 void solve() {
-    i64 n, k;
-    cin >> n >> k;
-    i128 _k = k;
-    vector<array<i128, 3>> a(n);
-    for (int i = 0; i < n; i ++) {
-        i64 x, y, z;
-        cin >> x >> y >> z;
-        a[i] = {x, y, z};
-    }
+    string s;
+    cin >> s;
+    int n = s.size();
+    s = " " + s;
+    vector dp(n + 2, vector<pair<int, string>>(n + 2));
 
-    auto check = [&](i128 m)->bool {
-        i128 sum = 0;
-        for (auto [t, l, w] : a) {
-            i128 T = t * l + w;
-            i128 cnt = m / T, r = m % T;
-            sum += cnt * l + min(l, r / t);
-            if (sum >= _k) {
-                return 1;
+    for (int len = 1; len <= n; len ++) {
+        for (int l = 1, r = l + len - 1; r <= n; l ++, r ++) {
+            dp[l][r] = {0, s.substr(l, len)};
+            for (int i = l; i + 2 <= r; i ++) {
+                if (s.substr(i, 3) == "iwi") {
+                    string str = dp[l][i - 1].second + dp[i + 3][r].second;
+                    int cnt = 1, idx = -1;
+                    for (int j = 0; j + 2 < str.size(); j ++) {
+                        if (str.substr(j, 3) == "iwi") {
+                            idx = j;
+                        }
+                    }
+                    if (idx != -1) {
+                        cnt ++;
+                        str = str.substr(0, idx) + str.substr(idx + 3, str.size() - idx - 3);
+                    }
+                    cmax(dp[l][r], {cnt + dp[l][i - 1].first + dp[i + 3][r].first, str});
+                }
             }
         }
-        return (sum >= _k);
-    };
-
-    i128 l = 0, r = (i128)INFLL * INFLL, ans = -1;
-    while (l <= r) {
-        cerr << l << ' ' << r << '\n';
-        i128 mid = l + r >> 1;
-        if (check(mid)) {
-            ans = mid, r = mid - 1;
-        } else {
-            l = mid + 1;
-        }
     }
-    cout << ans << '\n';
+    cout << dp[1][n].first << '\n';
 }
 
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     cout << fixed << setprecision(10);
     int _ = 1;
-    cin >> _;
     while (_ --) {
         solve();
     }

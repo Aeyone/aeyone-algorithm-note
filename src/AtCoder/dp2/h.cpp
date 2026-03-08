@@ -12,6 +12,12 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
+/*	
+*	dp[i][j][k]代表考虑前i种颜色，总共选了j种颜色，总重量为k的最大价值
+*	考虑该颜色为第一次放入背包，dp[x][i][j][k] <- dp[x - 1][i - 1][j - 1][k - w] + v
+*	考虑该颜色不是第一次放入背包，dp[x][i][j][k] <- dp[x - 1][i][j][k - w] + v
+*/ 
+
 void solve() {
 	int n, W, C;
 	cin >> n >> W >> C;
@@ -21,36 +27,37 @@ void solve() {
 		cin >> w >> v >> c;
 		a[c].push_back({w, v});
 	}
+
 	vector dp(2, vector(C + 1, vector<int>(W + 1, -INF)));
 	dp[0][0][0] = 0;
-	for (int c = 1; c <= 50; c ++) {
-		vector f(2, vector<int>(W + 1, -INF));
-		f[1][0] = 0;
-		int tot = a[c].size();
-		for (int p = 0; p < tot; p ++) {
-			auto [w, v] = a[c][p];
 
-			for (int j = w; j <= W; j ++) {
-				f[p & 1][j] = max(f[p & 1][j], f[p - 1 & 1][j]);
-				f[p & 1][j] = max(f[p & 1][j], f[p - 1 & 1][j - w] + v);
+	for (int c = 1; c <= 50; c ++) {
+		dp[1].assign(C + 1, vector<int>(W + 1, -INF));
+		for (auto [w, v] : a[c]) {
+			for (int j = C; j >= 0; j --) {
+				for (int k = W; k >= 0; k --) {
+					if (k >= w) {
+						dp[1][j][k] = max(dp[1][j][k], dp[1][j][k - w] + v);
+						if (j >= 1) {
+							dp[1][j][k] = max(dp[1][j][k], dp[0][j - 1][k - w] + v);
+						}
+					}
+				}
 			}
 		}
-		dp[c & 1] = dp[c - 1 & 1];
-		// for (int i = 0; i < C; i ++) {
-		// 	for (int j = 0; j <= W; j ++) {
-		// 		dp[c & 1][i + 1][j] = max(dp[c & 1][i][j], )
-		// 	}
-		// }
+		for (int j = 0; j <= C; j ++) {
+			for (int k = 0; k <= W; k ++) {
+				dp[0][j][k] = max(dp[0][j][k], dp[1][j][k]);
+			}
+		}
 	}
-	// int ans = 0;
-	// for (int c = 1; c <= 50; c ++) {
-	// 	for (int i = 0; i <= C; i ++) {
-	// 		for (int j = 0; j <= W; j ++) {
-	// 			ans = max(ans, dp[c][i][j]);
-	// 		}
-	// 	}
-	// }
-	// cout << ans << '\n';
+	int ans = 0;
+	for (int i = 0; i <= C; i ++) {
+		for (int j = 0; j <= W; j ++) {
+			ans = max(ans, dp[0][i][j]);
+		}
+	}
+	cout << ans << '\n';
 }
 
 signed main() {
