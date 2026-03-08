@@ -183,11 +183,7 @@
 |cf*1600|[Good Key, Bad Key](https://codeforces.com/contest/1703/problem/G)|考虑势能分析，最多除2除30下，在此基础上进行DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.09.22/e.cpp)|
 |atc*1774|[Walk](https://atcoder.jp/contests/dp/tasks/dp_r)|矩阵快速幂优化DP，每走一步相当于进行一次矩阵乘法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/r.cpp)|
 |atc*2499|[Intervals](https://atcoder.jp/contests/dp/tasks/dp_w)|线段树优化DP，正难则反，按照右端点排序，考虑一个区间内能包含多少个给定区间，并维护每个区间权值|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/w.cpp)|
-<<<<<<< HEAD
-=======
 |atc*2163|[Frog 3](https://atcoder.jp/contests/dp/tasks/dp_z)|斜率优化DP，维护凸壳，关键在于数学推导，详细过程看Code|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/z.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
->>>>>>> 947a8e2 (斜率优化DP)
 
 
 ### 数据结构
