@@ -104,7 +104,6 @@
 |atc*1550|[Candies](https://atcoder.jp/contests/dp/tasks/dp_m)|背包DP + 树状数组优化，想到区间操作可以优化，就很好做了；还有一种做法是前缀和优化，光想区间操作了(XD|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/m.cpp)|
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 |cf*1800|[Missing Subsequence Sum](https://codeforces.com/contest/1965/problem/B)|构造题，利用背包DP维护状态，很巧妙，贪心解不是很懂|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.26/B--1965B.cpp)|
-|atc*unknown|[辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)|变相计数DP，字符串子序列中不重复计算的Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/g.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 2. 树形DP
@@ -119,6 +118,7 @@
 |atc*1444|[Path Decomposition of a Tree](https://atcoder.jp/contests/abc397/tasks/abc397_e)|树形DP，条件转移维护可行性，简单|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.24/C--abc397_e.cpp)|
 |cf*1962|[Cherry Tree](https://codeforces.com/contest/2184/problem/F)|树形DP，关键条件为选出三的倍数个节点|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/f.cpp)|
 |atc*2200|[Subtree](https://atcoder.jp/contests/dp/tasks/dp_v)|基础换根DP，做法为先树形DP算出以1为根的状态，然后从1开始去递推所有节点为根的状态，难点在于如何剔除某个节点的子节点的信息，递推到下一个即将要作为根的子节点上面去|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/v.cpp)|
+|atc*unknown|[木](https://atcoder.jp/contests/tdpc/tasks/tdpc_tree)|树形DP + 组合计数|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/n.cpp)|
 
 3. 状压DP
 
@@ -207,6 +207,7 @@
 |cf*2000|[XOR on Segment](https://codeforces.com/problemset/problem/242/E)|线段树板子题，区间异或操作 + 区间求和|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.09/D--242E.cpp)|
 |cf*1994|[Little Elephant and Array](https://codeforces.com/problemset/problem/220/B)|离线后按左端点排序后算贡献，利用树状数组维护。还有个非常简单的莫队做法)|[Code1](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/AA--220B.cpp),[Code2](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/A--220B.cpp)|
 |cf*1800|[Petya and Array](https://codeforces.com/problemset/problem/1042/D)|经典的计算区间数量问题，离散化+树状数组套路，树状数组求逆序对思想(动态维护大于某个数的数量)|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/C--1042D.cpp)|
+|unknown|[宠物对战](https://codeforces.com/gym/104081/problem/I)|Trie树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/2022年中国大学生程序设计竞赛女生专场/i.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 ### 数学
@@ -245,6 +246,7 @@
 |cf*1800|[Shohag Loves XOR (Hard Version) ](https://codeforces.com/contest/2039/problem/C2)|计数题，XOR+数学知识（整除一定至少为2倍）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.19/c.cpp)|
 |cf*1763|[Exquisite Array](https://codeforces.com/contest/2184/problem/E)|计数题，典题，题目要求最小值为1~n-1的k的子数组的数量，从小到大去删掉等于i的间隔点，计算答案即可|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/e.cpp)|
 |atc*1692|[Sums of Sliding Window Maximum](https://atcoder.jp/contests/abc407/tasks/abc407_f)|计数题，非常重量级，ST表+二分or单调栈+二重差分，难点在于存在相同的数字，如何不重不漏地统计所有情况，是一个经典Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.10/e.cpp)|
+|atc*unknown|[辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)|变相计数DP，字符串子序列中不重复计算的Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/g.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 

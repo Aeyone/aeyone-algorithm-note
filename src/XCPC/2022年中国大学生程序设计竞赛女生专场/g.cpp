@@ -22,6 +22,7 @@ void solve() {
 	for (int i = 0; i < n; i ++) {
 		cin >> a[i][0] >> a[i][1];
 	}
+	sort(a.begin(), a.end());
 	int idx = lower_bound(a.begin(), a.end(), array<int, 2>{t, 0}) - a.begin();
 	int cur = 0, T = 0;
 	for (int i = 0; i < idx; i ++) {
