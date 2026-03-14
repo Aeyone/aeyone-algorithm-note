@@ -12,27 +12,70 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
-void solve() {
+ostream& operator<<(ostream &os, __int128 n) {
     string s;
-    cin >> s;
-    map<string, int> mp;
-    auto dfs = [&](this auto &&self, string s)->int {
-        // cerr << "s = " << s << '\n';
-        if (s == "iwi") {
-            return 1;
+    while(n) {
+        s += '0' + n % 10;
+        n /= 10;
+    }
+    reverse(s.begin(), s.end());
+    if (s.size() == 0) {
+        s = "0";
+    }
+    return os << s;
+}
+
+
+void solve() {
+    int n, k;
+    cin >> n >> k;
+    vector g(n, vector<int>(n));
+    for (int i = 0; i < n; i ++) {
+        for (int j = 0; j < n; j ++) {
+            cin >> g[i][j];
         }
-        if (mp.find(s) != mp.end()) {
-            return mp[s];
-        }
-        int res = 0;
-        for (int i = 0; i + 2 < s.size(); i ++) {
-            if (s.substr(i, 3) == "iwi") {
-                res = max(res, 1 + self(s.substr(0, i) + s.substr(i + 3, s.size() - i - 3)));
+    }
+    vector dp(n, vector<i64>(1 << n));
+    vector<vector<int>> mask(n + 1);
+    for (int i = 0; i < 1 << n; i ++) {
+        mask[__builtin_popcount(i)].push_back(i);
+    }
+
+    for (int i = 0; i < n; i ++) {
+        dp[i][1 << i] = 1;
+    }
+    for (int len = 1; len < n; len ++) {
+        for (auto e : mask[len]) {
+            for (int u = 0; u < n; u ++) {
+                if (!(e >> u & 1)) {
+                    continue;
+                }
+                for (int v = 0; v < n; v ++) {
+                    if (e >> v & 1 || !g[u][v]) {
+                        continue;
+                    }
+                    dp[v][e | (1 << v)] += dp[u][e];
+                }
             }
         }
-        return res;
-    };
-    cout << dfs(s) << '\n';
+    }
+    vector<i64> cnt(1 << n);
+    for (int i = 0; i < 1 << n; i ++) {
+        for (int j = 0; j < n; j ++) {
+            cnt[i] += dp[j][i];
+        }
+        cnt[i] /= 2;
+    }
+
+    i128 ans = 0;
+    for (auto e : mask[k]) {
+        i128 sum = 0;
+        for (int sub = e; sub > 0; sub = (sub - 1) & e) {
+            sum += cnt[sub] * (__builtin_popcount(sub) - 1);
+        }
+        ans = max(ans, sum);
+    }
+    cout << ans << '\n';
 }
 
 signed main() {
