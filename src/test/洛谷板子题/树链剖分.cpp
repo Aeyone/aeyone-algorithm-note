@@ -1,3 +1,4 @@
+// https://www.luogu.com.cn/problem/P3384
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -100,12 +101,12 @@ struct SegmentTree{
         }
         return res;
     }
-    // 0-based
+    // 1-based
     void modify(int L, int R, i64 val){
-        modify(1, 1, n, L + 1, R + 1, val);
+        modify(1, 1, n, L, R, val);
     }
     Info query(int L, int R){
-        return query(1, 1, n, L + 1, R + 1);
+        return query(1, 1, n, L, R);
     }
 };
 
@@ -125,7 +126,9 @@ void solve() {
         g[u].push_back(v);
         g[v].push_back(u);
     }
-    vector<int> f(n), siz(n), son(n, -1), dep(n), top(n, -1), dfn(n), seg(n);
+    vector<int> f(n), siz(n), son(n, -1), dep(n), top(n, -1), dfn(n), seg(n + 1);
+
+    // 第一遍dfs预处理 f dep siz son 数组，son[u]为u节点的重儿子编号
     auto dfs1 = [&](this auto &&self, int u, int fa = -1)-> void {
         siz[u] = 1;
         for (auto v : g[u]) if (v != fa) {
@@ -142,7 +145,8 @@ void solve() {
     };
     dfs1(r);
 
-    int T = 0;
+    int T = 1;
+    // 第二遍dfs预处理 dfn序 反序列seg(1-based) top[u]为u节点所在的重链的头节点
     auto dfs2 = [&](this auto &&self, int u, int ftop)-> void {
         top[u] = ftop, dfn[u] = T, seg[T ++] = u;
         if (son[u] != -1) {
@@ -159,47 +163,55 @@ void solve() {
         st.modify(dfn[i], dfn[i], a[i]);
     }
 
+    auto pathAdd = [&](int x, int y, int v)-> void {
+        while (top[x] != top[y]) {
+            if (dep[top[x]] < dep[top[y]]) { // 优先选择深度大的往上跳
+                swap(x, y);
+            }
+            st.modify(dfn[top[x]], dfn[x], v);
+            x = f[top[x]];
+        }
+        if (dfn[x] > dfn[y]) {
+            swap(x, y);
+        }
+        st.modify(dfn[x], dfn[y], v); // 最后一定会跳到同一条链上
+    };
+
+    auto pathQuery = [&](int x, int y)-> i64 {
+        i64 res = 0;
+        while (top[x] != top[y]) {
+            if (dep[top[x]] < dep[top[y]]) {
+                swap(x, y);
+            }
+            res = (res + st.query(dfn[top[x]], dfn[x]).sum) % MOD;
+            x = f[top[x]];
+        }
+        if (dfn[x] > dfn[y]) {
+            swap(x, y);
+        }
+        res = (res + st.query(dfn[x], dfn[y]).sum) % MOD;
+        return res;
+    }; 
+
+
     while (m --) {
         int c;
         cin >> c;
         if (c == 1) {
-            int x, y, z;
-            cin >> x >> y >> z;
+            int x, y, v;
+            cin >> x >> y >> v;
             x --, y --;
-            while (top[x] != top[y]) {
-                if (dep[top[x]] < dep[top[y]]) {
-                    swap(x, y);
-                }
-                st.modify(dfn[top[x]], dfn[x], z);
-                x = f[top[x]];
-            }
-            if (dfn[x] > dfn[y]) {
-                swap(x, y);
-            }
-            st.modify(dfn[x], dfn[y], z);
+            pathAdd(x, y, v);
         } else if (c == 2) {
             int x, y;
             cin >> x >> y;
             x --, y --;
-            i64 ans = 0;
-
-            while (top[x] != top[y]) {
-                if (dep[top[x]] < dep[top[y]]) {
-                    swap(x, y);
-                }
-                ans = (ans + st.query(dfn[top[x]], dfn[x]).sum) % MOD;
-                x = f[top[x]];
-            }
-            if (dfn[x] > dfn[y]) {
-                swap(x, y);
-            }
-            ans = (ans + st.query(dfn[x], dfn[y]).sum) % MOD;
-            cout << ans << '\n';
+            cout << pathQuery(x, y) << '\n';
         } else if (c == 3) {
-            int x, z;
-            cin >> x >> z;
+            int x, v;
+            cin >> x >> v;
             x --;
-            st.modify(dfn[x], dfn[x] + siz[x] - 1, z);
+            st.modify(dfn[x], dfn[x] + siz[x] - 1, v);
         } else if (c == 4) {
             int x;
             cin >> x;

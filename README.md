@@ -247,6 +247,7 @@
 |cf*1763|[Exquisite Array](https://codeforces.com/contest/2184/problem/E)|计数题，典题，题目要求最小值为1~n-1的k的子数组的数量，从小到大去删掉等于i的间隔点，计算答案即可|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2184(div3)/e.cpp)|
 |atc*1692|[Sums of Sliding Window Maximum](https://atcoder.jp/contests/abc407/tasks/abc407_f)|计数题，非常重量级，ST表+二分or单调栈+二重差分，难点在于存在相同的数字，如何不重不漏地统计所有情况，是一个经典Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.10/e.cpp)|
 |atc*unknown|[辞書順](https://atcoder.jp/contests/tdpc/tasks/tdpc_lexicographical)|变相计数DP，字符串子序列中不重复计算的Trick|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/g.cpp)|
+|atc*unknown|[文字列](https://atcoder.jp/contests/tdpc/tasks/tdpc_string)|组合计数DP，状态定义和转移都很难想|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp2/o.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 
