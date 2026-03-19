@@ -12,109 +12,98 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
-template <typename T>
-struct Info{
-    T sum = 0;
-    T max = -INFLL;
-
-    friend Info operator+(const Info& l, const Info& r) {
-        return {
-            l.sum + r.sum,
-            std::max(l.max, r.max)
-        };
-    }
-};
-
-template <typename T>
-struct Lazy{
-    T add = 0;
-};
-
-template <typename T>
+template<class T>
 struct SegmentTree {
+    struct Info {
+        T sum = 0;
+        T max = -INFLL;
+        friend Info operator+(const Info& l, const Info& r) {
+            return { l.sum + r.sum, std::max(l.max, r.max) };
+        }
+    };
+
+    struct Lazy {
+        T add = 0;
+    };
+
     int n;
-    vector<Info<T>> info;
-    vector<Lazy<T>> lazy;
- 
-    SegmentTree() {}
-    SegmentTree(int _n) {
-        init(_n);
+    vector<Info> info;
+    vector<Lazy> lazy;
+
+    SegmentTree(int n = 0) { init(n); }
+
+    void init(int n) {
+        this->n = n;
+        info.assign(n << 2, Info());
+        lazy.assign(n << 2, Lazy());
     }
 
-    void init(int _n) {
-        n = _n;
-        info.assign(n << 2, Info<T>());
-        lazy.assign(n << 2, Lazy<T>());
-        build(1, 1, n);
-    }
-
-    void apply(int p, T val, int siz) {
-        info[p].sum = val * siz;
+    void apply(int p, T val, int len) {
+        info[p].sum = val * len;
         info[p].max = val;
         lazy[p].add = val;
     }
 
-    void down(int p, int sizL, int sizR) {
-        if (lazy[p].add != 0) {
-            apply(2 * p, lazy[p].add, sizL);
-            apply(2 * p + 1, lazy[p].add, sizR);
-            lazy[p].add = 0;
-        }
-    }
-
-    void up(int p) {
+    void pushup(int p) {
         info[p] = info[2 * p] + info[2 * p + 1];
     }
-    
-    void build(int p, int l, int r) {
-        if (l == r) {
-            info[p] = Info<T>();
-        } else {
-            int mid = (l + r) / 2;
-            build(2 * p, l, mid);
-            build(2 * p + 1, mid + 1, r);
-            up(p);
+
+    void pushdown(int p, int lsz, int rsz) {
+        T& tag = lazy[p].add;
+        if (tag != 0) {
+            apply(2 * p, tag, lsz);
+            apply(2 * p + 1, tag, rsz);
+            tag = 0;
         }
     }
 
-    void modify(int p, int l, int r, int L, int R, T val) {
-        if (L > r || R < l) {
+    void build(int p, int l, int r, const vector<T>& a) {
+        if (l == r) {
+            info[p] = {a[l], a[l]};
             return;
         }
-        if (L <= l && r <= R) {
-            apply(p, val, r - l + 1);
-        } else {
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            modify(2 * p, l, mid, L, R, val);
-            modify(2 * p + 1, mid + 1, r, L, R, val);
-            up(p);
-        }
+        int mid = (l + r) / 2;
+        build(2 * p, l, mid, a);
+        build(2 * p + 1, mid + 1, r, a);
+        pushup(p);
     }
 
-    Info<T> query(int p, int l, int r, int L, int R) {
-        if (L > r || R < l) {
-            return Info<T>();
+    void modify(int p, int l, int r, int ql, int qr, T val) {
+        if (ql <= l && r <= qr) {
+            apply(p, val, r - l + 1);
+            return;
         }
-        Info<T> res;
-        if (L <= l && r <= R) {
-            res = info[p];
-        } else {
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            res = query(2 * p, l, mid, L, R) + query(2 * p + 1, mid + 1, r, L, R);
+        int mid = (l + r) / 2;
+        pushdown(p, mid - l + 1, r - mid);
+        if (ql <= mid) modify(2 * p, l, mid, ql, qr, val);
+        if (qr > mid) modify(2 * p + 1, mid + 1, r, ql, qr, val);
+        pushup(p);
+    }
+
+    Info query(int p, int l, int r, int ql, int qr) {
+        if (ql <= l && r <= qr) {
+            return info[p];
         }
+        Info res {};
+        int mid = (l + r) / 2;
+        pushdown(p, mid - l + 1, r - mid);
+        if (ql <= mid) res = res + query(2 * p, l, mid, ql, qr);
+        if (qr > mid) res = res + query(2 * p + 1, mid + 1, r, ql, qr);
         return res;
     }
-    //1-based
-    void modify(int L, int R, T val) {
-        modify(1, 1, n, L, R, val);
+
+    void build(const vector<T>& a) { // 1-based
+        build(1, 1, n, a);
     }
-    Info<T> query(int L, int R) {
-        return query(1, 1, n, L, R);
+
+    void modify(int ql, int qr, T val) {
+        modify(1, 1, n, ql, qr, val);
+    }
+
+    Info query(int ql, int qr) {
+        return query(1, 1, n, ql, qr);
     }
 };
-
 
 void solve() {
     int n;
@@ -156,20 +145,19 @@ void solve() {
         }
     };
 
-    vector<int> a(n);
-    for (int i = 0; i < n; i ++) {
-        cin >> a[i];
-    }
     dfs1(0);
     dfs2(0, 0);
-
-    SegmentTree<i64> st(n);
-    for (int i = 0; i < n; i ++) {
-        st.modify(dfn[i], dfn[i], a[i]);
+    vector<i64> a(n + 1), b(n + 1);
+    for (int i = 1; i <= n; i ++) {
+        cin >> a[i];
+        b[dfn[i - 1]] = a[i];
     }
 
-    auto pathQuery = [&](int x, int y)-> Info<i64> {
-        Info<i64> res = Info<i64>();
+    SegmentTree<i64> st(n);
+    st.build(b);
+
+    auto pathQuery = [&](int x, int y)-> SegmentTree<i64>::Info {
+        SegmentTree<i64>::Info res {};
         while (top[x] != top[y]) {
             if (dep[top[x]] < dep[top[y]]) {
                 swap(x, y);

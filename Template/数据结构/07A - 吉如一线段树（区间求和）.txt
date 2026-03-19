@@ -4,6 +4,26 @@ struct Info{
     i64 sum = 0;        //区间和
     int cnt = 0;
     int len = 0;
+    
+    friend Info operator+(const Info &l, const Info &r){
+        Info res;
+        res.len = l.len + r.len;
+        res.sum = l.sum + r.sum;
+        if(l.mn == r.mn){
+            res.mn = l.mn;
+            res.cnt = l.cnt + r.cnt;
+            res.mn2 = min(l.mn2, r.mn2);
+        }else if(l.mn < r.mn){
+            res.mn = l.mn;
+            res.cnt = l.cnt;
+            res.mn2 = min(l.mn2, r.mn);
+        }else{
+            res.mn = r.mn;
+            res.cnt = r.cnt;
+            res.mn2 = min(l.mn, r.mn2);
+        }
+        return res;
+    }
 };
 
 struct Lazy{//由于需要在第二个剪枝的时候只对最小值进行加，而次小值不需要，因此需要两个懒标记
@@ -11,25 +31,7 @@ struct Lazy{//由于需要在第二个剪枝的时候只对最小值进行加，
     i64 otherAdd = 0;   //其他值的懒操作
 };
 
-Info operator+(const Info &l, const Info &r){
-    Info res;
-    res.len = l.len + r.len;
-    res.sum = l.sum + r.sum;
-    if(l.mn == r.mn){
-        res.mn = l.mn;
-        res.cnt = l.cnt + r.cnt;
-        res.mn2 = min(l.mn2, r.mn2);
-    }else if(l.mn < r.mn){
-        res.mn = l.mn;
-        res.cnt = l.cnt;
-        res.mn2 = min(l.mn2, r.mn);
-    }else{
-        res.mn = r.mn;
-        res.cnt = r.cnt;
-        res.mn2 = min(l.mn, r.mn2);
-    }
-    return res;
-}
+
 struct SegmentTree{
     int n;
     vector<Info> info;

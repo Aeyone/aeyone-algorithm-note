@@ -6,6 +6,27 @@ struct Info{
     i64 sum = 0;		 //区间和
     int cnt = 0;		 //最大值数量
     int len = 0;		 //区间长度
+
+    friend Info operator+(const Info &l, const Info &r){
+        Info res;
+        res.sum = l.sum + r.sum;
+        res.len = l.len + r.len;
+        if(l.mx == r.mx){
+            res.mx = l.mx;
+            res.cnt = l.cnt + r.cnt;
+            res.mx2 = max(l.mx2, r.mx2);
+        }else if(l.mx > r.mx){
+            res.mx = l.mx;
+            res.cnt = l.cnt;
+            res.mx2 = max(r.mx, l.mx2);
+        }else{
+            res.mx = r.mx;
+            res.cnt = r.cnt;
+            res.mx2 = max(l.mx, r.mx2);
+        }
+        res.hmx = max(l.hmx, r.hmx);
+        return res;
+    }
 };
 
 struct Lazy{
@@ -15,26 +36,6 @@ struct Lazy{
     i64 hotherAdd = 0;	 //除最大值以外的其他数字，达到过的最大提升幅度
 };
 
-Info operator+(const Info &l, const Info &r){
-	Info res;
-	res.sum = l.sum + r.sum;
-	res.len = l.len + r.len;
-	if(l.mx == r.mx){
-		res.mx = l.mx;
-		res.cnt = l.cnt + r.cnt;
-		res.mx2 = max(l.mx2, r.mx2);
-	}else if(l.mx > r.mx){
-		res.mx = l.mx;
-		res.cnt = l.cnt;
-		res.mx2 = max(r.mx, l.mx2);
-	}else{
-		res.mx = r.mx;
-		res.cnt = r.cnt;
-		res.mx2 = max(l.mx, r.mx2);
-	}
-	res.hmx = max(l.hmx, r.hmx);
-	return res;
-}
 struct SegmentTree{
     int n;
     vector<Info> info;

@@ -13,100 +13,102 @@ using u128 = unsigned __int128;
 
 int MOD = 998244353;
 
-struct Info{
-    i64 sum = 0;
-};
+template<class T>
+struct SegmentTree {
+    struct Info {
+        T sum = 0;
+        friend Info operator+(const Info& l, const Info& r) {
+            return { (l.sum + r.sum) % MOD };
+        }
+    };
 
-struct Lazy{
-    i64 add = 0;
-};
+    struct Lazy {
+        T add = 0;
+    };
 
-Info operator+(const Info &l, const Info &r){
-    Info res;
-    res.sum = (l.sum + r.sum) % MOD;
-    return res;
-}
- 
-struct SegmentTree{
     int n;
     vector<Info> info;
     vector<Lazy> lazy;
- 
-    SegmentTree() {}
-    SegmentTree(int _n) {
-        init(_n);
-    }
 
-    void init(int _n){
-        n = _n;
+    SegmentTree(int n = 0) { init(n); }
+
+    void init(int n) {
+        this->n = n;
         info.assign(n << 2, Info());
         lazy.assign(n << 2, Lazy());
-        build(1, 1, n);
     }
 
-    void apply(int p, i64 val, int siz){
-        info[p].sum = (info[p].sum + val * siz % MOD) % MOD;
+    void apply(int p, T val, int len) {
+        info[p].sum = (info[p].sum + val * len % MOD) % MOD;
         lazy[p].add = (lazy[p].add + val) % MOD;
     }
 
-    void down(int p, int sizL, int sizR){
-        if (lazy[p].add != 0){
-            apply(2 * p, lazy[p].add, sizL);
-            apply(2 * p + 1, lazy[p].add, sizR);
-            lazy[p].add = 0;
-        }
-    }
-
-    void up(int p){
+    void pushup(int p) {
         info[p] = info[2 * p] + info[2 * p + 1];
     }
-    
-    void build(int p, int l, int r){
-        if (l == r){
-            info[p] = Info(0);
-        }else{
-            int mid = (l + r) / 2;
-            build(2 * p, l, mid);
-            build(2 * p + 1, mid + 1, r);
-            up(p);
+
+    void pushdown(int p, int lsz, int rsz) {
+        T& tag = lazy[p].add;
+        if (tag != 0) {
+            apply(2 * p, tag, lsz);
+            apply(2 * p + 1, tag, rsz);
+            tag = 0;
         }
     }
 
-    void modify(int p, int l, int r, int L, int R, i64 val){
-        if (L > r || R < l){
+    void build(int p, int l, int r, const vector<T>& a) {
+        if (l == r) {
+            info[p].sum = a[l];
             return;
         }
-        if (L <= l && r <= R){
-            apply(p, val, r - l + 1);
-        }else{
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            modify(2 * p, l, mid, L, R, val);
-            modify(2 * p + 1, mid + 1, r, L, R, val);
-            up(p);
-        }
+        int mid = l + r >> 1;
+        build(2 * p, l, mid, a);
+        build(2 * p + 1, mid + 1, r, a);
+        pushup(p);
     }
 
-    Info query(int p, int l, int r, int L, int R){
-        if(L > r || R < l){
-            return Info();
+    void modify(int p, int l, int r, int ql, int qr, T val) {
+        if (ql <= l && r <= qr) {
+            apply(p, val, r - l + 1);
+            return;
         }
-        Info res;
-        if(L <= l && r <= R){
-            res = info[p];
-        }else{
-            int mid = (l + r) / 2;
-            down(p, mid - l + 1, r - mid);
-            res = query(2 * p, l, mid, L, R) + query(2 * p + 1, mid + 1, r, L, R);
+        int mid = l + r >> 1;
+        pushdown(p, mid - l + 1, r - mid);
+        if (ql <= mid) {
+            modify(2 * p, l, mid, ql, qr, val);
+        }
+        if (qr > mid) {
+            modify(2 * p + 1, mid + 1, r, ql, qr, val);
+        }
+        pushup(p);
+    }
+
+    Info query(int p, int l, int r, int ql, int qr) {
+        if (ql <= l && r <= qr) {
+            return info[p];
+        }
+        Info res{};
+        int mid = l + r >> 1;
+        pushdown(p, mid - l + 1, r - mid);
+        if (ql <= mid) {
+            res = res + query(2 * p, l, mid, ql, qr);
+        }
+        if (qr > mid) {
+            res = res + query(2 * p + 1, mid + 1, r, ql, qr);
         }
         return res;
     }
-    // 1-based
-    void modify(int L, int R, i64 val){
-        modify(1, 1, n, L, R, val);
+
+    void build(const vector<T>& a) {
+        build(1, 1, n, a);
     }
-    Info query(int L, int R){
-        return query(1, 1, n, L, R);
+
+    void modify(int ql, int qr, T val) {
+        modify(1, 1, n, ql, qr, val);
+    }
+
+    Info query(int ql, int qr) {
+        return query(1, 1, n, ql, qr);
     }
 };
 
@@ -158,7 +160,7 @@ void solve() {
     };
     dfs2(r, r);
 
-    SegmentTree st(n);
+    SegmentTree<i64> st(n);
     for (int i = 0; i < n; i ++) {
         st.modify(dfn[i], dfn[i], a[i]);
     }
