@@ -86,6 +86,7 @@
 |cf*1900|[Blackslex and Another RGB Walking](https://codeforces.com/contest/2179/problem/F)|通信题，很新鲜但是题目不难|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2179(div3)/f.cpp)|
 |cf*1800|[Clique Problem](https://codeforces.com/problemset/problem/527/D)|数学推导转换为经典线段覆盖问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.11/A--527D.cpp)|
 |cf*1800|[Maximum Subsequence](https://codeforces.com/problemset/problem/888/E)|很巧妙的分治，将n=35一分为二，然后分别二进制枚举，再考虑两个1e5级别的序列操作|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/A--888E.cpp)|
+|cf*1900|[Painting Fence](https://codeforces.com/problemset/problem/448/C)|递归分治|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.18/A--448C.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 ### 动态规划
@@ -164,6 +165,7 @@
 |Difficulty| Problem | Note | Code |
 |----------| --------| ---- | ---- |
 |atc*1610|[Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)|数位DP基础题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/s.cpp)|
+|cf*1900|[Classy Numbers](https://codeforces.com/problemset/problem/1036/C)|数位DP，也很基础|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.18/D--1036C.cpp)|
 
 8. 期望DP
 
