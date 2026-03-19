@@ -105,6 +105,7 @@
 |atc*1550|[Candies](https://atcoder.jp/contests/dp/tasks/dp_m)|背包DP + 树状数组优化，想到区间操作可以优化，就很好做了；还有一种做法是前缀和优化，光想区间操作了(XD|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/dp1/m.cpp)|
 |cf*1800|[Writing Code](https://codeforces.com/problemset/problem/543/A)|二维费用背包 + 完全背包|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/B--543A.cpp)|
 |cf*1800|[Missing Subsequence Sum](https://codeforces.com/contest/1965/problem/B)|构造题，利用背包DP维护状态，很巧妙，贪心解不是很懂|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.26/B--1965B.cpp)|
+|cf*1900|[Bottles](https://codeforces.com/problemset/problem/730/J)|二维费用01背包DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.19/A--730J.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 2. 树形DP
