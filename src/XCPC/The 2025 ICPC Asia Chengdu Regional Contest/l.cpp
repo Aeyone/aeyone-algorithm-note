@@ -13,11 +13,14 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
-	int n, k;
-	cin >> n >> k;
-	vector<int> a(n);
-	for (int i = 0; i < n; i ++) {
-		cin >> a[i];
+	int n;
+	cin >> n;
+	vector<int> a(n), b(n);
+	for (auto &e : a) {
+		cin >> e;
+	}
+	for (auto &e : b) {
+		cin >> e;
 	}
 	vector<vector<int>> g(n);
 	for (int i = 1; i < n; i ++) {
@@ -27,15 +30,17 @@ void solve() {
 		g[u].push_back(v);
 		g[v].push_back(u);
 	}
-	vector<int> dep(n), siz(n), dfn(n), seg(n), son(n, -1);
+
+	vector<int> dfn(n), seg(n), siz(n), son(n, -1), zero(n);
 	int T = 0;
 	auto init = [&](this auto &&self, int u, int fa = -1)-> void {
 		dfn[u] = T, seg[T ++] = u;
 		siz[u] = 1;
+		zero[u] = (a[u] == 0);
 		for (auto v : g[u]) if (v != fa) {
-			dep[v] = dep[u] + 1;
 			self(v, u);
 			siz[u] += siz[v];
+			zero[u] += zero[v];
 			if (son[u] == -1 || siz[v] > siz[son[u]]) {
 				son[u] = v;
 			}
@@ -43,21 +48,24 @@ void solve() {
 	};
 	init(0);
 
-	vector<int> col(n + 1); // 记录每种颜色出现的次数
-	int cnt = 0;
+	vector<int> cnt(n + 1);
+	int neg = 0; // 负数的总和
 
-	auto add = [&](int c)-> void {
-		cnt += (col[c] == 0);
-		col[c] ++;
+	auto add = [&](int num)-> void {
+		if (num != 0) {
+			neg -= (cnt[num] < 0);
+			cnt[num] ++;
+		}
 	};
 
-	auto del = [&](int c)-> void {
-		cnt -= (col[c] == 1);
-		col[c] --;
+	auto del = [&](int num)-> void {
+		if (num != 0) {
+			neg += (cnt[num] <= 0);
+			cnt[num] --;
+		}
 	};
 
 	vector<int> ans(n);
-	priority_queue<array<int, 2>> pq;
 	auto dfs = [&](this auto &&self, int u, int fa = -1, int keep = 0)-> void {
 		for (auto v : g[u]) if (v != fa && v != son[u]) {
 			self(v, u, 0);
@@ -66,48 +74,34 @@ void solve() {
 			self(son[u], u, 1);
 		}
 		add(a[u]);
-		pq.push({dep[u], u});
-		while (pq.size()) {
-			auto [d, v] = pq.top();
-			if (dep[v] - dep[u] <= k) {
-				break;
-			}
-			del(a[v]);
-			pq.pop();
-		}
+		del(b[u]);
 		for (auto v : g[u]) if (v != fa && v != son[u]) {
 			for (int i = dfn[v]; i < dfn[v] + siz[v]; i ++) {
-				int dis = dep[seg[i]] - dep[u];
-				if (dis <= k) {
-					add(a[seg[i]]);
-					pq.push({dep[seg[i]], seg[i]});
-				}
+				add(a[seg[i]]);
+				del(b[seg[i]]);
 			}
 		}
-		ans[u] = cnt;
+		ans[u] = (zero[u] >= neg);
 		if (!keep) {
-			while (pq.size()) {
-				auto [d, v] = pq.top();
-				del(a[v]);
-				pq.pop();
+			for (int i = dfn[u]; i < dfn[u] + siz[u]; i ++) {
+				del(a[seg[i]]);
+				add(b[seg[i]]);
 			}
 		}
+
 	};
 	dfs(0);
-	int m;
-	cin >> m;
-	while (m --) {
-		int u;
-		cin >> u;
-		u --;
-		cout << ans[u] << '\n';
+	for (int i = 0; i < n; i ++) {
+		cout << ans[i];
 	}
+	cout << '\n';
 }
 
 signed main() {
 	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 	cout << fixed << setprecision(10);
 	int _ = 1;
+	cin >> _;
 	while (_ --) {
 		solve();
 	}

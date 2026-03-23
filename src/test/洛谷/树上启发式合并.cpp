@@ -1,3 +1,4 @@
+// https://www.luogu.com.cn/problem/U41492
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -13,12 +14,8 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
-	int n, k;
-	cin >> n >> k;
-	vector<int> a(n);
-	for (int i = 0; i < n; i ++) {
-		cin >> a[i];
-	}
+	int n;
+	cin >> n;
 	vector<vector<int>> g(n);
 	for (int i = 1; i < n; i ++) {
 		int u, v;
@@ -27,13 +24,17 @@ void solve() {
 		g[u].push_back(v);
 		g[v].push_back(u);
 	}
-	vector<int> dep(n), siz(n), dfn(n), seg(n), son(n, -1);
+	vector<int> a(n);
+	for (int i = 0; i < n; i ++) {
+		cin >> a[i];
+	}
+
+	vector<int> dfn(n), seg(n), siz(n), son(n, -1);
 	int T = 0;
 	auto init = [&](this auto &&self, int u, int fa = -1)-> void {
 		dfn[u] = T, seg[T ++] = u;
 		siz[u] = 1;
 		for (auto v : g[u]) if (v != fa) {
-			dep[v] = dep[u] + 1;
 			self(v, u);
 			siz[u] += siz[v];
 			if (son[u] == -1 || siz[v] > siz[son[u]]) {
@@ -43,8 +44,8 @@ void solve() {
 	};
 	init(0);
 
-	vector<int> col(n + 1); // 记录每种颜色出现的次数
-	int cnt = 0;
+	vector<int> col(n + 1); // 记录每种颜色的数量
+	int cnt = 0; // 颜色种类数
 
 	auto add = [&](int c)-> void {
 		cnt += (col[c] == 0);
@@ -56,47 +57,33 @@ void solve() {
 		col[c] --;
 	};
 
-	vector<int> ans(n);
-	priority_queue<array<int, 2>> pq;
-	auto dfs = [&](this auto &&self, int u, int fa = -1, int keep = 0)-> void {
+	vector<int> ans(n); // 记录以1为根的树，以v为根的子树的颜色种类数
+
+	auto dfs = [&](this auto &&self, int u, int keep, int fa = -1)-> void {
 		for (auto v : g[u]) if (v != fa && v != son[u]) {
-			self(v, u, 0);
+			self(v, 0, u);
 		}
 		if (son[u] != -1) {
-			self(son[u], u, 1);
+			self(son[u], 1, u);
 		}
 		add(a[u]);
-		pq.push({dep[u], u});
-		while (pq.size()) {
-			auto [d, v] = pq.top();
-			if (dep[v] - dep[u] <= k) {
-				break;
-			}
-			del(a[v]);
-			pq.pop();
-		}
 		for (auto v : g[u]) if (v != fa && v != son[u]) {
 			for (int i = dfn[v]; i < dfn[v] + siz[v]; i ++) {
-				int dis = dep[seg[i]] - dep[u];
-				if (dis <= k) {
-					add(a[seg[i]]);
-					pq.push({dep[seg[i]], seg[i]});
-				}
+				add(a[seg[i]]);
 			}
 		}
 		ans[u] = cnt;
 		if (!keep) {
-			while (pq.size()) {
-				auto [d, v] = pq.top();
-				del(a[v]);
-				pq.pop();
+			for (int i = dfn[u]; i < dfn[u] + siz[u]; i ++) {
+				del(a[seg[i]]);
 			}
 		}
 	};
-	dfs(0);
-	int m;
-	cin >> m;
-	while (m --) {
+	dfs(0, 0);
+
+	int q;
+	cin >> q;
+	while (q --) {
 		int u;
 		cin >> u;
 		u --;
