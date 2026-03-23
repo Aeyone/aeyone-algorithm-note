@@ -1,9 +1,11 @@
 template<class T>
 struct SegmentTree {
     struct Info {
-        T sum = 0, max = -INFLL;
-        friend Info operator+(Info& l, Info& r) {
-            return { l.sum + r.sum, std::max(l.max, r.max) };
+        T sum = 0;
+        friend Info operator+(const Info& l, const Info& r) {
+            return {
+                l.sum + r.sum
+            };
         }
     };
     struct Lazy {
@@ -23,9 +25,8 @@ struct SegmentTree {
     }
 
     void apply(int p, T val, int len) {
-        info[p].sum = val * len;
-        info[p].max = val;
-        lazy[p].add = val;
+        info[p].sum += val * len;
+        lazy[p].add += val;
     }
 
     void pushup(int p) {
