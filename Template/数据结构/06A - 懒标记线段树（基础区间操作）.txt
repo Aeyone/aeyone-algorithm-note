@@ -44,7 +44,7 @@ struct SegmentTree {
 
     void build(int p, int l, int r, const vector<T>& a) {
         if (l == r) {
-            info[p] = {a[l], a[l]};
+            info[p] = {a[l]};
             return;
         }
         int mid = (l + r) / 2;

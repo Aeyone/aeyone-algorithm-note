@@ -1,9 +1,9 @@
 struct SCC {
     int n;
     vector<vector<int>> adj;
-    vector<int> stk;
     vector<int> dfn, low, bel;
-    int cur, cnt;
+    vector<int> stk;
+    int t, sccCnt;
     
     SCC() {}
     SCC(int n) {
@@ -17,34 +17,34 @@ struct SCC {
         low.resize(n);
         bel.assign(n, -1);
         stk.clear();
-        cur = cnt = 0;
+        t = sccCnt = 0;
     }
     
     void addEdge(int u, int v) {
         adj[u].push_back(v);
     }
     
-    void dfs(int x) {
-        dfn[x] = low[x] = cur++;
-        stk.push_back(x);
+    void dfs(int u) {
+        dfn[u] = low[u] = t ++;
+        stk.push_back(u);
         
-        for (auto y : adj[x]) {
-            if (dfn[y] == -1) {
-                dfs(y);
-                low[x] = min(low[x], low[y]);
-            } else if (bel[y] == -1) {
-                low[x] = min(low[x], dfn[y]);
-            }
+        for (auto y : adj[u]) {
+            if (dfn[y] == -1) {         // dfn序未分配，代表树边，继续递归
+                dfs(y); 
+                low[u] = min(low[u], low[y]);
+            } else if (bel[y] == -1) {  // dfn序分配了，但是没有分配强连通分量，代表回边
+                low[u] = min(low[u], dfn[y]);
+            }                           // 否则为弃边，不进行考虑
         }
         
-        if (dfn[x] == low[x]) {
-            int y;
+        if (dfn[u] == low[u]) {
+            int v;
             do {
-                y = stk.back();
-                bel[y] = cnt;
+                v = stk.back();
+                bel[v] = sccCnt;
                 stk.pop_back();
-            } while (y != x);
-            cnt++;
+            } while (v != u);
+            sccCnt ++;
         }
     }
     

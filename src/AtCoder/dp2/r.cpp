@@ -15,9 +15,9 @@ const int MOD = 998244353;
 struct SCC {
     int n;
     vector<vector<int>> adj;
-    vector<int> stk;
     vector<int> dfn, low, bel;
-    int cur, cnt;
+    vector<int> stk, siz;
+    int t, sccCnt;
     
     SCC() {}
     SCC(int n) {
@@ -31,34 +31,37 @@ struct SCC {
         low.resize(n);
         bel.assign(n, -1);
         stk.clear();
-        cur = cnt = 0;
+        siz.clear();
+        t = sccCnt = 0;
     }
     
     void addEdge(int u, int v) {
         adj[u].push_back(v);
     }
     
-    void dfs(int x) {
-        dfn[x] = low[x] = cur++;
-        stk.push_back(x);
+    void dfs(int u) {
+        dfn[u] = low[u] = t ++;
+        stk.push_back(u);
         
-        for (auto y : adj[x]) {
-            if (dfn[y] == -1) {
-                dfs(y);
-                low[x] = min(low[x], low[y]);
-            } else if (bel[y] == -1) {
-                low[x] = min(low[x], dfn[y]);
-            }
+        for (auto y : adj[u]) {
+            if (dfn[y] == -1) {         // dfn序未分配，代表树边，继续递归
+                dfs(y); 
+                low[u] = min(low[u], low[y]);
+            } else if (bel[y] == -1) {  // dfn序分配了，但是没有分配强连通分量，代表回边
+                low[u] = min(low[u], dfn[y]);
+            }                           // 否则为弃边，不进行考虑
         }
         
-        if (dfn[x] == low[x]) {
-            int y;
+        if (dfn[u] == low[u]) {
+            int v, cnt = 0;
             do {
-                y = stk.back();
-                bel[y] = cnt;
+                v = stk.back();
+                bel[v] = sccCnt;
                 stk.pop_back();
-            } while (y != x);
-            cnt++;
+                cnt ++;
+            } while (v != u);
+            siz.push_back(cnt);
+            sccCnt ++;
         }
     }
     
@@ -72,28 +75,67 @@ struct SCC {
     }
 };
 
-
 void solve() {
-	int n;
-	cin >> n;
-	SCC g(n);
-	for (int i = 0; i < n; i ++) {
-		for (int j = 0; j < n; j ++) {
-			int x;
-			cin >> x;
-			if (x) {
-				g.addEdge(i, j);
-			}
-		}
-	}
-	g.work();
+    int n;
+    cin >> n;
+    vector a(n + 1, vector<int>(n + 1));
+    SCC scc(n + 1);
+    for (int i = 0; i < n; i ++) {
+        for (int j = 0; j < n; j ++) {
+            cin >> a[i][j];
+            if (a[i][j]) {
+                scc.addEdge(i, j);
+            }
+        }
+    }
+    for (int i = 0; i < n; i ++) {
+        scc.addEdge(i, n);
+    }
+
+    vector<int> bel = scc.work(), w = scc.siz;
+    int m = scc.sccCnt;
+    vector<set<int>> g(m);
+    vector<int> in(m);
+    for (int i = 0; i < n; i ++) {
+        for (int j = 0; j < n; j ++) {
+            if (a[i][j] && bel[i] != bel[j]) {
+                g[bel[i]].insert(bel[j]);
+            }
+        }
+    }
+    for (int i = 0; i < n; i ++) {
+        g[bel[i]].insert(bel[n]);
+    }
+
+    vector dp(m, vector<int>(m));
+
+    int ans = 0;
+    for (int i = m - 1; i >= 0; i --) {
+        for (int j = m - 1; j >= 0; j --) {
+            dp[i][j] = max(dp[i][j], i == j ? w[i] : w[i] + w[j]);
+
+            ans = max(ans, dp[i][j]);
+            if (i >= j) { 
+                for (auto k : g[i]) {
+                    dp[k][j] = max(dp[k][j], dp[i][j] + (k != j ? w[k] : 0));
+                }
+            }
+            if (j >= i) {
+                for (auto k : g[j]) {
+                    dp[i][k] = max(dp[i][k], dp[i][j] + (k != i ? w[k] : 0));
+                }
+            }
+        }
+    }
+
+    cout << ans - 1 << '\n';
 }
 
 signed main() {
-	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-	cout << fixed << setprecision(10);
-	int _ = 1;
-	while (_ --) {
-		solve();
-	}
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+    cout << fixed << setprecision(10);
+    int _ = 1;
+    while (_ --) {
+        solve();
+    }
 }
