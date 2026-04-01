@@ -14,7 +14,8 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 vector<int> minp, p;
- 
+int m;
+
 void sieve(int n) {
     minp.assign(n + 1, 0);
     p.clear();
@@ -46,28 +47,14 @@ void solve() {
 	for (int i = 1; i <= n; i ++) {
 		cin >> b[i];
 	}
-	int ans = 0;
+	vector<vector<int>> dp(n, vector<int>(21));
 	for (int i = 1; i <= n; i ++) {
 		int la = __gcd(a[i], a[i - 1]);
 		int ne = __gcd(a[i], a[i + 1]);
-		int mul = (a[i - 1] / la) * (a[i + 1] / ne);
 		int l = lcm(la, ne);
-		int prim = 0;
-		if (a[i] != l) {
-			prim = 1;
-		} else {
-			for (auto e : p) {
-				if (mul % e != 0) {
-					prim = e;
-					break;
-				}
-			}
-		}
-		cerr << "prim = " << prim << " lcm = " << l << '\n';
-		ans += (prim * l <= b[i]);
-
+		int L = a[i - 1] / la, R = a[i + 1] / ne;
+		
 	}
-	cout << ans << '\n';
 }
 
 signed main() {
@@ -75,7 +62,9 @@ signed main() {
 	cout << fixed << setprecision(10);
 	int _ = 1;
 	cin >> _;
-	sieve(1e5);
+	sieve(50);
+	p.push_back(1);
+	m = p.size();
 	while (_ --) {
 		solve();
 	}
