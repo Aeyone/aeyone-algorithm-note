@@ -1,3 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+using u64 = unsigned long long;
+
+using i128 = __int128;
+using u128 = unsigned __int128;
+
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 998244353;
+
 //  判断 1e7个 1e14级别的素数大概2100ms
 //  https://atcoder.jp/contests/abc412/tasks/abc412_e
 
@@ -17,7 +31,7 @@ bool isprime(i64 n) {
     if(n <= 1 || n % 6 != 1 && n % 6 != 5){
         return false;
     }
-    static constexpr int A[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };  // 预定义的基数
+    static constexpr int A[] = { 2, 3, 5, 7, 11, 13, 17, 19, 23 };  // 预定义的基数 大小为K
     int s = __builtin_ctzll(n - 1);                                 // 计算 n-1 的尾零个数
     i64 d = (n - 1) >> s;                                           // d = (n-1) / 2^s
     for(auto a : A) {
@@ -41,4 +55,28 @@ bool isprime(i64 n) {
         }
     }
     return true;                        // 所有基数都通过，n 是素数
+}
+
+void solve() {
+	int n;
+	cin >> n;
+	if (n == 4) {
+		cout << 2 << '\n';
+		return;
+	}
+	if (isprime(n)) {
+		cout << n - 1 << '\n';
+ 	} else {
+ 		cout << 0 << '\n';
+ 	}
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int _ = 1;
+	cin >> _;
+	while (_ --) {
+		solve();
+	}
 }

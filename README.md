@@ -231,6 +231,7 @@
 |atc*unknown|[LCM Sequence](https://atcoder.jp/contests/abc412/tasks/abc412_e)|大质数判断板子题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.12.16/c.cpp)|
 |unknown|[Coin](https://codeforces.com/gym/105588/problem/C)|间隔取数，求第k大的经典Trick，倒推（2024ICPC昆明区域赛）|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Asia%20Kunming%20Regional%20Contest/c1.cpp)|
 |cf*2100|[Removal of a Sequence (Hard Version)](https://codeforces.com/contest/2169/problem/D2)|同上，上面这个题目的升级版，一样是倒推的做法|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2169(edu)/D.cpp)|
+|cf*1900|[Fox And Jumping](https://codeforces.com/problemset/problem/510/D)|裴蜀定理 + 背包DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.27/A--510D.cpp)|
 
 2. 计数问题
 
