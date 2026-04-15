@@ -24,33 +24,33 @@ int exgcd(int a, int b, int& x, int& y) {
 	return d;
 }
 
-void solve() {
-	int x, y, n, m, L;
-	cin >> x >> y >> m >> n >> L;
-	if (n < m) {
-		swap(n, m);
-		swap(x, y);
+bool solve() {
+	int a, b, c, k;
+	cin >> a >> b >> c >> k;
+	if (a == 0 && b == 0 && c == 0 && k == 0) {
+		return true;
 	}
+	int x = 0, y = 0;
+	int g = exgcd(c, 1ll << k, x, y);
 
-	int d = 0, k = 0;
-	int g = exgcd(n - m, L, d, k);
-
-	if ((x - y) % g != 0) {
-		cout << "Impossible" << '\n';
+	if ((b - a) % g != 0) {
+		cout << "FOREVER" << '\n';
 	} else {
-		int td = L / g;
-		d *= (x - y) / g;
-		int md = (d % td + td) % td;
-		cout << md << '\n';
+		int tx = (1ll << k) / g;
+		x *= (b - a) / g;
+		int mx = ((x % tx) + tx) % tx;
+		cout << mx << '\n';
 	}
-
+	return false;
 }
 
 signed main() {
 	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 	cout << fixed << setprecision(10);
 	int _ = 1;
-	while (_ --) {
-		solve();
+	while (1) {
+		if (solve()) {
+			break;
+		}
 	}
 }
