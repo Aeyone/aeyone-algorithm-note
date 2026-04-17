@@ -22,22 +22,50 @@ void solve() {
 	for (auto &e : b) {
 		cin >> e;
 	}
-
-	bool ok = true;
-	for (int i = 0; i < n - k; i ++) {
-		if (a[i] != a[i + k]) {
-			ok &= (b[i] == -1 || a[i] == b[i]);
-			ok &= (b[i + k] == -1 || a[i + k] == b[i + k]);
-			b[i] = a[i];
-			b[i + k] = a[i + k];
-		}
+	vector<vector<int>> a_buk(k), b_buk(k);
+	for (int i = 0; i < n; i ++) {
+		a_buk[i % k].push_back(a[i]);
+		b_buk[i % k].push_back(b[i]);
 	}
-
+	bool ok = true;
+	for (int i = 0; i < k; i ++) {
+		int siz = a_buk[i].size();
+		bool ok1 = ranges::count(a_buk[i], a_buk[i][0]) == siz;
+		if (ok1) {
+			ranges::sort(b_buk[i]);
+			int c1 = ranges::count(b_buk[i], -1);
+			int c2 = ranges::count(b_buk[i], b_buk[i].back());
+			if (c1 + c2 == siz) {
+				b[i] = b_buk[i].back();
+			}
+			ok1 &= (c1 == siz || c1 + c2 == siz);
+		}
+		bool ok2 = true;
+		for (int j = 0; j < siz; j ++) {
+			ok2 &= (b_buk[i][j] == -1 || a_buk[i][j] == b_buk[i][j]);
+		}
+		if (!ok1 && ok2) {
+			b[i] = a[i];
+		}
+		ok &= (ok1 || ok2);
+	}
+	map<int, int> cnta, cntb;
+	for (int i = 0; i < k; i ++) {
+		cnta[a[i]] ++;
+		cntb[b[i]] ++;
+	}
+	int sum = 0;
+	for (auto [e, c] : cnta) {
+		ok &= (c >= cntb[e]);
+		sum += (c - cntb[e]);
+	}
+	ok &= (cntb[-1] == sum);
 	if (ok) {
 		cout << "YES" << '\n';
 	} else {
 		cout << "NO" << '\n';
 	}
+
 }
 
 signed main() {
