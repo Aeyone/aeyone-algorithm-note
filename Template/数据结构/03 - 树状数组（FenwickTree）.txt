@@ -9,13 +9,17 @@ struct Fenwick {
     
     void init(int n_) {
         n = n_;
-        a.assign(n, T{});
+        a.assign(n + 1, T{});
     }
 
-    void add(int x, const T &v) { // 单点修改
+    void modify(int x, const T &v) { // 单点修改
         while(x <= n){
             a[x] += v, x += x & -x;
         }
+    }
+
+    void modify(int l, int r, const T &v) { // 区间修改(差分优化)
+        modify(l, v), modify(r + 1, -v);
     }
     
     T query(int x) {// 查询1~x的和 or 单点查询(差分优化)
@@ -30,7 +34,20 @@ struct Fenwick {
         return query(r) - query(l - 1);
     }
 
-    void rangeAdd(int l, int r, const T &v) { // 区间修改(差分优化)
-        add(l, v), add(r + 1, -v);
+    void fill () { //初始化为全1
+        for (int x = 1; x <= n; x ++) {
+            a[x] += x & (-x);
+        }
+    }
+
+    int select (T k) { // 选择满足前缀和<=k的最大下标，要求所有值非负，且k从1开始
+        int x = 0;
+        T cur {};
+        for (int i = __lg(n); ~i; i --) {
+            x += (1 << i);
+            if (x > n || cur + a[x] >= k) x -= (1 << i);
+            else cur += a[x];
+        }
+        return x + 1;
     }
 };

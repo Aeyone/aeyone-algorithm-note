@@ -51,15 +51,6 @@ struct Fenwick {
 
 vector<i64> fac;
 
-i64 qmi(i64 a, i64 b, int p){
-    i64 res = 1;
-    for( ;b ; b >>= 1, a = a * a % p){
-        if(b & 1)
-            res = a * res % p;
-    }
-    return res;
-}
-
 void init(int n) {
     fac.assign(n + 1, 1);
     for (int i = 1; i <= n; i++) {
