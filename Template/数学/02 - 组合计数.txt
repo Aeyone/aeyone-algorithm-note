@@ -27,6 +27,17 @@ int C(int N, int M) {
     return fac[N] * inv[M] % MOD * inv[N - M] % MOD;
 }
 
+int C(int N, int M) { // Lucas定理
+    if (M > N || M < 0) {
+        return 0;
+    }
+    if (N > MOD || M > MOD) {
+        return C(N / MOD, M / MOD) * C(N % MOD, M % MOD) % MOD;
+    } else {
+        return fac[N] * inv[M] % MOD * inv[N - M] % MOD;
+    }
+}
+
 int A(int N, int M) {
     if (M > N || M < 0) {
         return 0;

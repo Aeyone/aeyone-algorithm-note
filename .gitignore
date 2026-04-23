@@ -1,3 +1,5 @@
 *.o
 *.exe
 *.cpp__tests
+.cph
+.codex

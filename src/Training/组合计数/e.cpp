@@ -12,8 +12,9 @@ using u128 = unsigned __int128;
 
 const int MOD = 100000007;
 
-vector<int> minp, p, nums, vis;
+vector<int> minp, p, vis;
 vector<i64> fac, inv;
+vector<vector<i64>> nums(35);
 
 i64 qmi(i64 a, i64 b, int p){
     i64 res = 1;
@@ -61,7 +62,15 @@ void sieve(int n) {
     	for (i64 x = i; x <= n; x *= i) {
     		vis[x] = true;
     	}
-		nums.push_back(i);
+		nums[1].push_back(i);
+    }
+    int m = nums[1].size();
+    for (int i = 2; i <= 34; i ++) {
+    	nums[i].assign(m, 0);
+    	for (int j = 0; j < m; j ++) {
+    		i64 e = nums[i - 1][j] * nums[1][j];
+    		nums[i][j] = (e <= 1e10 ? e : 1e12);
+    	}
     }
 }
 
@@ -75,11 +84,14 @@ int C(int N, int M) {
 int get(i64 x) {
 	int tot = 0;
 	for (int i = 2; i <= 34; i ++) {
-		int hi = pow(x, 1.0 / i);
-		if (hi <= 1) {
+		int cnt = upper_bound(nums[i].begin(), nums[i].end(), x) - nums[i].begin();
+		tot += cnt;
+		if (!cnt) {
 			break;
 		}
-		tot += upper_bound(nums.begin(), nums.end(), hi) - nums.begin();
+		// cerr << "i = " << i << ' ';
+		// cerr << "select: " <<  nums[i][cnt - 1] << ' ';
+		// cerr << "cnt = " << cnt << '\n';
 	}
 	return tot;
 }
@@ -88,7 +100,7 @@ void solve() {
 	i64 l, r;
 	cin >> l >> r;
 	int n = get(r) - get(l - 1);
-	cerr << "n = " << n << '\n';
+	// cerr << "n = " << n << '\n';
 	if (n == 0) {
 		cout << 0 << '\n';
 	} else {
