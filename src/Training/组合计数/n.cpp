@@ -13,14 +13,41 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
-	
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	for (int i = 0; i < n; i ++) {
+		cin >> a[i];
+	}
+	if (n > 60) {
+		cout << 1 << '\n';
+		return;
+	}
+	int ans = INF;
+	for (int i = 1; i < n; i ++) {
+		int pre = 0;
+		for (int j = i - 1; j >= 0; j --) {
+			pre ^= a[j];
+			int suf = 0;
+			for (int k = i; k < n; k ++) {
+				suf ^= a[k];
+				if (pre > suf) {
+					ans = min(ans, k - j - 1);
+				}
+			}
+		}
+	}
+	if (ans == INF) {
+		cout << -1 << '\n';
+	} else {
+		cout << ans << '\n';
+	}
 }
 
 signed main() {
 	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 	cout << fixed << setprecision(10);
 	int _ = 1;
-	cin >> _;
 	while (_ --) {
 		solve();
 	}
