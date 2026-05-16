@@ -1,0 +1,115 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+using u64 = unsigned long long;
+
+using i128 = __int128;
+using u128 = unsigned __int128;
+
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int P = 998244353;
+vector<int> rev, roots{0, 1};
+
+int qmi(int a, int b) {
+    int res = 1;
+    for (; b; b >>= 1, a = 1ll * a * a % P){
+        if (b & 1) 
+            res = 1ll * res * a % P;
+    }
+    return res;
+}
+
+void dft(vector<int> &a) {//正变换，迭代版NTT，将每个ai转换为对应的单位根
+    int n = a.size();
+    if (int(rev.size()) != n) {
+        int k = __builtin_ctz(n) - 1;
+        rev.resize(n);
+        for (int i = 0; i < n; i++) {
+            rev[i] = rev[i >> 1] >> 1 | (i & 1) << k;
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if (rev[i] < i) {
+            swap(a[i], a[rev[i]]);
+        }
+    }
+    if (roots.size() < n) {
+        int k = __builtin_ctz(roots.size());
+        roots.resize(n);
+        while ((1 << k) < n) {
+            int e = qmi(31, 1 << (__builtin_ctz(P - 1) - k - 1));
+            for (int i = 1 << (k - 1); i < (1 << k); i++) {
+                roots[2 * i] = roots[i];
+                roots[2 * i + 1] = 1LL * roots[i] * e % P;
+            }
+            k++;
+        }
+    }
+    for (int k = 1; k < n; k *= 2) {
+        for (int i = 0; i < n; i += 2 * k) {
+            for (int j = 0; j < k; j++) {
+                int u = a[i + j];
+                int v = 1LL * a[i + j + k] * roots[k + j] % P;
+                a[i + j] = (u + v) % P;
+                a[i + j + k] = (u - v) % P;
+            }
+        }
+    }
+}
+
+void idft(vector<int> &a) {//逆变换
+    int n = a.size();
+    reverse(a.begin() + 1, a.end());
+    dft(a);
+    int inv = (1 - P) / n;
+    for (int i = 0; i < n; i++) {
+        a[i] = 1ll * a[i] * inv % P;
+    }
+}
+
+vector<int> mul(vector<int> a, vector<int> b) {//卷积操作，操作的多项式为系数表达式
+    int n = 1, tot = a.size() + b.size() - 1;
+    while (n < tot) {
+        n *= 2;
+    }
+    if (tot < 128) {
+        vector<int> c(a.size() + b.size() - 1);
+        for (int i = 0; i < (int)a.size(); i++) {
+            for (int j = 0; j < (int)b.size(); j++) {
+                c[i + j] = (c[i + j] + 1ll * a[i] * b[j]) % P;
+            }
+        }
+        return c;
+    }
+    a.resize(n);
+    b.resize(n);
+    dft(a);
+    dft(b);
+    for (int i = 0; i < n; i++) {
+        a[i] = 1ll * a[i] * b[i] % P;
+    }
+    idft(a);
+    a.resize(tot);
+    return a;
+}
+
+
+void solve() {
+	vector<int> a = {1, 2, 1, 0, 0, 0, 0};
+	vector<int> b = {1, 1, 0, 0, 0, 0, 0};
+	vector<int> c = mul(a, b);
+	for (auto e : c) cout << e << ' ';
+		cout << '\n';
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int _ = 1;
+	while (_ --) {
+		solve();
+	}
+}

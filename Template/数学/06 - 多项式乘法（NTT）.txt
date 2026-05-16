@@ -81,5 +81,6 @@ vector<int> mul(vector<int> a, vector<int> b) {//卷积操作，操作的多项�
     }
     idft(a);
     a.resize(tot);
+    for (int &x : a) x = (x + P) % P;
     return a;
 }

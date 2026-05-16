@@ -10,28 +10,30 @@ using u128 = unsigned __int128;
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
-const int MOD = 1000000007;
+const int MOD = 998244353;
 
 void solve() {
-	int n, x;
-	cin >> n >> x;
+	int n, m;
+	cin >> n >> m;
 	vector<int> a(n + 1);
 	for (int i = 1; i <= n; i ++) {
 		cin >> a[i];
-		a[i] -= x;
 	}
-	const int N = 20000;
-	vector<vector<i64>> dp(2, vector<i64>(2 * N + 1));
+	vector<i64> suf(n + 2);
+	for (int i = n; i >= 1; i --) {
+		suf[i] = suf[i + 1] + a[i];
+	}
 
-	dp[0][N] = 1;
+	multiset<i64> st;
+	i64 ans = -INFLL;
 	for (int i = 1; i <= n; i ++) {
-		dp[i & 1] = dp[i - 1 & 1];
-		for (int j = 2 * N; j >= max(0, a[i]); j --) {
-			if (j - a[i] <= 2 * N) dp[i & 1][j] = (dp[i & 1][j] + dp[i - 1 & 1][j - a[i]]) % MOD;
+		st.insert(suf[i]);
+		if (i - m >= 1) {
+			st.erase(st.find(suf[i - m]));
 		}
+		ans = max(ans, *(--st.end()) - suf[i + 1]);
 	}
-
-	cout << (MOD + dp[n & 1][N] - 1) % MOD << '\n';
+	cout << ans << '\n';
 }
 
 signed main() {

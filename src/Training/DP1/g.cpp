@@ -14,43 +14,40 @@ const int MOD = 998244353;
 
 void solve() {
 	int n = 4, q;
-	int c[n + 1] {};
+	vector<int> c(n + 1);
 	cin >> c[1] >> c[2] >> c[3] >> c[4] >> q;
 
+	vector<i64> dp(1e5 + 1);
+	dp[0] = 1;
+
+	for (int i = 1; i <= 4; i ++) {
+		for (int j = c[i]; j <= 1e5; j ++) {
+			dp[j] += dp[j - c[i]];
+		}
+	}
+
+	// for (int i = 1; i <= 20; i ++) {
+	// 	cout << dp[i] << '\n';
+	// }
+
 	while (q --) {
-		vector<map<i64, int>> w(n + 1);
-		for (int i = 1; i <= 4; i ++) {
-			int d;
-			cin >> d;
-			for (int j = 0; d >= (1 << j); j ++) {
-				w[i][1ll * c[i] * (1 << j)] ++;
-				d -= (1 << j);
-			}
-			for (int j = 0; d >> j > 0; j ++) if (d >> j & 1) {
-				w[i][1ll * c[i] * (1 << j)] ++;
-			}
-		}
+		vector<int> d(n + 1);
 		int s;
-		cin >> s;
+		cin >> d[1] >> d[2] >> d[3] >> d[4] >> s;
 
-		vector<vector<i64>> dp(n + 1, vector<i64>(s + 1));
-		dp[0][0] = 1;
+		i64 ans = dp[s];
 
-		for (int i = 1; i <= 4; i ++) {
-			dp[i] = dp[i - 1];
-
-			for (auto [e, cnt] : w[i]) {
-				cerr << "{"<< e << "," << cnt << "} ";
-				for (int k = 1; k <= cnt; k ++) {
-					for (int j = s; j >= k * e; j --) {
-						dp[i][j] += dp[i][j - k * e];
-					}
-				}
+		for (int mask = 1; mask < 1 << n; mask ++) {
+			i64 sum = 0;
+			for (int i = 0; i < n; i ++) if (mask >> i & 1) {
+				sum += 1ll * c[i + 1] * (d[i + 1] + 1);
 			}
-			cerr << '\n';
+			if (sum <= s) {
+				ans += (__builtin_popcount(mask) & 1) ? -dp[s - sum] : dp[s - sum]; 
+			}
 		}
 
-		cout << dp[n][s] << '\n';
+		cout << ans << '\n';
 	}
 }
 
