@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+using u64 = unsigned long long;
+
+using i128 = __int128;
+using u128 = unsigned __int128;
+
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 10007;
+
+void solve() {
+	int n, m;
+	cin >> n >> m;
+	vector<int> a(n);
+	int mn = INF, mx = 0;
+	for (int i = 0; i < n; i ++) {
+		cin >> a[i];
+		mn = min(mn, a[i]);
+		mx = max(mx, a[i]);
+	}
+	sort(a.begin(), a.end());
+	i64 ans = 0;
+	while (m --) {
+		int l, r;
+		cin >> l >> r;
+		if (r < mn || l > mx) {
+			ans = (ans + n) % MOD;
+			continue;
+		}
+		l = max(mn, l);
+		r = min(mx, r);
+		int cost = lower_bound(a.begin(), a.end(), r) - lower_bound(a.begin(), a.end(), l) + 1;
+		ans = (ans + n - cost) % MOD;
+	}
+	cout << ans << '\n';
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int _ = 1;
+	while (_ --) {
+		solve();
+	}
+}
