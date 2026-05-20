@@ -5,7 +5,9 @@ void solve() { // 普通st表
     for(int i = 0; i < n; i ++){
         cin >> a[i];
     }
-    vector<vector<int>> st(n, vector<int>(21));
+    const int pow = 20;
+    vector<array<int, pow + 1>> st(n);
+
     for(int i = 0; i < n; i ++){    //p = 0时
         st[i][0] = a[i];
     }
@@ -26,7 +28,9 @@ void solve() { // 普通st表
 }
 
 void solve() { // 树上倍增求lca
-    vector up(n, vector<int>(21));
+    const int pow = 20;
+
+    vector<array<int, pow + 1>> up(n);
     vector<int> dep(n);
 
     auto init = [&](this auto &&self, int u, int fa)->void {
@@ -60,6 +64,6 @@ void solve() { // 树上倍增求lca
                 y = up[y][p];
             }
         }
-        return up[x][0]; // 最后不要忘记再跳一次
+        return up[x][0]; // 最后不要忘记再跳一次 x, y随意，注意区间操作时两个都需要取
     };
 }

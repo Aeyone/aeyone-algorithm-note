@@ -124,7 +124,7 @@ void solve() {
 		}
 	}
 
-	const int pow = 22;
+	const int pow = 20;
 	vector<array<int, pow + 1>> up(n), mn(n);
 	vector<int> dep(n), vis(n);
 

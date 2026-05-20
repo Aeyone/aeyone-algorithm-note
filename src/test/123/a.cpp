@@ -12,34 +12,33 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
-void solve() {
-	vector<int> n(1);
-	cin >> n[0];
-	if ((n[0] % 4) == 0) {
-		cout << 0 << '\n';
-		return;
-	}
-	while (n.back() >= 4) {
-		int cur = n.back();
-		n.push_back(cur / 5 + ((cur % 5) == 4 ? 0 : (cur % 5)));
-	}
-	int m = n.back();
-	vector<int> ans(m);
-	iota(ans.begin(), ans.end(), 1);
-	for (int i = n.size() - 2; i >= 0; i --) {
-		for (int j = 0; j < m; j ++) {
-			if (5ll * ans[j] <= n[i]) {
-				ans[j] *= 5;
-			} else {
-				ans[j] = n[i] - (m - j - 1);
-			}
-		}
-	}
-	cout << m << '\n';
-	for (auto e : ans) {
-		cout << e << ' ';
-	}
-	cout << '\n';
+void solve() { // 普通st表
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for(int i = 0; i < n; i ++){
+        cin >> a[i];
+    }
+    const int pow = 20;
+    vector<array<int, pow + 1>> st(n);
+
+    for(int i = 0; i < n; i ++){    //p = 0时
+        st[i][0] = a[i];
+    }
+    for(int p = 1; n >> p > 0; p ++){   //枚举所有p
+        for(int i = 0; i + (1 << p) <= n; i ++){    //从下标 i 开始的长度为 2^p 的区间大小不能超过n
+            st[i][p] = max(st[i][p - 1], st[i + (1 << (p - 1))][p - 1]);
+        }
+    }
+    auto query = [&](int l, int r)->int{
+        int p = __lg(r - l + 1);
+        return max(st[l][p], st[r - (1 << p) + 1][p]);//取从l开始的2^p格内和以r结尾的2^p格内的最大值
+    };
+
+    for(int i = 0; i < n; i ++){
+        for(int j = i; j < n; j ++)
+            cout << "i: " << i + 1 << ' ' << "j: " << j + 1 << ' ' << "MAX: " << query(i, j) << '\n';
+    }
 }
 
 signed main() {
