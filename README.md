@@ -88,7 +88,7 @@
 |cf*1800|[Clique Problem](https://codeforces.com/problemset/problem/527/D)|数学推导转换为经典线段覆盖问题|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.11/A--527D.cpp)|
 |cf*1800|[Maximum Subsequence](https://codeforces.com/problemset/problem/888/E)|很巧妙的分治，将n=35一分为二，然后分别二进制枚举，再考虑两个1e5级别的序列操作|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/A--888E.cpp)|
 |cf*1900|[Painting Fence](https://codeforces.com/problemset/problem/448/C)|递归分治|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.03.18/A--448C.cpp)|
-||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
+|cf*unkown|[Red-Black Pairs](https://codeforces.com/contest/2225/problem/C)|非常经典且基础的DP|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2225(edu)/c.cpp)|
 
 ### 动态规划
 

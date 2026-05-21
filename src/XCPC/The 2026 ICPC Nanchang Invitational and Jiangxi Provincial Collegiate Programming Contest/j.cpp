@@ -78,14 +78,21 @@ void sieve(int n) {
 void solve() {
 	int n, q;
 	cin >> n >> q;
-	vector<int> a(n);
+	vector<int> a(n), id(1e6 + 1);
 	for (auto &e : a) cin >> e;
+
+	auto b = a;
+	sort(b.begin(), b.end());
+	b.erase(unique(b.begin(), b.end()), b.end());
+	n = b.size();
+
+	for (int i = 0; i < n; i ++) id[b[i]] = i;
 
 	vector<vector<pair<int, int>>> tot(n);
 	vector<vector<int>> mp(1e6 + 1);
 
 	for (int i = 0; i < n; i ++) {
-		int cur = a[i];
+		int cur = b[i];
 		while (cur > 1) {
 			int cnt = 0, x = minp[cur];
 			while (cur % x == 0) {
@@ -131,7 +138,7 @@ void solve() {
 	auto init = [&](this auto && self, int u, int fa)->void {
 		up[u][0] = fa;
 		vis[u] = true;
-		if (fa != -1) mn[u][0] = __gcd(a[u], a[fa]);
+		if (fa != -1) mn[u][0] = __gcd(b[u], b[fa]);
 		for (int p = 1; dep[u] >> p > 0; p ++) {
 			int la = up[u][p - 1];
 			up[u][p] = up[la][p - 1];
@@ -144,7 +151,7 @@ void solve() {
 	};
 
 	auto lca = [&](int x, int y)->int {
-		int res = INF;
+		int res = b[x];
 		if (dep[x] < dep[y]) {
 			swap(x, y);
 		}
@@ -175,15 +182,11 @@ void solve() {
 		int u, v;
 		cin >> u >> v;
 		u --, v --;
-		if (u == v) {
-			cout << a[u] << '\n';
-			continue;
-		}
-		if (!dsu.cmp(u, v)) {
+		if (!dsu.cmp(id[a[u]], id[a[v]])) {
 			cout << 1 << '\n';
 			continue;
 		}
-		cout << lca(u, v) << '\n';
+		cout << lca(id[a[u]], id[a[v]]) << '\n';
 	}
 }
 

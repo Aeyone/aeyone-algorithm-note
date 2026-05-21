@@ -27,7 +27,7 @@ void solve() {
 	bool ok = false;
 	for(int i = 0; i < n; i ++){
 		vector<bool> vis(n);
-		auto dfs = [&](auto &&self, int u, int cnt)->bool{
+		auto dfs = [&](auto &&self, int u, int cnt)-> bool {
 			if(cnt == n){
 				return true;
 			}

@@ -24,15 +24,17 @@ void solve() {
 
 	auto v = a;
 	iota(v.begin(), v.end(), 0);
-	sort(v.begin(), v.end(), [&](const int &p, const int &q)-> bool{
+	sort(v.begin(), v.end(), [&](const int &p, const int &q)-> bool {
 		return a[p] > a[q];
 	});
 
-	int cur = 1, i = (v[0] == n - 1);
+	int cur = 1, i = 0;
 	for (; i < n && a[v[i]] > 0 && cur <= k; i ++) {
+		if (v[i] == n - 1) continue;
 		id[v[i]] = cur ++;
 	}
 	for (; i < n && a[v[i]] > 0 && cur > 2; i ++) {
+		if (v[i] == n - 1) continue;
 		id[v[i]] = -- cur;
 	}
 
