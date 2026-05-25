@@ -1,6 +1,8 @@
 *.o
 *.exe
 *.cpp__tests
+*.in
+*.out
 .cph
 .codex
 AGENTS.md
