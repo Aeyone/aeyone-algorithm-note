@@ -31,7 +31,6 @@ void solve() {
     }
     vector<int> dp(N + 1);
     deque<int> q;
-    queue<int> que;
     q.push_back(0);
 
     auto up = [&](int i, int j)-> int {
@@ -43,22 +42,20 @@ void solve() {
     };
 
     for (int i = 1; i <= N; i ++) {
-        while (que.size() && que.front() <= i - m) {
-            q.push_back(que.front());
-            que.pop();
-        }
+        int k = i - m;
+        if (k >= 0) {
+            int siz = q.size();
+            while (q.size() >= 2 && (i128)up(q[siz - 2], q[siz - 1]) * down(q[siz - 1], k) >= (i128)up(q[siz - 1], k) * down(q[siz - 2], q[siz - 1])) {
+                siz --;
+                q.pop_back();
+            }
+            q.push_back(k);
+        }        
         while (q.size() >= 2 && (i128)i * down(q[0], q[1]) <= up(q[0], q[1])) {
             q.pop_front();
         }
         int j = q[0];
         dp[i] = dp[j] + i * (c[i] - c[j]) - (s[i] - s[j]);
-        int siz = q.size();
-        que.push(i);
-        int k = que.front(); // 这里写成了q.front() ...
-        while (q.size() >= 2 && (i128)up(q[siz - 2], q[siz - 1]) * down(q[siz - 1], k) >= (i128)up(q[siz - 1], k) * down(q[siz - 2], q[siz - 1])) {
-            siz --;
-            q.pop_back();
-        }
     }
     int ans = INFLL;
     for (int i = max; i <= max + m; i ++) ans = std::min(ans, dp[i]);

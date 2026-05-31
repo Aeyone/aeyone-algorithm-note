@@ -13,25 +13,20 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
-    int n;
-    cin >> n;
-    vector<double> p(n + 1);
-    for (int i = 1; i <= n; i ++) {
-        cin >> p[i];
+    int n, m, p;
+    cin >> n >> m >> p;
+    vector<int> d(n), h(m + 1), t(m + 1);
+    for (int i = 1; i < n; i ++) {
+        cin >> d[i];
     }
-
-    double len = 0, ans = 0;
-    for (int i = 1; i <= n; i ++) {
-        ans += p[i] * (2 * len + 1);
-        len = p[i] * (len + 1);
+    for (int i = 1; i <= m; i ++) {
+        cin >> h[i] >> t[i];
     }
-
-    cout << ans << '\n';
+    
 }
 
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    cout << fixed << setprecision(10);
     int t = 1;
     // cin >> t;
     while (t --) {
