@@ -1,6 +1,6 @@
 #!/bin/bash
 
-touch $1.in
+touch $1.in $1.out
 g++ -std=c++23 -Wall -Wextra $1.cpp -o out.o
 ./out.o < $1.in > $1.out
 
