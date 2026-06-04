@@ -9,7 +9,8 @@
 <summary><strong>一些杂碎</strong></summary>
 
 - [01 - main.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/01%20-%20main.txt)
-- [02 - 一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02%20-%20一些小trick.txt)
+- [02A - 一些小trick.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02A%20-%20一些小trick.txt)
+- [02B - 线性求1~n逆元.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/02B%20-%20线性求1~n逆元.txt)
 - [03 - 进制转换.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/03%20-%20进制转换.txt)
 - [04 - int128 输出流自定义.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/04%20-%20int128%20输出流自定义.txt)
 - [05 - 取模类（MLong & MInt）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/一些杂碎/05%20-%20取模类（MLong%20&%20MInt）.txt)
@@ -20,6 +21,7 @@
 <summary><strong>图论</strong></summary>
 
 - [01 - 强连通分量缩点（SCC）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/图论/01%20-%20强连通分量缩点（SCC）.txt)
+- [02 - 树链剖分（HLD）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/图论/02%20-%20树链剖分（HLD）.txt)
 
 </details>
 
@@ -27,6 +29,8 @@
 <summary><strong>字符串</strong></summary>
 
 - [01 - kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01%20-%20kmp.txt)
+- [02 - 马拉车（Manacher）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/02%20-%20马拉车（Manacher）.txt)
+- [03 - Trie.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/03%20-%20Trie.txt)
 
 </details>
 
