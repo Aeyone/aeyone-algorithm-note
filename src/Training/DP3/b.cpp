@@ -16,12 +16,11 @@ void solve() {
 }
 
 signed main() {
-	ios::sync_with_stdio(false);
-	cin.tie(nullptr), cout.tie(nullptr);
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
 	cout << fixed << setprecision(10);
 	int _ = 1;
 	cin >> _;
-	while (_ --){
+	while (_ --) {
 		solve();
 	}
 }

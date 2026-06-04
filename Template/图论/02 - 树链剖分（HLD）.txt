@@ -1,0 +1,68 @@
+vector<int> f(n), siz(n), son(n, -1), dep(n), top(n, -1), dfn(n), seg(n + 1);
+
+// 第一遍dfs预处理 f dep siz son 数组，son[u]为u节点的重儿子编号
+auto dfs1 = [&](this auto &&self, int u, int fa = -1)-> void {
+	siz[u] = 1;
+	for (auto v : g[u]) if (v != fa) {
+		dep[v] = dep[u] + 1;
+		f[v] = u;
+		self(v, u);
+		siz[u] += siz[v];
+	}
+	for (auto v : g[u]) if (v != fa) {
+		if (son[u] == -1 || siz[son[u]] < siz[v]) {
+			son[u] = v;
+		}
+	}
+};
+dfs1(r);
+
+int T = 1;
+// 第二遍dfs预处理 dfn序 反序列seg(1-based) top[u]为u节点所在的重链的头节点
+auto dfs2 = [&](this auto &&self, int u, int ftop)-> void {
+	top[u] = ftop, dfn[u] = T, seg[T ++] = u;
+	if (son[u] != -1) {
+		self(son[u], ftop);
+	}
+	for (auto v : g[u]) if (v != f[u] && v != son[u]){
+		self(v, v);
+	}
+};
+dfs2(r, r);
+
+SegmentTree<i64> st(n); // 用线段树维护区间和(dfn序)
+for (int i = 0; i < n; i ++) {
+	st.modify(dfn[i], dfn[i], a[i]);
+}
+
+// 在x~y节点的简单路径上修改
+auto pathAdd = [&](int x, int y, int v)-> void {
+	while (top[x] != top[y]) {
+		if (dep[top[x]] < dep[top[y]]) { // 优先选择深度大的往上跳
+			swap(x, y);
+		}
+		st.modify(dfn[top[x]], dfn[x], v);
+		x = f[top[x]];
+	}
+	if (dfn[x] > dfn[y]) {
+		swap(x, y);
+	}
+	st.modify(dfn[x], dfn[y], v); // 最后一定会跳到同一条链上
+};
+
+// 在x~y节点的简单路径上查询
+auto pathQuery = [&](int x, int y)-> i64 {
+	i64 res = 0;
+	while (top[x] != top[y]) {
+		if (dep[top[x]] < dep[top[y]]) {
+			swap(x, y);
+		}
+		res = (res + st.query(dfn[top[x]], dfn[x]).sum) % MOD;
+		x = f[top[x]];
+	}
+	if (dfn[x] > dfn[y]) {
+		swap(x, y);
+	}
+	res = (res + st.query(dfn[x], dfn[y]).sum) % MOD;
+	return res;
+}; 

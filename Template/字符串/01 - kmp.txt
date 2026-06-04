@@ -1,27 +1,27 @@
 auto kmp = [&](string s, string p)-> void {
 	int n = p.size(), m = s.size();
-	s = " " + s;//原始串
-	p = " " + p;//模式串
+	s = " " + s;  //原始串
+	p = " " + p;  //模式串
 	vector<int> ne(n + 1);
 	for (int i = 2, j = 0; i <= n; i ++) { // j此时的意义：i-1位置的前缀函数中，匹配真前缀的最后一个字符的位置
-        while (j && p[i] != p[j + 1]) {    // 1~j的位置已经匹配，只需要看i和j+1位置上是否相等
-            j = ne[j];                     // 不相等，就往前跳
-        }
-        if (p[i] == p[j + 1]) {            // 如果相等，说明匹配上了，更新j的位置
-            j ++;
-        }
-        ne[i] = j;
-    }
-    for (int i = 1, j = 0; i <= m; i ++) {
-        while (j && s[i] != p[j + 1]) {
-            j = ne[j];
-        }
-        if (s[i] == p[j + 1]) {
-            j ++ ;
-        }
-        if (j == n) {
-        	cout << i - n << '\n';//输出第一个匹配上的下标
-            j = ne[j];
-        }
-    }
+		while (j && p[i] != p[j + 1]) {     // 1~j的位置已经匹配，只需要看i和j+1位置上是否相等
+			j = ne[j];                       // 不相等，就往前跳
+		}
+		if (p[i] == p[j + 1]) {             // 如果相等，说明匹配上了，更新j的位置
+			j ++;
+		}
+		ne[i] = j;
+	}
+	for (int i = 1, j = 0; i <= m; i ++) {
+		while (j && s[i] != p[j + 1]) {
+			j = ne[j];
+		}
+		if (s[i] == p[j + 1]) {
+			j ++ ;
+		}
+		if (j == n) {
+			cout << i - n << '\n'; // 输出第一个匹配上的下标
+			j = ne[j];
+		}
+	}
 };

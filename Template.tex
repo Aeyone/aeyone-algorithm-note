@@ -1,0 +1,251 @@
+\documentclass[a4paper]{article}
+
+\usepackage{graphicx, amssymb, amsmath, textcomp, booktabs}
+\usepackage[libertine,vvarbb]{newtxmath}
+\usepackage[scr=rsfso]{mathalfa}
+\usepackage[T1]{fontenc}
+\usepackage{minted}
+\usepackage{listings, color, setspace, titlesec, fancyhdr, mdframed}
+\usepackage{ucharclasses}
+\usepackage{xunicode, xltxtra}
+\usepackage[inner=1.25cm, outer=0.8cm, top=1.7cm, bottom=1.5cm]{geometry}
+\usepackage{tocloft}
+\usepackage{nameref}
+\usepackage{verbatim}
+\usepackage{relsize}
+\usepackage{fontspec}
+\usepackage[colorlinks, linkcolor = black]{hyperref}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{multicol}
+\setlength{\columnsep}{16pt}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Source Han Serif SC}[Scale=0.8, BoldFont=Source Han Serif SC Bold]
+\setCJKmonofont{SimHei}[Scale=0.8]
+\setCJKsansfont{KaiTi}[Scale=0.8]
+
+% 为封面定义黑体（纯 xeCJK 方式）
+\setCJKfamilyfont{zhhei}{SimHei}
+
+\setmainfont{Linux Libertine O}[Scale=0.925]
+\setmonofont{Consolas}[Scale=0.775]
+
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+
+\setlength{\parindent}{0em}\setlength{\parskip}{1pt}
+\setlength\itemsep{1pt}
+
+% header
+\pagestyle{fancy}
+\setlength{\headsep}{0.1cm}
+\chead{Aeyone}
+\rhead{Page \thepage}
+\lhead{Template}
+
+% toc
+\renewcommand\cftsecfont{\Large}
+
+% section style
+\titleformat{\section}
+{\huge\bfseries}
+{\thesection.}
+{4pt}
+{}
+\titleformat{\subsection}
+{\large\bfseries}
+{\thesubsection.}
+{4pt}
+{}
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\titlespacing{\subsubsection}{0pt}{0pt}{0pt}
+
+% minted line number style
+\renewcommand{\theFancyVerbLine}{\sffamily \textcolor[rgb]{0.5,0.5,0.5}{\scriptsize {\arabic{FancyVerbLine}}}}
+
+% minted 全局默认（所有语言生效）
+\setminted{
+    style=xcode,
+    linenos,
+    baselinestretch=0.8,
+    tabsize=3,
+    fontsize=\normalsize,
+    frame=single,
+    framesep=1mm,
+    framerule=0.3pt,
+    numbersep=1mm,
+    breaklines=true,
+    breaksymbolsepleft=2pt,
+    breakbytoken=false,
+	showtabs=true,
+    tab={\relscale{0.6} $\big\vert \ \ \ $ \relscale{1}},
+}
+
+\begin{document}
+
+% === 封面 ===
+\begin{titlepage}
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{center}
+    {\CJKfamily{zhhei}\Huge 算法竞赛模版}\\[1cm]
+    {\Large Aeyone}\\[0.5cm]
+    {\large \today}
+\end{center}
+\vspace*{\fill}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+\begin{multicols}{2}
+\begin{spacing}{0.6}
+
+\section{一些杂碎}
+
+\subsection{主模版}
+\inputminted{cpp}{Template/一些杂碎/01 - main.txt}
+
+
+\subsection{run.sh}
+\begin{minted}{bash}
+#!/bin/bash
+touch $1.in $1.out
+g++ -std=c++23 -Wall -Wextra $1.cpp -o out.o
+./out.o < $1.in > $1.out
+\end{minted}
+
+\subsection{对拍器}
+\inputminted{cpp}{src/Debug/run.cpp}
+
+\columnbreak
+
+\subsection{随机化}
+\begin{minted}{cpp}
+static mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define rand(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
+shuffle(a.begin(), a.end(), rng) // 打乱一个数组
+\end{minted}
+
+\subsection{线性求 \(1 \sim n\)  逆元}
+\inputminted{cpp}{Template/一些杂碎/02B - 线性求1~n逆元.txt}
+
+\subsection{进制转换}
+\inputminted{cpp}{Template/一些杂碎/03 - 进制转换.txt}
+
+\subsection{int128 输出流自定义}
+\inputminted{cpp}{Template/一些杂碎/04 - int128 输出流自定义.txt}
+
+\end{spacing}
+\end{multicols}
+
+\begin{spacing}{0.6}
+\newpage
+\section{图论}
+
+\subsection{强连通分量缩点（SCC）}
+\inputminted{cpp}{Template/图论/01 - 强连通分量缩点（SCC）.txt}
+
+\newpage
+\subsection{树链剖分（HLD）}
+\inputminted{cpp}{Template/图论/02 - 树链剖分（HLD）.txt}
+
+\newpage
+\section{字符串}
+
+\subsection{KMP}
+\inputminted{cpp}{Template/字符串/01 - KMP.txt}
+
+\subsection{马拉车（Manacher）}
+\inputminted{cpp}{Template/字符串/02 - 马拉车（Manacher）.txt}
+
+\subsection{Trie}
+\inputminted{cpp}{Template/字符串/03 - Trie.txt}
+
+\newpage
+
+\end{spacing}
+
+\begin{multicols}{2}
+\begin{spacing}{0.6}
+\section{数学}
+
+\subsection{快速幂}
+\inputminted{cpp}{Template/数学/01A - 快速幂.txt}
+
+\subsection{矩阵快速幂}
+\inputminted{cpp}{Template/数学/01B - 矩阵快速幂.txt}
+\columnbreak
+
+\subsection{组合计数}
+\inputminted{cpp}{Template/数学/02 - 组合计数.txt}
+\columnbreak
+
+\subsection{线性筛}
+\inputminted{cpp}{Template/数学/03 - 线性筛.txt}
+
+\subsection{欧拉函数 \& 拓展欧几里得}
+\inputminted{cpp}{\detokenize{Template/数学/04 - 欧拉函数 & 拓展欧几里得.txt}}
+
+\subsection{计算几何}
+\inputminted{cpp}{Template/数学/05 - 计算几何.txt}
+
+\end{spacing}
+\end{multicols}
+
+
+\begin{spacing}{0.6}
+
+\newpage
+\subsection{多项式乘法（NTT）}
+\inputminted{cpp}{Template/数学/06 - 多项式乘法（NTT）.txt}
+
+\subsection{米勒-罗宾素数检验（Miller–Rabin）}
+\inputminted{cpp}{Template/数学/07 - 米勒-罗宾素数检验（Miller–Rabin）.txt}
+\newpage
+
+\end{spacing}
+
+\begin{multicols}{2}
+\begin{spacing}{0.6}
+
+\section{数据结构}
+
+\subsection{并查集（DSU）}
+\inputminted{cpp}{Template/数据结构/01 - 并查集（DSU）.txt}
+
+\subsection{普通莫队}
+\inputminted{cpp}{Template/数据结构/02 - 普通莫队.txt}
+
+\subsection{树状数组（FenwickTree）}
+\inputminted{cpp}{Template/数据结构/03 - 树状数组（FenwickTree）.txt}
+\columnbreak
+
+\subsection{ST表（SparseTable）}
+\inputminted{cpp}{Template/数据结构/04 - ST表（SparseTable）.txt}
+\columnbreak
+
+\subsection{线段树（区间合并，不带修）}
+\inputminted{cpp}{Template/数据结构/05 - 线段树（区间合并，不带修）.txt}
+\columnbreak
+
+\subsection{懒标记线段树（基础区间操作）}
+\inputminted{cpp}{Template/数据结构/06A - 懒标记线段树（基础区间操作）.txt}
+\columnbreak
+
+\subsection{懒标记线段树（双重区间操作）}
+\inputminted{cpp}{Template/数据结构/06B - 懒标记线段树（双重区间操作）.txt}
+\columnbreak
+
+\subsection{懒标记线段树（动态开点+区间操作）}
+\inputminted{cpp}{Template/数据结构/06C - 懒标记线段树（动态开点+区间操作）.txt}
+\columnbreak
+
+\subsection{吉如一线段树（区间求和）}
+\inputminted{cpp}{Template/数据结构/07A - 吉如一线段树（区间求和）.txt}
+
+\end{spacing}
+\end{multicols}
+\end{document}

@@ -5,4 +5,12 @@
 *.out
 .cph
 .codex
+/out
 AGENTS.md
+CLAUDE.md
+.claude
+*.aux
+*.log
+*.toc
+*.pdf
+_minted

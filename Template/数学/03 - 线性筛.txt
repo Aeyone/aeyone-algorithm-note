@@ -1,21 +1,21 @@
 vector<int> minp, p;
  
 void sieve(int n) {
-    minp.assign(n + 1, 0);
-    p.clear();
-    for (int i = 2; i <= n; i++) {
-        if (minp[i] == 0) {
-            minp[i] = i;
-            p.push_back(i);
-        }
-        for (auto e : p) {
-            if (1ll * i * e > n) {
-                break;
-            }
-            minp[i * e] = e;
-            if (e == minp[i]) {
-                break;
-            }
-        }
-    }
+	minp.assign(n + 1, 0);
+	p.clear();
+	for (int i = 2; i <= n; i++) {
+		if (minp[i] == 0) {
+			minp[i] = i;
+			p.push_back(i);
+		}
+		for (auto e : p) {
+			if (1ll * i * e > n) {
+				break;
+			}
+			minp[i * e] = e;
+			if (e == minp[i]) {
+				break;
+			}
+		}
+	}
 }

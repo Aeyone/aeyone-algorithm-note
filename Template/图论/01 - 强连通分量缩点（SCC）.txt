@@ -1,59 +1,59 @@
 struct SCC {
-    int n;
-    vector<vector<int>> adj;
-    vector<int> dfn, low, bel;
-    vector<int> stk;
-    int t, sccCnt;
-    
-    SCC() {}
-    SCC(int n) {
-        init(n);
-    }
-    
-    void init(int n) {
-        this->n = n;
-        adj.assign(n, {});
-        dfn.assign(n, -1);
-        low.resize(n);
-        bel.assign(n, -1);
-        stk.clear();
-        t = sccCnt = 0;
-    }
-    
-    void addEdge(int u, int v) {
-        adj[u].push_back(v);
-    }
-    
-    void dfs(int u) {
-        dfn[u] = low[u] = t ++;
-        stk.push_back(u);
-        
-        for (auto y : adj[u]) {
-            if (dfn[y] == -1) {         // dfn序未分配，代表树边，继续递归
-                dfs(y); 
-                low[u] = min(low[u], low[y]);
-            } else if (bel[y] == -1) {  // dfn序分配了，但是没有分配强连通分量，代表回边
-                low[u] = min(low[u], dfn[y]);
-            }                           // 否则为弃边，不进行考虑
-        }
-        
-        if (dfn[u] == low[u]) {
-            int v;
-            do {
-                v = stk.back();
-                bel[v] = sccCnt;
-                stk.pop_back();
-            } while (v != u);
-            sccCnt ++;
-        }
-    }
-    
-    vector<int> work() {
-        for (int i = 0; i < n; i++) {
-            if (dfn[i] == -1) {
-                dfs(i);
-            }
-        }
-        return bel;
-    }
+	int n;
+	vector<vector<int>> adj;
+	vector<int> dfn, low, bel;
+	vector<int> stk;
+	int t, sccCnt;
+	
+	SCC() {}
+	SCC(int n) {
+		init(n);
+	}
+	
+	void init(int n) {
+		this->n = n;
+		adj.assign(n, {});
+		dfn.assign(n, -1);
+		low.resize(n);
+		bel.assign(n, -1);
+		stk.clear();
+		t = sccCnt = 0;
+	}
+	
+	void addEdge(int u, int v) {
+		adj[u].push_back(v);
+	}
+	
+	void dfs(int u) {
+		dfn[u] = low[u] = t ++;
+		stk.push_back(u);
+		
+		for (auto y : adj[u]) {
+			if (dfn[y] == -1) {         // dfn序未分配，代表树边，继续递归
+				dfs(y); 
+				low[u] = min(low[u], low[y]);
+			} else if (bel[y] == -1) {  // dfn序分配了，但是没有分配强连通分量，代表回边
+				low[u] = min(low[u], dfn[y]);
+			}                           // 否则为弃边，不进行考虑
+		}
+		
+		if (dfn[u] == low[u]) {
+			int v;
+			do {
+				v = stk.back();
+				bel[v] = sccCnt;
+				stk.pop_back();
+			} while (v != u);
+			sccCnt ++;
+		}
+	}
+	
+	vector<int> work() {
+		for (int i = 0; i < n; i++) {
+			if (dfn[i] == -1) {
+				dfs(i);
+			}
+		}
+		return bel;
+	}
 };

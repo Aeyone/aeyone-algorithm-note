@@ -1,0 +1,24 @@
+// 字符串数量统计模版
+const int N = 1e5 + 10;
+int son[N][26], cnt[N];
+int n, idx;
+
+void insert(string s) {
+	int p = 0;
+	for(auto c : s) {
+		int u = c - 'a';
+		if(!son[p][u]) son[p][u] = ++ idx; // 如果没有路 则开辟一条路
+		p = son[p][u];                     // 一定是在有路的前提下，进入下一条路
+	}
+	cnt[p]++;
+}
+
+int query(string s) {
+	int p = 0;
+	for(auto c : s) {
+		int u = c - 'a';
+		if(!son[p][u]) return 0;
+		p = son[p][u];
+	}
+	return cnt[p];
+}

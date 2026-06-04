@@ -1,69 +1,69 @@
 void solve() { // 普通st表
-    int n;
-    cin >> n;
-    vector<int> a(n);
-    for(int i = 0; i < n; i ++){
-        cin >> a[i];
-    }
-    const int pow = 20;
-    vector<array<int, pow + 1>> st(n);
+	int n;
+	cin >> n;
+	vector<int> a(n);
+	for(int i = 0; i < n; i ++){
+		cin >> a[i];
+	}
+	const int pow = 20;
+	vector<array<int, pow + 1>> st(n);
 
-    for(int i = 0; i < n; i ++){    //p = 0时
-        st[i][0] = a[i];
-    }
-    for(int p = 1; n >> p > 0; p ++){   //枚举所有p
-        for(int i = 0; i + (1 << p) <= n; i ++){    //从下标 i 开始的长度为 2^p 的区间大小不能超过n
-            st[i][p] = max(st[i][p - 1], st[i + (1 << (p - 1))][p - 1]);
-        }
-    }
-    auto query = [&](int l, int r)->int{
-        int p = __lg(r - l + 1);
-        return max(st[l][p], st[r - (1 << p) + 1][p]);//取从l开始的2^p格内和以r结尾的2^p格内的最大值
-    };
+	for(int i = 0; i < n; i ++){    //p = 0时
+		st[i][0] = a[i];
+	}
+	for(int p = 1; n >> p > 0; p ++){   //枚举所有p
+		for(int i = 0; i + (1 << p) <= n; i ++){    //从下标 i 开始的长度为 2^p 的区间大小不能超过n
+			st[i][p] = max(st[i][p - 1], st[i + (1 << (p - 1))][p - 1]);
+		}
+	}
+	auto query = [&](int l, int r)->int{
+		int p = __lg(r - l + 1);
+		return max(st[l][p], st[r - (1 << p) + 1][p]);//取从l开始的2^p格内和以r结尾的2^p格内的最大值
+	};
 
-    for(int i = 0; i < n; i ++){
-        for(int j = i; j < n; j ++)
-            cout << "i: " << i + 1 << ' ' << "j: " << j + 1 << ' ' << "MAX: " << query(i, j) << '\n';
-    }
+	for(int i = 0; i < n; i ++){
+		for(int j = i; j < n; j ++)
+			cout << "i: " << i + 1 << ' ' << "j: " << j + 1 << ' ' << "MAX: " << query(i, j) << '\n';
+	}
 }
 
 void solve() { // 树上倍增求lca
-    const int pow = 20;
+	const int pow = 20;
 
-    vector<array<int, pow + 1>> up(n);
-    vector<int> dep(n);
+	vector<array<int, pow + 1>> up(n);
+	vector<int> dep(n);
 
-    auto init = [&](this auto &&self, int u, int fa)->void {
-        up[u][0] = fa;
-        for (int p = 1; dep[u] >> p > 0; p ++) {
-            int la = up[u][p - 1];
-            up[u][p] = up[la][p - 1];
-        }
-        for (auto [v, _] : g[u]) if (v != fa) {
-            dep[v] = dep[u] + 1;
-            self(v, u);
-        }
-    };
-    init(0, -1);
+	auto init = [&](this auto &&self, int u, int fa)->void {
+		up[u][0] = fa;
+		for (int p = 1; dep[u] >> p > 0; p ++) {
+			int la = up[u][p - 1];
+			up[u][p] = up[la][p - 1];
+		}
+		for (auto [v, _] : g[u]) if (v != fa) {
+			dep[v] = dep[u] + 1;
+			self(v, u);
+		}
+	};
+	init(0, -1);
 
-    auto lca = [&](int x, int y)->int {
-        if (dep[x] < dep[y]) {
-            swap(x, y);
-        }
-        for (int p = 20; p >= 0; p --) { // 使x, y跳到同一树高
-            if (dep[x] - (1 << p) >= dep[y]) {
-                x = up[x][p];
-            }
-        }
-        if (x == y) { // 已经相等说明y就是x的祖先
-            return x;
-        }
-        for (int p = 20; p >= 0; p --) { // 一起上跳至差一格到lca
-            if (up[x][p] != up[y][p]) {
-                x = up[x][p];
-                y = up[y][p];
-            }
-        }
-        return up[x][0]; // 最后不要忘记再跳一次 x, y随意，注意区间操作时两个都需要取
-    };
+	auto lca = [&](int x, int y)->int {
+		if (dep[x] < dep[y]) {
+			swap(x, y);
+		}
+		for (int p = 20; p >= 0; p --) { // 使x, y跳到同一树高
+			if (dep[x] - (1 << p) >= dep[y]) {
+				x = up[x][p];
+			}
+		}
+		if (x == y) { // 已经相等说明y就是x的祖先
+			return x;
+		}
+		for (int p = 20; p >= 0; p --) { // 一起上跳至差一格到lca
+			if (up[x][p] != up[y][p]) {
+				x = up[x][p];
+				y = up[y][p];
+			}
+		}
+		return up[x][0]; // 最后不要忘记再跳一次 x, y随意，注意区间操作时两个都需要取
+	};
 }
