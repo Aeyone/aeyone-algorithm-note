@@ -29,6 +29,7 @@
 <summary><strong>字符串</strong></summary>
 
 - [01 - kmp.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/01%20-%20kmp.txt)
+- [02 - 字符串哈希.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/02%20-%20字符串哈希.txt)
 - [02 - 马拉车（Manacher）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/02%20-%20马拉车（Manacher）.txt)
 - [03 - Trie.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/字符串/03%20-%20Trie.txt)
 
