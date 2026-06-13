@@ -12,17 +12,18 @@ using u128 = unsigned __int128;
 
 #ifdef LOCAL 
     int test = 1;
-#else 
-    int test = 0;
+#else
+    int test = 1;
 #endif
 
 const int MOD = 998244353;
 
 void solve() {
+    
 }
 
 signed main() {
-    ios::sync_with_stdio(0),cin.tie(0), cout.tie(0);
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     cout << fixed << setprecision(10);
     int t = 1;
     if (test) cin >> t;

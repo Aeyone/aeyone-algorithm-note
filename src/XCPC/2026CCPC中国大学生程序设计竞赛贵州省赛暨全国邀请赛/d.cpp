@@ -19,17 +19,6 @@ void solve() {
     vector<i64> s(n + 1);
     for (int i = 0; i < n; i ++) cin >> a[i];
 
-	if (k == 0) {
-		int q;
-		cin >> q;
-		while (q --) {
-			i64 x;
-			cin >> x;
-			cout << x * (2 * n - x + 1) / 2 << '\n';
-		}
-		return;
-	}
-
     s[0] = a[0];
     for (int i = 1; i < n; i ++) s[i] = s[i - 1] + a[i];
 

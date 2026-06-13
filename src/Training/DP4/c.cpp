@@ -10,22 +10,22 @@ using u128 = unsigned __int128;
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
-#ifdef LOCAL 
-    int test = 1;
-#else 
-    int test = 0;
-#endif
-
 const int MOD = 998244353;
 
 void solve() {
+    int n1, n2, n3, n4, w1, w2, w3, w4;
+    cin >> n1 >> w1;
+    cin >> n2 >> w2;
+    cin >> n3 >> w3;
+    cin >> n4 >> w4;
+    cout << double(w1) / n1 / 4 + double(w2) / n2 / 4 + double(w3) / n3 / 4 + double(w4) / n4 / 4 << '\n';
 }
 
 signed main() {
-    ios::sync_with_stdio(0),cin.tie(0), cout.tie(0);
+    ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     cout << fixed << setprecision(10);
     int t = 1;
-    if (test) cin >> t;
+    // cin >> t;
     while (t --) {
         solve();
     }
