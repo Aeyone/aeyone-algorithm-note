@@ -41,11 +41,12 @@
 - [01A - 快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01A%20-%20快速幂.txt)
 - [01B - 矩阵快速幂.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/01B%20-%20矩阵快速幂.txt)
 - [02 - 组合计数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/02%20-%20组合计数.txt)
-- [03 - 线性筛.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03%20-%20线性筛.txt)
+- [03A - 线性筛质数.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03A%20-%20线性筛质数.txt)
+- [03B - 米勒-罗宾素数检验（Miller–Rabin）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/03B%20-%20米勒-罗宾素数检验（Miller–Rabin）.txt)
 - [04 - 欧拉函数 & 拓展欧几里得.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/04%20-%20欧拉函数%20&%20拓展欧几里得.txt)
-- [05 - 计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05%20-%20计算几何.txt)
-- [06 - 多项式乘法（NTT）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/06%20-%20多项式乘法（NTT）.txt)
-- [07 - 米勒-罗宾素数检验（Miller–Rabin）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/07%20-%20米勒-罗宾素数检验（Miller–Rabin）.txt)
+- [05 - 高斯消元.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/05%20-%20高斯消元.txt)
+- [07- 多项式乘法（NTT）.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/07-%20多项式乘法（NTT）.txt)
+- [08 - 计算几何.txt](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/Template/数学/08%20-%20计算几何.txt)
 
 </details>
 
