@@ -1,7 +1,7 @@
 #!/bin/bash
 
 touch $1.in $1.out
-g++ -std=c++23 -DLOCAL -Wall -Wextra $1.cpp -o out.o
+g++ -std=c++23 -DLOCAL -Wall -Wextra -O2 $1.cpp -o out.o
 ./out.o < $1.in > $1.out
 
 # 配置path:
