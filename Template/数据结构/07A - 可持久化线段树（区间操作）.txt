@@ -1,0 +1,111 @@
+template<class T>
+struct SegmentTree {
+	struct Info {
+		T sum = 0;
+        friend Info operator+(const Info& l, const Info& r) {
+			return {
+				l.sum + r.sum
+			};
+		}
+	};
+	struct Lazy {
+		T add = 0;
+	};
+
+	int n, idx = 0;
+	vector<Info> info;
+	vector<Lazy> lazy;
+	vector<int> ls, rs;
+
+	SegmentTree(int n = 0) { init(n); }
+
+	void init(int n) {
+		this->n = n;
+		const int m = 1e5 * 70;
+		info.assign(m, Info());
+		lazy.assign(m, Lazy());
+		ls.assign(m, 0);
+		rs.assign(m, 0);
+	}
+
+	int clone(int p) {
+		int i = ++ idx;
+		info[i] = info[p];
+		lazy[i] = lazy[p];
+		ls[i] = ls[p], rs[i] = rs[p];
+		return i;
+	}
+
+	void apply(int p, T val, int len) {
+		info[p].sum += val * len;
+		lazy[p].add += val;
+	}
+
+	void pushup(int p) {
+		info[p] = info[ls[p]] + info[rs[p]];
+	}
+
+	void pushdown(int p, int lsz, int rsz) {
+		T& tag = lazy[p].add;
+		if (tag != 0) {
+			ls[p] = clone(ls[p]);
+			rs[p] = clone(rs[p]);
+			apply(ls[p], tag, lsz);
+			apply(rs[p], tag, rsz);
+			tag = 0;
+		}
+	}
+
+	int build(int l, int r, const vector<T>& a) {
+        int p = ++ idx;
+		if (l == r) {
+			info[p].sum = a[l];
+		} else {
+            int mid = (l + r) / 2;
+            ls[p] = build(l, mid, a);
+            rs[p] = build(mid + 1, r, a);
+            pushup(p);
+        }
+        return p;
+	}
+
+	int modify(int p, int l, int r, int ql, int qr, T val) {
+        p = clone(p);
+		if (ql <= l && r <= qr) {
+			apply(p, val, r - l + 1);
+		} else {
+            int mid = (l + r) / 2;
+			pushdown(p, mid - l + 1, r - mid);
+            if (ql <= mid) ls[p] = modify(ls[p], l, mid, ql, qr, val);
+            if (qr > mid) rs[p] = modify(rs[p], mid + 1, r, ql, qr, val);
+			pushup(p);
+        }
+        return p;
+	}
+
+	Info query(int p, int l, int r, int ql, int qr) {
+		if (ql <= l && r <= qr) {
+			return info[p];
+		}
+		Info res {};
+		int mid = (l + r) / 2;
+		pushdown(p, mid - l + 1, r - mid); 
+		if (ql <= mid) res = res + query(ls[p], l, mid, ql, qr);
+		if (qr > mid) res = res + query(rs[p], mid + 1, r, ql, qr);
+		return res;	
+	}
+
+	int build(const vector<T>& a) {
+		return build(1, n, a);
+	}
+
+    // p为要修改的版本的头编号，返回更改后版本的头编号
+	int modify(int p, int ql, int qr, T val) { 
+		return modify(p, 1, n, ql, qr, val);
+	}
+
+	// 注意：因为查询需要pushdown操作，每次查询也会产生logn个新节点
+	Info query(int p, int ql, int qr) {
+		return query(p, 1, n, ql, qr);
+	}
+};
