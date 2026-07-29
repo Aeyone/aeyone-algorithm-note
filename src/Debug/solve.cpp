@@ -10,73 +10,30 @@ using u128 = unsigned __int128;
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
+#ifdef LOCAL 
+    int test = 1;
+#else
+    int test = 1;
+#endif
+
 const int MOD = 998244353;
 
-ostream& operator<<(ostream &os, __int128 n) {
-    string s;
-    while(n) {
-        s += '0' + n % 10;
-        n /= 10;
-    }
-    reverse(s.begin(), s.end());
-    if (s.size() == 0) {
-        s = "0";
-    }
-    return os << s;
-}
-
-
 void solve() {
-    int n, k;
-    cin >> n >> k;
-    vector g(n, vector<int>(n));
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    int bit[32] {};
     for (int i = 0; i < n; i ++) {
-        for (int j = 0; j < n; j ++) {
-            cin >> g[i][j];
+        cin >> a[i];
+        for (int j = 0; a[i] >> j > 0; j ++) {
+            bit[j] += (a[i] >> j & 1);
         }
     }
-    vector dp(n, vector<i64>(1 << n));
-    vector<vector<int>> mask(n + 1);
-    for (int i = 0; i < 1 << n; i ++) {
-        mask[__builtin_popcount(i)].push_back(i);
-    }
-
-    for (int i = 0; i < n; i ++) {
-        dp[i][1 << i] = 1;
-    }
-    for (int len = 1; len < n; len ++) {
-        for (auto e : mask[len]) {
-            for (int u = 0; u < n; u ++) {
-                if (!(e >> u & 1)) {
-                    continue;
-                }
-                for (int v = 0; v < n; v ++) {
-                    if (e >> v & 1 || !g[u][v]) {
-                        continue;
-                    }
-                    dp[v][e | (1 << v)] += dp[u][e];
-                }
-            }
-        }
-    }
-    vector<i64> cnt(1 << n);
-    for (int i = 0; i < 1 << n; i ++) {
-        for (int j = 0; j < n; j ++) {
-            cnt[i] += dp[j][i];
-        }
-        cnt[i] /= 2;
-    }
-
-    i128 ans = 0;
-    for (auto e : mask[k]) {
-        i128 sum = 0;
-        for (int sub = e; sub > 0; sub = (sub - 1) & e) {
-            sum += cnt[sub] * (__builtin_popcount(sub) - 1);
-        }
-        ans = max(ans, sum);
-    }
-    if (ans > 1e18) {
-        cout << "x" << '\n';
+    i64 ans = 0;
+    for (int i = 0; i < 30; i ++) {
+        if (!bit[i]) continue;
+        if (bit[i] & 1) ans += (1ll << i);
+        else ans += (2ll << i);
     }
     cout << ans << '\n';
 }
@@ -84,8 +41,9 @@ void solve() {
 signed main() {
     ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
     cout << fixed << setprecision(10);
-    int _ = 1;
-    while (_ --) {
+    int t = 1;
+    if (test) cin >> t;
+    while (t --) {
         solve();
     }
 }
