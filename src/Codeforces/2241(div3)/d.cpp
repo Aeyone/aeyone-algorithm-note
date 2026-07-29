@@ -13,6 +13,19 @@ using u128 = unsigned __int128;
 const int MOD = 998244353;
 
 void solve() {
+	int n;
+	cin >> n;
+	vector<int> a(n), b(n);
+	for (int i = 0; i < n; i ++) cin >> a[i];
+	for (int i = 0; i < n; i ++) cin >> b[i];
+
+	bool ok = true;
+	i64 sum = 0;
+	for (int i = 0; i < n; i ++) {
+		sum += b[i] - a[i];
+		ok &= (sum >= 0);
+	}
+	cout << (ok ? "YES" : "NO") << '\n';
 }
 
 signed main() {
