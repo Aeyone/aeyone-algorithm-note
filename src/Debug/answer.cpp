@@ -13,30 +13,43 @@ using u128 = unsigned __int128;
 #ifdef LOCAL 
     int test = 1;
 #else
-    int test = 1;
+    int test = 0;
 #endif
 
 const int MOD = 998244353;
 
-void solve() {
+void solve () {
     int n;
     cin >> n;
-    vector<int> a(n), b(n);
-    for (int i = 0; i < n; i ++) {
+    vector<int> a (n);
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
-        b[i] = (i ? max(b[i - 1], a[i]) : a[i]);
     }
-    for (int i = 1; i < n; i ++) {
-        vector<int> t(n);
-        for (int j = 0; j < n; j ++) {
-            t[j] = (j ? max(t[j - 1], a[(i + j) % n]) : a[(i + j) % n]);
+
+    int len = n / 4;
+    int ans = 0;
+
+    for (int _i = 0;_i < (1 << (len - 1));_i++) {
+        vector<int> cnt (n + 1);
+        int i = _i | (1 << (len - 1));
+        bool ok = true;
+        for (int j = 0;j < n;j++) {
+            cnt[a[j]]++;
+            if (j % 4 == 3) {
+                int idx = j / 4;
+                if (i >> idx & 1) {
+                    for (int k = 1;k <= n;k++) {
+                        ok &= (cnt[k] == 4 || cnt[k] == 0);
+                        cnt[k] = 0;
+                    }
+                }
+            }
         }
-        if (t < b) b = t;
+        ans += ok;
     }
-    for (int i = 0; i < n; i ++) {
-        cout << b[i] << ' ';
-    }
-    cout << '\n';
+    cout << ans << "\n";
+
+
 }
 
 signed main() {
