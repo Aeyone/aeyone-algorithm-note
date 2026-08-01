@@ -102,7 +102,7 @@ struct SegmentTree{
 	}
 	void setmax(int p, int l, int r, int L, int R, int k){
 		if(L > r || R < l || info[p].mn > k){   //第一个剪枝：最小值大于k不操作
-			return 0;
+			return;
 		}
 		if(L <= l && r <= R && info[p].mn2 > k){//第二个剪枝：l~r被ql~qr完全包含时，且次小值大于k，只需要对最小值添加懒标记
 			applyAdd(p, k - info[p].mn, 0);

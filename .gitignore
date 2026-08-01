@@ -14,3 +14,6 @@ CLAUDE.md
 *.toc
 *.pdf
 _minted
+src/Debug/*.in
+src/Debug/*.out
+src/Debug/*.log
