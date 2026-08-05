@@ -290,6 +290,7 @@
 |unknown|[Even or Odd Spanning Tree](https://qoj.ac/contest/1780/problem/8941?v=1)|prim最小生成树 + lca树上倍增维护树上区间最值，注意prim和dijk生成的最小生成树和最短路径树的区别|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20China%20Zhejiang%20Province%20Programming%20Contest/j.cpp)|
 |unknown|[The Quest for El Dorado](https://qoj.ac/contest/1802/problem/9431)|Dijkstra最短路 + RMQ问题，难点在于想到状态如何定义以及怎么跑最短路|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/The%202024%20ICPC%20Kunming%20Invitational%20Contest/j.cpp)|
 |cf*2300|[Jerry and Tom](https://codeforces.com/contest/2188/problem/E)|利用Map维护启发式合并，难点在于贡献的计算|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Codeforces/2188(div2)/e.cpp)|
+|unknown|[toys](https://acm.hdu.edu.cn/contest/problem?cid=1231&pid=1004)|2026杭电多校3，最小费用最大流模版|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/NowCoder/2026“钉耙编程”中国大学生算法设计暑期联赛（3）/d.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 ### 字符串
