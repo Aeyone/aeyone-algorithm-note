@@ -18,20 +18,6 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
-string to_string(i64 num, int base){
-	if(num == 0){
-		return "0";
-	}
-	string idx = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	string res;
-	while(num){
-		res += idx[num % base];
-		num /= base;
-	}
-	reverse(res.begin(), res.end());
-	return res;
-}
-
 void solve() {
     int n, m;
     cin >> n >> m;
