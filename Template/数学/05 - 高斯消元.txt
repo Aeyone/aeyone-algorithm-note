@@ -2,42 +2,42 @@ const double EPS = 1e-12;
 
 // 0 = 无解, 1 = 唯一解, 2 = 无穷多解
 int gauss(vector<vector<double>> a, vector<double>& ans) {
-    int n = a.size(), m = a[0].size() - 1; // 变量个数
-    int row = 0;
-    ans.assign(m, 0);
+	int n = a.size(), m = a[0].size() - 1; // 变量个数
+	int row = 0;
+	ans.assign(m, 0);
 
-    for (int col = 0; col < m && row < n; col ++) {
-        int max = row; // 找绝对值最大作为主元
-        for (int i = row + 1; i < n; i++) {
-            if (abs(a[i][col]) > abs(a[max][col])) {
-                max = i;
-            }
-        }
-        if (abs(a[max][col]) < EPS) continue;
-        swap(a[row], a[max]); 
+	for (int col = 0; col < m && row < n; col ++) {
+		int max = row; // 找绝对值最大作为主元
+		for (int i = row + 1; i < n; i++) {
+			if (abs(a[i][col]) > abs(a[max][col])) {
+				max = i;
+			}
+		}
+		if (abs(a[max][col]) < EPS) continue;
+		swap(a[row], a[max]); 
 
-        double div = a[row][col]; // 归一
-        for (int j = col; j <= m; j ++) a[row][j] /= div; 
+		double div = a[row][col]; // 归一
+		for (int j = col; j <= m; j ++) a[row][j] /= div; 
 
-        for (int i = 0; i < n; i ++) { // 将其他行的当前列上的数化为0
-            if (i != row && abs(a[i][col]) > EPS) {
-                double t = a[i][col];
-                for (int j = col; j <= m; j ++) {
-                    a[i][j] -= t * a[row][j];
-                }
-            }
-        }
-        row ++;
-    }
+		for (int i = 0; i < n; i ++) { // 将其他行的当前列上的数化为0
+			if (i != row && abs(a[i][col]) > EPS) {
+				double t = a[i][col];
+				for (int j = col; j <= m; j ++) {
+					a[i][j] -= t * a[row][j];
+				}
+			}
+		}
+		row ++;
+	}
 
-    for (int i = row; i < n; i ++) { // 检查无解：0 0 0 ... = 非 0
-        if (abs(a[i][m]) > EPS) {
-            return 0;
-        }
-    }
+	for (int i = row; i < n; i ++) { // 检查无解：0 0 0 ... = 非 0
+		if (abs(a[i][m]) > EPS) {
+			return 0;
+		}
+	}
 
-    if (row < m) return 2; // 自由元存在，无穷多解
+	if (row < m) return 2; // 自由元存在，无穷多解
 
-    for (int i = 0; i < m; i++) ans[i] = a[i][m];
-    return 1;
+	for (int i = 0; i < m; i++) ans[i] = a[i][m];
+	return 1;
 }

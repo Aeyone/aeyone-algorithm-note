@@ -2,7 +2,7 @@ template<class T>
 struct SegmentTree {
 	struct Info {
 		T sum = 0;
-        friend Info operator+(const Info& l, const Info& r) {
+		friend Info operator+(const Info& l, const Info& r) {
 			return {
 				l.sum + r.sum
 			};
@@ -57,30 +57,30 @@ struct SegmentTree {
 	}
 
 	int build(int l, int r, const vector<T>& a) {
-        int p = ++ idx;
+		int p = ++ idx;
 		if (l == r) {
 			info[p].sum = a[l];
 		} else {
-            int mid = (l + r) / 2;
-            ls[p] = build(l, mid, a);
-            rs[p] = build(mid + 1, r, a);
-            pushup(p);
-        }
-        return p;
+			int mid = (l + r) / 2;
+			ls[p] = build(l, mid, a);
+			rs[p] = build(mid + 1, r, a);
+			pushup(p);
+		}
+		return p;
 	}
 
 	int modify(int p, int l, int r, int ql, int qr, T val) {
-        p = clone(p);
+		p = clone(p);
 		if (ql <= l && r <= qr) {
 			apply(p, val, r - l + 1);
 		} else {
-            int mid = (l + r) / 2;
+			int mid = (l + r) / 2;
 			pushdown(p, mid - l + 1, r - mid);
-            if (ql <= mid) ls[p] = modify(ls[p], l, mid, ql, qr, val);
-            if (qr > mid) rs[p] = modify(rs[p], mid + 1, r, ql, qr, val);
+			if (ql <= mid) ls[p] = modify(ls[p], l, mid, ql, qr, val);
+			if (qr > mid) rs[p] = modify(rs[p], mid + 1, r, ql, qr, val);
 			pushup(p);
-        }
-        return p;
+		}
+		return p;
 	}
 
 	Info query(int p, int l, int r, int ql, int qr) {
@@ -99,7 +99,7 @@ struct SegmentTree {
 		return build(1, n, a);
 	}
 
-    // p为要修改的版本的头编号，返回更改后版本的头编号
+	// p为要修改的版本的头编号，返回更改后版本的头编号
 	int modify(int p, int ql, int qr, T val) { 
 		return modify(p, 1, n, ql, qr, val);
 	}

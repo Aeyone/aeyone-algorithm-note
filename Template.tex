@@ -87,16 +87,18 @@
 \begin{document}
 
 % === 封面 ===
+\hypersetup{pageanchor=false}
 \begin{titlepage}
 \thispagestyle{empty}
 \vspace*{\fill}
 \begin{center}
-    {\CJKfamily{zhhei}\Huge 算法竞赛模版}\\[1cm]
+    {\CJKfamily{zhhei}\Huge 算法竞赛模板}\\[1cm]
     {\Large Aeyone}\\[0.5cm]
     {\large \today}
 \end{center}
 \vspace*{\fill}
 \end{titlepage}
+\hypersetup{pageanchor=true}
 
 \tableofcontents
 \newpage
@@ -105,9 +107,8 @@
 
 \section{一些杂碎}
 
-\subsection{主模版}
-\inputminted{cpp}{Template/一些杂碎/01 - main.txt}
-
+\subsection{主模板}
+\inputminted{cpp}{\detokenize{Template/一些杂碎/01 - main.txt}}
 
 \subsection{run.sh}
 \begin{minted}{bash}
@@ -118,25 +119,25 @@ g++ -std=c++23 -Wall -Wextra $1.cpp -o out.o
 \end{minted}
 
 \subsection{对拍器}
-\inputminted{cpp}{src/Debug/run.cpp}
+\inputminted{cpp}{\detokenize{src/Debug/run.cpp}}
 
 \columnbreak
 
 \subsection{随机化}
-\begin{minted}{cpp}
+\begin{minted}[breakanywhere=true]{cpp}
 static mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 #define rand(l, r) (uniform_int_distribution<long long>((l),(r))(rng))
 shuffle(a.begin(), a.end(), rng) // 打乱一个数组
 \end{minted}
 
-\subsection{线性求 \(1 \sim n\)  逆元}
-\inputminted{cpp}{Template/一些杂碎/02B - 线性求1~n逆元.txt}
+\subsection{\texorpdfstring{线性求 \(1 \sim n\) 逆元}{线性求 1 至 n 逆元}}
+\inputminted{cpp}{\detokenize{Template/一些杂碎/02B - 线性求1~n逆元.txt}}
 
 \subsection{进制转换}
-\inputminted{cpp}{Template/一些杂碎/03 - 进制转换.txt}
+\inputminted{cpp}{\detokenize{Template/一些杂碎/03 - 进制转换.txt}}
 
 \subsection{int128 输出流自定义}
-\inputminted{cpp}{Template/一些杂碎/04 - int128 输出流自定义.txt}
+\inputminted{cpp}{\detokenize{Template/一些杂碎/04 - int128 输出流自定义.txt}}
 
 \end{spacing}
 \end{multicols}
@@ -146,23 +147,34 @@ shuffle(a.begin(), a.end(), rng) // 打乱一个数组
 \section{图论}
 
 \subsection{强连通分量缩点（SCC）}
-\inputminted{cpp}{Template/图论/01 - 强连通分量缩点（SCC）.txt}
+\inputminted{cpp}{\detokenize{Template/图论/01 - 强连通分量缩点（SCC）.txt}}
 
 \newpage
 \subsection{树链剖分（HLD）}
-\inputminted{cpp}{Template/图论/02 - 树链剖分（HLD）.txt}
+\inputminted{cpp}{\detokenize{Template/图论/02 - 树链剖分（HLD）.txt}}
+
+\newpage
+\subsection{最大流（Dinic）}
+\inputminted{cpp}{\detokenize{Template/图论/03 - 最大流（Dinic）.txt}}
+
+\newpage
+\subsection{费用流（最小费用流）}
+\inputminted{cpp}{\detokenize{Template/图论/04 - 费用流（最小费用流）.txt}}
 
 \newpage
 \section{字符串}
 
 \subsection{KMP}
-\inputminted{cpp}{Template/字符串/01 - KMP.txt}
+\inputminted{cpp}{\detokenize{Template/字符串/01 - KMP.txt}}
 
 \subsection{马拉车（Manacher）}
-\inputminted{cpp}{Template/字符串/02 - 马拉车（Manacher）.txt}
+\inputminted{cpp}{\detokenize{Template/字符串/02 - 马拉车（Manacher）.txt}}
 
 \subsection{Trie}
-\inputminted{cpp}{Template/字符串/03 - Trie.txt}
+\inputminted{cpp}{\detokenize{Template/字符串/03 - Trie.txt}}
+
+\subsection{字符串哈希}
+\inputminted{cpp}{\detokenize{Template/字符串/04 - 字符串哈希.txt}}
 
 \newpage
 
@@ -173,24 +185,32 @@ shuffle(a.begin(), a.end(), rng) // 打乱一个数组
 \section{数学}
 
 \subsection{快速幂}
-\inputminted{cpp}{Template/数学/01A - 快速幂.txt}
+\inputminted{cpp}{\detokenize{Template/数学/01A - 快速幂.txt}}
 
 \subsection{矩阵快速幂}
-\inputminted{cpp}{Template/数学/01B - 矩阵快速幂.txt}
+\inputminted{cpp}{\detokenize{Template/数学/01B - 矩阵快速幂.txt}}
 \columnbreak
 
 \subsection{组合计数}
-\inputminted{cpp}{Template/数学/02 - 组合计数.txt}
+\inputminted{cpp}{\detokenize{Template/数学/02 - 组合计数.txt}}
 \columnbreak
 
-\subsection{线性筛}
-\inputminted{cpp}{Template/数学/03 - 线性筛.txt}
+\subsection{根号求欧拉函数}
+\inputminted{cpp}{\detokenize{Template/数学/03A - 根号求欧拉函数.txt}}
 
-\subsection{欧拉函数 \& 拓展欧几里得}
-\inputminted{cpp}{\detokenize{Template/数学/04 - 欧拉函数 & 拓展欧几里得.txt}}
+\subsection{线性筛求欧拉函数（Euler 筛法）}
+\inputminted{cpp}{\detokenize{Template/数学/03B - 线性筛求欧拉函数（Euler筛法）.txt}}
 
-\subsection{计算几何}
-\inputminted{cpp}{Template/数学/05 - 计算几何.txt}
+\subsection{拓展欧几里得}
+\inputminted{cpp}{\detokenize{Template/数学/04 - 拓展欧几里得.txt}}
+
+\columnbreak
+
+\subsection{高斯消元}
+\inputminted{cpp}{\detokenize{Template/数学/05 - 高斯消元.txt}}
+
+\subsection{线性基（Basis）}
+\inputminted{cpp}{\detokenize{Template/数学/06 - 线性基（Basis）.txt}}
 
 \end{spacing}
 \end{multicols}
@@ -199,11 +219,15 @@ shuffle(a.begin(), a.end(), rng) // 打乱一个数组
 \begin{spacing}{0.6}
 
 \newpage
+\subsection{计算几何}
+\inputminted{cpp}{\detokenize{Template/数学/07 - 计算几何.txt}}
+
+\newpage
 \subsection{多项式乘法（NTT）}
-\inputminted{cpp}{Template/数学/06 - 多项式乘法（NTT）.txt}
+\inputminted{cpp}{\detokenize{Template/数学/08- 多项式乘法（NTT）.txt}}
 
 \subsection{米勒-罗宾素数检验（Miller–Rabin）}
-\inputminted{cpp}{Template/数学/07 - 米勒-罗宾素数检验（Miller–Rabin）.txt}
+\inputminted{cpp}{\detokenize{Template/数学/09 - 米勒-罗宾素数检验（Miller–Rabin）.txt}}
 \newpage
 
 \end{spacing}
@@ -214,37 +238,49 @@ shuffle(a.begin(), a.end(), rng) // 打乱一个数组
 \section{数据结构}
 
 \subsection{并查集（DSU）}
-\inputminted{cpp}{Template/数据结构/01 - 并查集（DSU）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/01 - 并查集（DSU）.txt}}
 
 \subsection{普通莫队}
-\inputminted{cpp}{Template/数据结构/02 - 普通莫队.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/02 - 普通莫队.txt}}
 
 \subsection{树状数组（FenwickTree）}
-\inputminted{cpp}{Template/数据结构/03 - 树状数组（FenwickTree）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/03 - 树状数组（FenwickTree）.txt}}
 \columnbreak
 
 \subsection{ST表（SparseTable）}
-\inputminted{cpp}{Template/数据结构/04 - ST表（SparseTable）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/04 - ST表（SparseTable）.txt}}
 \columnbreak
 
 \subsection{线段树（区间合并，不带修）}
-\inputminted{cpp}{Template/数据结构/05 - 线段树（区间合并，不带修）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/05 - 线段树（区间合并，不带修）.txt}}
 \columnbreak
 
 \subsection{懒标记线段树（基础区间操作）}
-\inputminted{cpp}{Template/数据结构/06A - 懒标记线段树（基础区间操作）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/06A - 懒标记线段树（基础区间操作）.txt}}
 \columnbreak
 
 \subsection{懒标记线段树（双重区间操作）}
-\inputminted{cpp}{Template/数据结构/06B - 懒标记线段树（双重区间操作）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/06B - 懒标记线段树（双重区间操作）.txt}}
 \columnbreak
 
 \subsection{懒标记线段树（动态开点+区间操作）}
-\inputminted{cpp}{Template/数据结构/06C - 懒标记线段树（动态开点+区间操作）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/06C - 懒标记线段树（动态开点+区间操作）.txt}}
+\columnbreak
+
+\subsection{可持久化线段树（单点操作）}
+\inputminted{cpp}{\detokenize{Template/数据结构/07A - 可持久化线段树（单点操作）.txt}}
+\columnbreak
+
+\subsection{可持久化线段树（区间操作）}
+\inputminted{cpp}{\detokenize{Template/数据结构/07A - 可持久化线段树（区间操作）.txt}}
 \columnbreak
 
 \subsection{吉如一线段树（区间求和）}
-\inputminted{cpp}{Template/数据结构/07A - 吉如一线段树（区间求和）.txt}
+\inputminted{cpp}{\detokenize{Template/数据结构/08A - 吉如一线段树（区间求和）.txt}}
+\columnbreak
+
+\subsection{吉如一线段树（区间求和+区间历史最值）}
+\inputminted{cpp}{\detokenize{Template/数据结构/08B - 吉如一线段树（区间求和+区间历史最值）.txt}}
 
 \end{spacing}
 \end{multicols}

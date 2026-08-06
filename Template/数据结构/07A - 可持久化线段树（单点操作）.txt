@@ -2,7 +2,7 @@ template<class T>
 struct SegmentTree {
 	struct Info {
 		T val = 0;
-        int ls = 0, rs = 0;
+		int ls = 0, rs = 0;
 	};
 
 	int n, idx = 0;
@@ -16,28 +16,28 @@ struct SegmentTree {
 	}
 
 	int build(int l, int r, const vector<T>& a) {
-        int rt = ++ idx;
+		int rt = ++ idx;
 		if (l == r) {
 			info[rt].val = a[l];
 		} else {
-            int mid = (l + r) / 2;
-            info[rt].ls = build(l, mid, a);
-            info[rt].rs = build(mid + 1, r, a);
-        }
-        return rt;
+			int mid = (l + r) / 2;
+			info[rt].ls = build(l, mid, a);
+			info[rt].rs = build(mid + 1, r, a);
+		}
+		return rt;
 	}
 
 	int modify(int p, int l, int r, int qi, T val) {
-        int rt = ++ idx;
-        info[rt] = info[p];
+		int rt = ++ idx;
+		info[rt] = info[p];
 		if (l == r) {
-            info[rt].val += val;
+			info[rt].val += val;
 		} else {
-            int mid = (l + r) / 2;
-            if (qi <= mid) info[rt].ls = modify(info[rt].ls, l, mid, qi, val);
-            if (qi > mid) info[rt].rs = modify(info[rt].rs, mid + 1, r, qi, val);
-        }
-        return rt;
+			int mid = (l + r) / 2;
+			if (qi <= mid) info[rt].ls = modify(info[rt].ls, l, mid, qi, val);
+			if (qi > mid) info[rt].rs = modify(info[rt].rs, mid + 1, r, qi, val);
+		}
+		return rt;
 	}
 
 	Info query(int p, int l, int r, int qi) {
@@ -53,7 +53,7 @@ struct SegmentTree {
 		return build(1, n, a);
 	}
 
-    // p为要修改的版本的头编号，返回更改后版本的头编号
+	// p为要修改的版本的头编号，返回更改后版本的头编号
 	int modify(int p, int qi, T val) { 
 		return modify(p, 1, n, qi, val);
 	}

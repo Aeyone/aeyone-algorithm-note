@@ -1,74 +1,74 @@
 struct MCFGraph {
-    struct Edge {
-        int v, c, f;
-        Edge(int v, int c, int f) : v(v), c(c), f(f) {}
-    };
-    const int n;
-    vector<Edge> e;
-    vector<vector<int>> g;
-    vector<i64> h, dis;
-    vector<int> pre;
+	struct Edge {
+		int v, c, f;
+		Edge(int v, int c, int f) : v(v), c(c), f(f) {}
+	};
+	const int n;
+	vector<Edge> e;
+	vector<vector<int>> g;
+	vector<i64> h, dis;
+	vector<int> pre;
 
-    MCFGraph(int n) : n(n), g(n) {}
+	MCFGraph(int n) : n(n), g(n) {}
 
-    bool dijkstra(int s, int t) {
-        dis.assign(n, INFLL);
-        pre.assign(n, -1);
-        using PLI = pair<i64, int>;
-        priority_queue<PLI, vector<PLI>, greater<PLI>> que;
-        dis[s] = 0;
-        que.emplace(0, s);
-        while (!que.empty()) {
-            i64 d = que.top().first;
-            int u = que.top().second;
-            que.pop();
-            if (dis[u] < d) continue;
-            for (int i : g[u]) {
-                int v = e[i].v;
-                int c = e[i].c;
-                int f = e[i].f;
-                if (c > 0 && dis[v] > d + h[u] - h[v] + f) {
-                    dis[v] = d + h[u] - h[v] + f;
-                    pre[v] = i;
-                    que.emplace(dis[v], v);
-                }
-            }
-        }
-        return dis[t] != INFLL;
-    }
-    
-    // 当前是求可行流，若求最大流，需要去掉f < 0的部分
-    void addEdge(int u, int v, int c, int f) {
-        if (f < 0) { 
-            g[u].push_back(e.size());
-            e.emplace_back(v, 0, f);
-            g[v].push_back(e.size());
-            e.emplace_back(u, c, -f);
-        } else {
-            g[u].push_back(e.size());
-            e.emplace_back(v, c, f);
-            g[v].push_back(e.size());
-            e.emplace_back(u, 0, -f);
-        }
-    }
+	bool dijkstra(int s, int t) {
+		dis.assign(n, INFLL);
+		pre.assign(n, -1);
+		using PLI = pair<i64, int>;
+		priority_queue<PLI, vector<PLI>, greater<PLI>> que;
+		dis[s] = 0;
+		que.emplace(0, s);
+		while (!que.empty()) {
+			i64 d = que.top().first;
+			int u = que.top().second;
+			que.pop();
+			if (dis[u] < d) continue;
+			for (int i : g[u]) {
+				int v = e[i].v;
+				int c = e[i].c;
+				int f = e[i].f;
+				if (c > 0 && dis[v] > d + h[u] - h[v] + f) {
+					dis[v] = d + h[u] - h[v] + f;
+					pre[v] = i;
+					que.emplace(dis[v], v);
+				}
+			}
+		}
+		return dis[t] != INFLL;
+	}
+	
+	// 当前是求可行流，若求最大流，需要去掉f < 0的部分
+	void addEdge(int u, int v, int c, int f) {
+		if (f < 0) { 
+			g[u].push_back(e.size());
+			e.emplace_back(v, 0, f);
+			g[v].push_back(e.size());
+			e.emplace_back(u, c, -f);
+		} else {
+			g[u].push_back(e.size());
+			e.emplace_back(v, c, f);
+			g[v].push_back(e.size());
+			e.emplace_back(u, 0, -f);
+		}
+	}
 
-    pair<int, i64> flow(int s, int t) {
-        int flow = 0;
-        i64 cost = 0;
-        h.assign(n, 0);
-        while (dijkstra(s, t)) {
-            for (int i = 0; i < n; i ++) if (dis[i] != INFLL) {
-                h[i] += dis[i];
-            }
-            int aug = INF;
-            for (int i = t; i != s; i = e[pre[i] ^ 1].v) aug = min(aug, e[pre[i]].c);
-            for (int i = t; i != s; i = e[pre[i] ^ 1].v) {
-                e[pre[i]].c -= aug;
-                e[pre[i] ^ 1].c += aug;
-            }
-            flow += aug;
-            cost += i64(aug) * h[t];
-        }
-        return {flow, cost};
-    }
+	pair<int, i64> flow(int s, int t) {
+		int flow = 0;
+		i64 cost = 0;
+		h.assign(n, 0);
+		while (dijkstra(s, t)) {
+			for (int i = 0; i < n; i ++) if (dis[i] != INFLL) {
+				h[i] += dis[i];
+			}
+			int aug = INF;
+			for (int i = t; i != s; i = e[pre[i] ^ 1].v) aug = min(aug, e[pre[i]].c);
+			for (int i = t; i != s; i = e[pre[i] ^ 1].v) {
+				e[pre[i]].c -= aug;
+				e[pre[i] ^ 1].c += aug;
+			}
+			flow += aug;
+			cost += i64(aug) * h[t];
+		}
+		return {flow, cost};
+	}
 };
