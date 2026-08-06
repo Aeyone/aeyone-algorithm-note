@@ -1,0 +1,43 @@
+struct Basis {
+    const int N = 20;
+    bitset<N> a[N];
+    int t[N];
+
+    Basis() {
+        fill(t, t + N, -1);
+    }
+
+    void add(bitset<N> x, int y = INF) {
+        for (int i = N - 1; i >= 0; i--) {
+            if (x[i]) {
+                if (y > t[i]) {
+                    swap(a[i], x);
+                    swap(t[i], y);
+                }
+                x ^= a[i];
+            }
+        }
+    }
+
+    // 只使用编号>=y的数，求最大异或和
+    bitset<N> queryMax(int y = 0) const {
+        bitset<N> ans;
+
+        for (int i = N - 1; i >= 0; i--) {
+            if (t[i] >= y && !ans[i]) {
+                ans ^= a[i];
+            }
+        }
+        return ans;
+    }
+
+    // 判断编号>=y的数能否异或得到 x
+    bool contains(bitset<N> x, int y = 0) const {
+        for (int i = N - 1; i >= 0; i--) {
+            if (x[i] && t[i] >= y) {
+                x ^= a[i];
+            }
+        }
+        return x.none();
+    }
+};

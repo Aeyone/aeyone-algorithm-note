@@ -1,0 +1,26 @@
+vector<int> minp, p, phi;
+ 
+void sieve(int n) {
+	minp.assign(n + 1, 0);
+	phi.assign(n + 1, 0);
+	p.clear();
+	for (int i = 2; i <= n; i++) {
+		if (minp[i] == 0) {
+			minp[i] = i;
+			phi[i] = i - 1;
+			p.push_back(i);
+		}
+		for (auto e : p) {
+			if (1ll * i * e > n) {
+				break;
+			}
+			minp[i * e] = e;
+			if (e == minp[i]) {
+				phi[i * p] = phi[i] * p;
+				break;
+			} else {
+				phi[i * p] = phi[i] * (p - 1);
+			}
+		}
+	}
+}

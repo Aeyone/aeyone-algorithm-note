@@ -36,12 +36,20 @@ struct MCFGraph {
         }
         return dis[t] != INFLL;
     }
-
+    
+    // 当前是求可行流，若求最大流，需要去掉f < 0的部分
     void addEdge(int u, int v, int c, int f) {
-        g[u].push_back(e.size());
-        e.emplace_back(v, c, f);
-        g[v].push_back(e.size());
-        e.emplace_back(u, 0, -f);
+        if (f < 0) { 
+            g[u].push_back(e.size());
+            e.emplace_back(v, 0, f);
+            g[v].push_back(e.size());
+            e.emplace_back(u, c, -f);
+        } else {
+            g[u].push_back(e.size());
+            e.emplace_back(v, c, f);
+            g[v].push_back(e.size());
+            e.emplace_back(u, 0, -f);
+        }
     }
 
     pair<int, i64> flow(int s, int t) {

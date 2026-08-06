@@ -1,0 +1,13 @@
+i64 phi(i64 x) {
+	i64 res = x;
+	for (int i = 2; i <= x / i; i ++) {
+		if (x % i == 0) {
+			res -= res / i;
+			while (x % i == 0) x /= i;
+		}
+	}
+	if (x > 1) {
+		res -= res / x;
+	}
+	return res;
+}

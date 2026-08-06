@@ -1,0 +1,23 @@
+/*
+设：
+a * x + b * y = c
+d = exgcd(a, b, x, y)
+k = c / d
+dx = b / d
+dy = a / d
+
+有解： d | c
+一组解：x0 = x*k, y0 = x*k
+通解：x' = x0 + Z * dx, y' = y0 + Z + dy
+最小正整数解：x = (x % dx + dx) % dx
+*/
+int exgcd(int a, int b, int& x, int& y) {
+	if (!b) {
+		x = 1, y = 0;
+		return a;
+	}
+	int d = exgcd(b, a % b, x, y);
+	int X = x;
+	x = y, y = X - (a / b) * y;
+	return d;
+}
