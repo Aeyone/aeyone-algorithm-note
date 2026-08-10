@@ -1,17 +1,16 @@
-/*
-复杂度：V为点数，E为边数，O(V^2 * E)，实际上远比这个小
-e保存残量网络中的所有边。
-对于e[i]：
-i为边编号，to是目标节点的编号，cap为当前残量容量，不保存边的起点
+#include <bits/stdc++.h>
+using namespace std;
 
-建图后的每一轮：
-1、bfs在残量网络上分层，找出当前所有的最短增广路，每次只走cap > 0的边，并且更新出dep数组，dep[i]为为s到i的最少边数。
+using i64 = long long;
+using u64 = unsigned long long;
 
-2、dfs一次性尽量跑完这些最短增广路，每次只走满足cap > 0, dep[v] = dep[u] + 1的边，并且更新出正反边的残量，cur[u]表示当前bfs分层阶段中，节点u的邻接表g[u]已经枚举到哪个位置，不会反复扫描当前分层图中已经确认无法继续贡献流量的邻接边，"当前弧优化"。
+using i128 = __int128;
+using u128 = unsigned __int128;
 
-dfs(u,t,lim)为当前轮允许最多从u向汇点t输送lim单位流的条件下，实际送出了多少流量。
-直到bfs从当前残量网络的s，跑不到汇点t时，停止轮次，根据最大流最小割定理，所有轮dfs的总和即为整张图的最大流。
-*/
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 998244353;
 
 template<class T>
 struct Dinic {
@@ -111,3 +110,59 @@ struct Dinic {
 		return a;
 	}
 };
+
+void solve() {
+	int m, n;
+	cin >> m >> n;
+	int s = 0, t = n + m + 1;
+	Dinic<int> d(t + 1);
+
+	int sum = 0;
+	for (int i = 1; i <= m; i ++) {
+		int r;
+		cin >> r;
+		sum += r;
+		d.addEdge(s, i, r);
+		for (int j = 1; j <= n; j ++) {
+			d.addEdge(i, j + m, 1);
+		}
+	}
+
+	for (int i = 1; i <= n; i ++) {
+		int c;
+		cin >> c;
+		d.addEdge(i + m, t, c);
+	}
+
+	int f = d.flow(s, t);
+
+	if (f != sum) {
+		cout << 0 << '\n';
+		return;
+	}
+
+	cout << 1 << '\n';
+	auto es = d.edges();
+	vector<vector<int>> ans(m + 1);
+	for (auto [u, v, c, f] : es) {
+		if (u >= 1 && u <= m && f > 0) {
+			ans[u].push_back(v - m);
+		}
+	}
+	for (int i = 1; i <= m; i ++) {
+		for (auto e : ans[i]) {
+			cout << e << ' ';
+		}
+		cout << '\n';
+	}
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int _ = 1;
+	// cin >> _;
+	while (_ --) {
+		solve();
+	}
+}
