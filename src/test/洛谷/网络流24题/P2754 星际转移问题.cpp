@@ -12,6 +12,47 @@ using u128 = unsigned __int128;
 
 const int MOD = 998244353;
 
+struct DSU {
+	vector<int> f, siz;
+	
+	DSU() {}
+	DSU(int n) {
+		init(n);
+	}
+	
+	void init(int n) {
+		f.resize(n);
+		iota(f.begin(), f.end(), 0);
+		siz.assign(n, 1);
+	}
+	
+	int find(int x) {
+		while (x != f[x]) {
+			x = f[x] = f[f[x]];
+		}
+		return x;
+	}
+	
+	bool cmp(int x, int y) {
+		return find(x) == find(y);
+	}
+	
+	bool merge(int x, int y) {//将y合并至x中
+		x = find(x);
+		y = find(y);
+		if (x == y) {
+			return false;
+		}
+		siz[x] += siz[y];
+		f[y] = x;
+		return true;
+	}
+	
+	int size(int x) {
+		return siz[find(x)];
+	}
+};
+
 template<class T>
 struct Dinic {
 	struct Edge {
@@ -27,17 +68,15 @@ struct Dinic {
 
 	Dinic() {}
 	Dinic(int n) {
-		e.clear();
-		update(n);
+		init(n);
 	}
 	
-	void update(int n) {
+	void init(int n) {
 		this->n = n;
-		while (g.size() < n) {
-			g.push_back({});
-			cur.push_back(0);
-			dep.push_back(0);
-		}
+		e.clear();
+		g.assign(n, {});
+		cur.resize(n);
+		dep.resize(n);
 	}
 
 	bool bfs(int s, int t) {
@@ -78,6 +117,9 @@ struct Dinic {
 	}
 
 	void addEdge(int u, int v, T c) {
+		while (g.size() <= u) g.push_back({});
+		while (g.size() <= v) g.push_back({});
+		n = g.size();
 		g[u].push_back(e.size());
 		e.emplace_back(v, c);
 		g[v].push_back(e.size());
@@ -114,44 +156,54 @@ struct Dinic {
 };
 
 void solve() {
-	int n;
-	cin >> n;
-	int siz = 2, s = 0, t = 1;
-	Dinic<int> d(siz);
-	for (int i = 1, cur = 0; cur <= n; i ++) {
-		siz += 2;
-		d.update(siz);
-		d.addEdge(s, i << 1, 1);
-		d.addEdge(i << 1 | 1, t, 1);
-		for (int j = (int)sqrt(i) + 1; j * j < 2 * i; j ++) {
-			int num = j * j - i;
-			d.addEdge(num << 1, i << 1 | 1, 1);
+	int n, m, k;
+	cin >> n >> m >> k;
+	vector<vector<int>> a(m);
+	vector<int> r(m), h(m), cur(m, 0);
+	DSU dsu(n + 2);
+	for (int i = 0; i < m; i ++) {
+		cin >> h[i] >> r[i];
+		a[i].assign(r[i], 0);
+		for (auto &e : a[i]) {
+			cin >> e;
+			if (e == -1) e = n + 1;
 		}
-		if (!d.flow(s, t)) {
-			cur ++;
+		for (int j = 1; j < r[i]; j ++) {
+			dsu.merge(a[i][j - 1], a[i][j]);
 		}
 	}
-	auto es = d.edges();
-	int m = siz / 2 - 2;
-	cout << m << '\n';
-
-	vector<int> in(m + 1, -1), out(m + 1, -1);
-	for (auto [u, v, c, f] : es) {
-		if (f == 0 || u == s || v == t) continue;
-		u >>= 1, v >>= 1;
-		out[u] = v;
-		in[v] = u;
+	if (!dsu.cmp(0, n + 1)) {
+		cout << 0 << '\n';
+		return;
 	}
 
-	for (int i = 1; i <= m; i ++) {
-		if (in[i] != -1) continue;
-		int x = i;
-		while (x != -1) {
-			cout << x << ' ';
-			x = out[x];
-		}
-		cout << '\n';
+	int s = 0, t = 1, idx = 2;
+	map<pair<int, int>, int> id;
+	for (int i = 0; i <= n + 1; i ++) {
+		id[{i, 0}] = idx ++;
 	}
+
+	Dinic<int> d(idx);
+	d.addEdge(s, id[{0, 0}], k);
+	d.addEdge(id[{n + 1, 0}], t, INF);
+
+	int T = 1;
+	for (int cnt = 0; cnt < k; T ++) {
+		for (int i = 0; i <= n + 1; i ++) {
+			d.addEdge(id[{i, T - 1}], idx, INF);
+			id[{i, T}] = idx ++;
+		}
+		for (int i = 0; i < m; i ++) {
+			auto &v = a[i];
+			int j = cur[i];
+			cur[i] = (cur[i] + 1) % r[i];
+			int k = cur[i];
+			d.addEdge(id[{v[j], T - 1}], id[{v[k], T}], h[i]);
+		}
+		d.addEdge(id[{n + 1, T}], t, INF);
+		cnt += d.flow(s, t);
+	}
+	cout << T - 1 << '\n';
 }
 
 signed main() {

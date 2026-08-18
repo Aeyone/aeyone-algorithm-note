@@ -27,17 +27,15 @@ struct Dinic {
 
 	Dinic() {}
 	Dinic(int n) {
-		e.clear();
-		update(n);
+		init(n);
 	}
 	
-	void update(int n) {
+	void init(int n) {
 		this->n = n;
-		while (g.size() < n) {
-			g.push_back({});
-			cur.push_back(0);
-			dep.push_back(0);
-		}
+		e.clear();
+		g.assign(n, {});
+		cur.resize(n);
+		dep.resize(n);
 	}
 
 	bool bfs(int s, int t) {
@@ -116,42 +114,39 @@ struct Dinic {
 void solve() {
 	int n;
 	cin >> n;
-	int siz = 2, s = 0, t = 1;
-	Dinic<int> d(siz);
-	for (int i = 1, cur = 0; cur <= n; i ++) {
-		siz += 2;
-		d.update(siz);
-		d.addEdge(s, i << 1, 1);
-		d.addEdge(i << 1 | 1, t, 1);
-		for (int j = (int)sqrt(i) + 1; j * j < 2 * i; j ++) {
-			int num = j * j - i;
-			d.addEdge(num << 1, i << 1 | 1, 1);
+	vector<int> a(n + 1), dp(n + 1, 1);
+	for (int i = 1; i <= n; i ++) {
+		cin >> a[i];
+	}
+	int s = 0, t = 1;
+	Dinic<int> d(2 * n + 2); // in: 0, out: 1
+	for (int i = 1; i <= n; i ++) {
+		d.addEdge(i << 1, i << 1 | 1, 1);
+	}
+	int L = 0;
+	for (int i = 1; i <= n; i ++) {
+		for (int j = 1; j < i; j ++) if (a[i] >= a[j]) {
+			dp[i] = max(dp[i], dp[j] + 1);
 		}
-		if (!d.flow(s, t)) {
-			cur ++;
+		L = max(L, dp[i]);
+		if (dp[i] == 1) {
+			d.addEdge(s, i << 1, INF);
+		}
+		for (int j = 1; j < i; j ++) if (a[i] >= a[j] && dp[i] == dp[j] + 1) {
+			d.addEdge(j << 1 | 1, i << 1, 1);
 		}
 	}
-	auto es = d.edges();
-	int m = siz / 2 - 2;
-	cout << m << '\n';
-
-	vector<int> in(m + 1, -1), out(m + 1, -1);
-	for (auto [u, v, c, f] : es) {
-		if (f == 0 || u == s || v == t) continue;
-		u >>= 1, v >>= 1;
-		out[u] = v;
-		in[v] = u;
+	cout << L << '\n';
+	for (int i = 1; i <= n; i ++) if (dp[i] == L) {
+		d.addEdge(i << 1 | 1, t, INF);
 	}
-
-	for (int i = 1; i <= m; i ++) {
-		if (in[i] != -1) continue;
-		int x = i;
-		while (x != -1) {
-			cout << x << ' ';
-			x = out[x];
-		}
-		cout << '\n';
+	int x = d.flow(s, t);
+	cout << x << '\n';
+	if (L > 1) {
+		d.addEdge(2, 3, INF);
+		if (dp[n] == L) d.addEdge(n << 1, n << 1 | 1, INF);
 	}
+	cout << x + d.flow(s, t) << '\n';
 }
 
 signed main() {
