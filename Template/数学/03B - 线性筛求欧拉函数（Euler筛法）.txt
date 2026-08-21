@@ -16,10 +16,10 @@ void sieve(int n) {
 			}
 			minp[i * e] = e;
 			if (e == minp[i]) {
-				phi[i * p] = phi[i] * p;
+				phi[i * e] = phi[i] * e;
 				break;
 			} else {
-				phi[i * p] = phi[i] * (p - 1);
+				phi[i * e] = phi[i] * (e - 1);
 			}
 		}
 	}
