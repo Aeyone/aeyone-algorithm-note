@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+using u64 = unsigned long long;
+
+using i128 = __int128;
+using u128 = unsigned __int128;
+
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 998244353;
+
+void solve() {
+	int x, y;
+	cin >> x >> y;
+	int sum = x + y;
+	int xx = 0;
+	for (int i = 30; i >= 0; i --) {
+		if (sum >> i & 1) {
+			if ((xx | (1 << i)) <= x) {
+				xx |= (1 << i);
+			}
+		}
+	}
+	cout << sum << ' ' << x - xx << '\n';
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int t = 1;
+	cin >> t;
+	while (t --) {
+		solve();
+	}
+}
