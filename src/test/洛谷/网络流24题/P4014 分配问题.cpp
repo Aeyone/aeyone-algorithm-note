@@ -1,3 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+using i64 = long long;
+using u64 = unsigned long long;
+
+using i128 = __int128;
+using u128 = unsigned __int128;
+
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
+
+const int MOD = 998244353;
+
 /*
 如何保证 Dijkstra 时所有边权非负？正确性？
 对于每个点i，h[i]为每轮dij的最短路的累计值，这里简称势能
@@ -25,8 +39,8 @@ w'边权非负性说明：
 
 	在下一次跑 Dijkstra 时，在跑之前对每个节点 i 更新 h[i]' = h[i] + dist[i]
 	还是 u -> v 这条边，新的约化费用 w'' = w + h[u]' - h[v]'
-	展开： w'' = w + (h[u] + dist[u]) - (h[v] + dist[v])
-			  = w' + dist[u] - dist[v]
+	展开：  w'' = w + (h[u] + dist[u]) - (h[v] + dist[v])
+			   = w' + dist[u] - dist[v]
 	因为 w' + dist[u] - dist[v] >= 0
 	所以 w'' >= 0
 */
@@ -72,17 +86,17 @@ struct MCFGraph {
 	
 	// 当前是求可行流，若求最大流，需要去掉f < 0的部分
 	void addEdge(int u, int v, int c, int f) {
-		if (f < 0) { 
-			g[u].push_back(e.size());
-			e.emplace_back(v, 0, f);
-			g[v].push_back(e.size());
-			e.emplace_back(u, c, -f);
-		} else {
+		// if (f < 0) { 
+		// 	g[u].push_back(e.size());
+		// 	e.emplace_back(v, 0, f);
+		// 	g[v].push_back(e.size());
+		// 	e.emplace_back(u, c, -f);
+		// } else {
 			g[u].push_back(e.size());
 			e.emplace_back(v, c, f);
 			g[v].push_back(e.size());
 			e.emplace_back(u, 0, -f);
-		}
+		// }
 	}
 
 	pair<int, i64> flow(int s, int t) {
@@ -105,3 +119,37 @@ struct MCFGraph {
 		return {flow, cost};
 	}
 };
+
+
+void solve() {
+	int n;
+	cin >> n;
+	int s = 0, t = 2 * n + 1;
+	MCFGraph d1(t + 1), d2(t + 1);
+	for (int i = 1; i <= n; i ++) {
+		d1.addEdge(s, i, 1, 0);
+		d2.addEdge(s, i, 1, 0);
+		d1.addEdge(i + n, t, 1, 0);
+		d2.addEdge(i + n, t, 1, 0);
+		for (int j = 1; j <= n; j ++) {
+			int c;
+			cin >> c;
+			d1.addEdge(i, n + j, 1, c);
+			d2.addEdge(i, n + j, 1, -c);
+		}
+	}
+	auto [_, min] = d1.flow(s, t);
+	auto [_, max] = d2.flow(s, t);
+	cout << min << '\n';
+	cout << -max << '\n';
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int t = 1;
+	// cin >> t;
+	while (t --) {
+		solve();
+	}
+}

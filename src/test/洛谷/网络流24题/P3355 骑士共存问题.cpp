@@ -111,61 +111,68 @@ struct Dinic {
 	}
 };
 
-const int dx[4] = {-1, 0, 1, 0}, dy[4] = {0, -1, 0, 1};
+const int dx[8] = {-2, -1, 1, 2, -2, -1, 1, 2}, dy[8] = {1, 2, 2, 1, -1, -2, -2, -1};
 
 void solve() {
 	int n, m;
 	cin >> n >> m;
-	int N = n * m;
-	vector<int> a(N + 1);
-	for (int i = 1; i <= n; i ++) {
-		for (int j = 1; j <= m; j ++) {
-			int u = (i - 1) * m + j;
-			cin >> a[u];
-		}
+	auto idx = [&](int x, int y)-> int {
+		return (x - 1) * n + y;
+	};
+	int N = n * n;
+	vector<int> a(N + 1), col(N + 1, -1);
+	for (int i = 0; i < m; i ++) {
+		int x, y;
+		cin >> x >> y;
+		a[idx(x, y)] = 1;
 	}
 
 	vector<vector<int>> g(N + 1);
 	for (int i = 1; i <= n; i ++) {
-		for (int j = 1; j <= m; j ++) {
-			int u = (i - 1) * m + j;
-			for (int k = 0; k < 4; k ++) {
+		for (int j = 1; j <= n; j ++) {
+			int u = idx(i, j);
+			if (a[u]) continue;
+			for (int k = 0; k < 8; k ++) {
 				int p = i + dx[k], q = j + dy[k];
-				if (p <= 0 || p > n || q <= 0 || q > m) continue;
-				int v = (p - 1) * m + q;
-				g[u].push_back(v);
-				g[v].push_back(u);
+				int v = idx(p, q);
+				if (p <= 0 || p > n || q <= 0 || q > n) continue; 
+				if (!a[v]) {
+					g[u].push_back(v);
+				}
 			}
 		}
 	}
-	vector<int> col(N + 1, -1);
-	queue<int> q;
 
-	q.push(1);
-	col[1] = 0;
-	while(q.size()) {
-		auto u = q.front();
-		q.pop();
-		for (auto v : g[u]) if (col[v] == -1) {
-			col[v] = !col[u];
-			q.push(v);
+	for (int i = 1; i <= N; i ++) {
+		if (!a[i] && col[i] == -1) {
+			queue<int> q;
+			q.push(i);
+			col[i] = 0;
+			while(q.size()) {
+				auto u = q.front();
+				q.pop();
+				for (auto v : g[u]) if (col[v] == -1) {
+					col[v] = !col[u];
+					q.push(v);
+				}
+			}
 		}
 	}
 
-	int s = 0, t = N + 1, sum = 0;
+	int s = 0, t = N + 1;
 	Dinic<int> d(t + 1);
 	for (int i = 1; i <= N; i ++) {
-		sum += a[i];
+		if (a[i]) continue;
 		if (col[i]) {
-			d.addEdge(i, t, a[i]);
+			d.addEdge(i, t, 1);
 		} else {
-			d.addEdge(s, i, a[i]);
+			d.addEdge(s, i, 1);
 			for (auto v : g[i]) {
 				d.addEdge(i, v, INF);
 			}
 		}
 	}
-	cout << sum - d.flow(s, t) << '\n';
+	cout << n * n - m - d.flow(s, t) << '\n';
 }
 
 signed main() {
