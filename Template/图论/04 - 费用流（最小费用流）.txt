@@ -25,10 +25,14 @@ w'边权非负性说明：
 
 	在下一次跑 Dijkstra 时，在跑之前对每个节点 i 更新 h[i]' = h[i] + dist[i]
 	还是 u -> v 这条边，新的约化费用 w'' = w + h[u]' - h[v]'
-	展开： w'' = w + (h[u] + dist[u]) - (h[v] + dist[v])
-			  = w' + dist[u] - dist[v]
+	展开：  w'' = w + (h[u] + dist[u]) - (h[v] + dist[v])
+			   = w' + dist[u] - dist[v]
 	因为 w' + dist[u] - dist[v] >= 0
 	所以 w'' >= 0
+
+注意：
+	在第一次跑dij之前，如果所有边权已经非负了，h 数组初始化全 0 没错
+	如果存在非负，那么需要提前跑一次SPFA来初始化 h 数组
 */
 
 struct MCFGraph {
@@ -43,6 +47,33 @@ struct MCFGraph {
 	vector<int> pre;
 
 	MCFGraph(int n) : n(n), g(n) {}
+
+	void SPFA(int s) {
+	    h.assign(n, INFLL);
+	    vector<bool> vis(n);
+	    queue<int> q;
+	    h[s] = 0;
+	    vis[s] = true;
+	    q.push(s);
+	    while (!q.empty()) {
+	        int u = q.front();
+	        q.pop();
+	        vis[u] = false;
+	        for (int id : g[u]) {
+	            auto [v, c, cost] = e[id];
+	            if (c > 0 && h[v] > h[u] + cost) {
+	                h[v] = h[u] + cost;
+	                if (!vis[v]) {
+	                    vis[v] = true;
+	                    q.push(v);
+	                }
+	            }
+	        }
+	    }
+	    for (int i = 0; i < n; i++) {
+	        if (h[i] == INFLL) h[i] = 0;
+	    }
+	}
 
 	bool dijkstra(int s, int t) {
 		dis.assign(n, INFLL);
@@ -74,9 +105,9 @@ struct MCFGraph {
 	void addEdge(int u, int v, int c, int f) {
 		if (f < 0) { 
 			g[u].push_back(e.size());
-			e.emplace_back(v, 0, f);
+		 	e.emplace_back(v, 0, f);
 			g[v].push_back(e.size());
-			e.emplace_back(u, c, -f);
+		 	e.emplace_back(u, c, -f);
 		} else {
 			g[u].push_back(e.size());
 			e.emplace_back(v, c, f);
@@ -89,6 +120,7 @@ struct MCFGraph {
 		int flow = 0;
 		i64 cost = 0;
 		h.assign(n, 0);
+		SPFA(s); // 存在负初值的时候先跑一遍spfa初始化h数组保证非负性
 		while (dijkstra(s, t)) {
 			for (int i = 0; i < n; i ++) if (dis[i] != INFLL) {
 				h[i] += dis[i];
