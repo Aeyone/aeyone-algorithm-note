@@ -1,39 +1,16 @@
-/*
-如何保证 Dijkstra 时所有边权非负？正确性？
-对于每个点i，h[i]为每轮dij的最短路的累计值，这里简称势能
-将 u -> v 这条边权 w，更新为 w'= w + h[u] - h[v]
+#include <bits/stdc++.h>
+using namespace std;
 
-正确性说明：
-	对于 s -> A -> B -> ... -> Z -> t 的一条最短路径
-	则通过特殊边权得到的 t 的最短路 dist[t] =
-		w(s, A) + h[s] - h[A] +
-		w(A, B) + h[A] - h[B] + 
-		...
-		w(Z, t) + h[Z] - h[s]
-	可以发现中间的h[A], h[B], ..., h[Z] 都被减去了
-	因此 dist[t] = dist[t]' + h[s] - h[t]
-	所以对于同起点 s ，同终点 t ，h[s] - h[t]都是固定的
-	那么得到的 dist 数组大小关系，可以直接代表实际最短路 dist' 的大小关系
-	因此可以保证路径最短
+using i64 = long long;
+using u64 = unsigned long long;
 
-w'边权非负性说明：
-	对于 u -> v 这条边，边权为 w，当前约化费用为 w' = w + h[u] - h[v]
-	假设已经保证了 w' >= 0
-	Dijkstra 跑完之后，v 得到的最短路，要么从 u 走过来，要么不是
-	所以一定满足 dist[v] <= dist[u] + w'
-	即 w' + dist[u] - dist[v] >= 0
+using i128 = __int128;
+using u128 = unsigned __int128;
 
-	在下一次跑 Dijkstra 时，在跑之前对每个节点 i 更新 h[i]' = h[i] + dist[i]
-	还是 u -> v 这条边，新的约化费用 w'' = w + h[u]' - h[v]'
-	展开：  w'' = w + (h[u] + dist[u]) - (h[v] + dist[v])
-			   = w' + dist[u] - dist[v]
-	因为 w' + dist[u] - dist[v] >= 0
-	所以 w'' >= 0
+#define INF 0x3f3f3f3f
+#define INFLL 0x3f3f3f3f3f3f3f3fLL
 
-注意：
-	在第一次跑dij之前，如果所有边权已经非负了，h 数组初始化全 0 没错
-	如果存在非负，那么需要提前跑一次SPFA来初始化 h 数组
-*/
+const int MOD = 998244353;
 
 struct MCFGraph {
 	struct Edge {
@@ -103,23 +80,23 @@ struct MCFGraph {
 	
 	// 当前是求可行流，若求最大流，需要去掉f < 0的部分
 	void addEdge(int u, int v, int c, int f) {
-		if (f < 0) { 
-			g[u].push_back(e.size());
-		 	e.emplace_back(v, 0, f);
-			g[v].push_back(e.size());
-		 	e.emplace_back(u, c, -f);
-		} else {
+		// if (f < 0) { 
+		// 	g[u].push_back(e.size());
+		//  	e.emplace_back(v, 0, f);
+		// 	g[v].push_back(e.size());
+		//  	e.emplace_back(u, c, -f);
+		// } else {
 			g[u].push_back(e.size());
 			e.emplace_back(v, c, f);
 			g[v].push_back(e.size());
 			e.emplace_back(u, 0, -f);
-		}
+		// }
 	}
 
 	pair<int, i64> flow(int s, int t) {
 		int flow = 0;
 		i64 cost = 0;
-		h.assign(n, 0);
+		// h.assign(n, 0);
 		SPFA(s); // 存在负初值的时候先跑一遍spfa初始化h数组保证非负性
 		while (dijkstra(s, t)) {
 			for (int i = 0; i < n; i ++) if (dis[i] != INFLL) {
@@ -137,3 +114,74 @@ struct MCFGraph {
 		return {flow, cost};
 	}
 };
+
+
+void solve() {
+	int m, n;
+	cin >> m >> n;
+	vector<vector<int>> a(n);
+	map<array<int, 2>, int> id;
+
+	int idx = 1;
+	for (int i = 0; i < n; i ++) {
+		a[i].assign(i + m, 0);
+		for (int j = 0; j < i + m; j ++) {
+			cin >> a[i][j];
+			id[{i, j}] = idx ++;
+		}
+	}
+
+	int s = 0, t = 1;
+	MCFGraph g1(2 * idx); // 0: in, 1: out
+	MCFGraph g2(2 * idx);
+	MCFGraph g3(2 * idx);
+
+	for (int i = 0; i < n; i ++) {
+		for (int j = 0; j < i + m; j ++) {
+			int u = id[{i, j}];
+			g1.addEdge(u << 1, u << 1 | 1, 1, -a[i][j]);
+			g2.addEdge(u << 1, u << 1 | 1, INF, -a[i][j]);
+			g3.addEdge(u << 1, u << 1 | 1, INF, -a[i][j]);
+			if (i < n - 1) {
+				int l = id[{i + 1, j}], r = id[{i + 1, j + 1}];
+				g1.addEdge(u << 1 | 1, l << 1, 1, 0);
+				g1.addEdge(u << 1 | 1, r << 1, 1, 0);
+
+				g2.addEdge(u << 1 | 1, l << 1, 1, 0);
+				g2.addEdge(u << 1 | 1, r << 1, 1, 0);
+
+				g3.addEdge(u << 1 | 1, l << 1, INF, 0);
+				g3.addEdge(u << 1 | 1, r << 1, INF, 0);
+			}
+		}
+	}
+
+	for (int i = 1; i <= m; i ++) {
+		g1.addEdge(s, i << 1, 1, 0);
+		g2.addEdge(s, i << 1, 1, 0);
+		g3.addEdge(s, i << 1, 1, 0);
+	}
+
+	for (int i = idx - (m + n - 1); i < idx; i ++) {
+		g1.addEdge(i << 1 | 1, t, 1, 0);
+		g2.addEdge(i << 1 | 1, t, INF, 0);
+		g3.addEdge(i << 1 | 1, t, INF, 0);
+	}
+	auto [_, ans1] = g1.flow(s, t);
+	cout << -ans1 << '\n';
+	auto [_, ans2] = g2.flow(s, t);
+	cout << -ans2 << '\n';
+	auto [_, ans3] = g3.flow(s, t);
+	cout << -ans3 << '\n';
+
+}
+
+signed main() {
+	ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
+	cout << fixed << setprecision(10);
+	int t = 1;
+	// cin >> t;
+	while (t --) {
+		solve();
+	}
+}
