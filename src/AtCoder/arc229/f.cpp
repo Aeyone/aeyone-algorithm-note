@@ -7,32 +7,13 @@ using u64 = unsigned long long;
 using i128 = __int128;
 using u128 = unsigned __int128;
 
-#define int long long
 #define INF 0x3f3f3f3f
 #define INFLL 0x3f3f3f3f3f3f3f3fLL
 
 const int MOD = 998244353;
 
 void solve() {
-	int n;
-	cin >> n;
-	int sum = 0, min = INF;
-	for (int i = 0; i <= n; i ++) {
-		int x;
-		cin >> x;
-		sum += x;
-		min = std::min(min, x);
-	}
-	sum -= min;
-	int k = min / n;
-	sum -= 1ll * n * n * k;
-
-	if (sum >= n) {
-		cout << "Alice" << '\n';
-	} else {
-		cout << "Bob" << '\n';
-	}
-
+	
 }
 
 signed main() {

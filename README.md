@@ -227,6 +227,7 @@
 |cf*1994|[Little Elephant and Array](https://codeforces.com/problemset/problem/220/B)|离线后按左端点排序后算贡献，利用树状数组维护。还有个非常简单的莫队做法)|[Code1](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/AA--220B.cpp),[Code2](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.10/A--220B.cpp)|
 |cf*1800|[Petya and Array](https://codeforces.com/problemset/problem/1042/D)|经典的计算区间数量问题，离散化+树状数组套路，树状数组求逆序对思想(动态维护大于某个数的数量)|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2026.02.13/C--1042D.cpp)|
 |unknown|[宠物对战](https://codeforces.com/gym/104081/problem/I)|Trie树|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/XCPC/2022年中国大学生程序设计竞赛女生专场/i.cpp)|
+|atc*1934|[Taka and Hashi](https://atcoder.jp/contests/arc229/tasks/arc229_e)|并查集小巧思|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/arc229/e.cpp)|
 ||[]()||[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/)|
 
 ### 数学
