@@ -12,7 +12,7 @@ void solve() { // 普通st表
 		st[i][0] = a[i];
 	}
 	for(int p = 1; n >> p > 0; p ++){   //枚举所有p
-		for(int i = 0; i + (1 << p) <= n; i ++){    //从下标 i 开始的长度为 2^p 的区间大小不能超过n
+		for(int i = 0; i + (1 << p) <= n; i ++){    //从下标 i 开始的长度为 2^p 的区间大小不能超过n, (1-based: i + (1 << p) <= n + 1)
 			st[i][p] = max(st[i][p - 1], st[i + (1 << (p - 1))][p - 1]);
 		}
 	}
