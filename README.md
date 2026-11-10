@@ -80,6 +80,7 @@
 
 |Difficulty| Problem | Note | Code |
 |----------| -------- | ---- | ---- |
+|atc*1207|[Bin-ary Packing](https://atcoder.jp/contests/arc226/tasks/arc226_b)|巧妙的二分/贪心|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/AtCoder/arc226/b.cpp)|
 |cf*1600|[Balanced Stone Heaps](https://codeforces.com/contest/1623/problem/C)|二分+一点DP思想|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.09.22/c.cpp)|
 |cf*1600|[Binary String](https://codeforces.com/contest/1680/problem/C)|二分 n*n优化至nlogn|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.09.23/b.cpp)|
 |cf*1700|[Constant Palindrome Sum](https://codeforces.com/contest/1343/problem/D)|枚举+二分 需要动点脑子|[Code](https://github.com/Aeyone/aeyone-algorithm-note/blob/main/src/Training/2025.10.22-10.24/1343D.cpp)|
